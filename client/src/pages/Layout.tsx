@@ -3,10 +3,10 @@ import Navbar from "../components/Navbar";
 
 function Layout() {
   return (
-    <div>
+    <section className="px-16 py-10">
       <Navbar />
       <Outlet />
-    </div>
+    </section>
   );
 }
 

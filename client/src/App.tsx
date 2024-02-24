@@ -9,6 +9,7 @@ import Movies from "./pages/Movies";
 import TVShows from "./pages/TVShows";
 import Actors from "./pages/Actors";
 import User from "./pages/User";
+import Cartoons from "./pages/Cartoons";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       { path: "movies", element: <Movies /> },
+      { path: "cartoons", element: <Cartoons /> },
       { path: "tv-shows", element: <TVShows /> },
       { path: "actors", element: <Actors /> },
       { path: "user", element: <User /> },
