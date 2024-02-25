@@ -10,6 +10,9 @@ export default {
       backgroundImage: {
         movies: "url('/movies.jpg')",
       },
+      height: {
+        pad: 'calc(100vh - 2rem)',
+      },
     },
   },
   plugins: [],
