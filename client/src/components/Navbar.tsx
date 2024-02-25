@@ -1,6 +1,6 @@
-import User from "../pages/User";
-import Logo from "./Logo";
-import NavigationLink from "./NavigationLink";
+import Logo from './Logo';
+import NavigationLink from './NavigationLink';
+import TopBar from './TopBar';
 
 function Navbar() {
   return (
@@ -15,7 +15,7 @@ function Navbar() {
           <NavigationLink path="/actors">Actors</NavigationLink>
         </ul>
       </div>
-      <User />
+      <TopBar />
     </nav>
   );
 }

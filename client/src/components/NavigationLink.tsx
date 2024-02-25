@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 interface NavigationLinkProps {
   path: string;
@@ -9,7 +9,11 @@ function NavigationLink({ path, children }: NavigationLinkProps) {
   return (
     <li>
       <NavLink
-        className={({ isActive }) => (isActive ? "text-red-500" : "")}
+        className={({ isActive }) =>
+          isActive
+            ? 'duration-400 text-blue-500 transition-all hover:text-blue-400'
+            : 'duration-400 transition-all hover:text-slate-200'
+        }
         to={path}
       >
         {children}
