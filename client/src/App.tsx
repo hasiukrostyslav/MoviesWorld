@@ -10,6 +10,7 @@ import Actors from './pages/Actors';
 import User from './pages/User';
 import Cartoons from './pages/Cartoons';
 import OuterLayout from './pages/OuterLayout';
+import { ThemeProvider } from './context/ThemeContext';
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
 export default App;

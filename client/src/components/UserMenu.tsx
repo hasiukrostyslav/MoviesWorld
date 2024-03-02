@@ -1,5 +1,5 @@
 function UserMenu() {
-  return <div>User</div>;
+  return <></>;
 }
 
 export default UserMenu;

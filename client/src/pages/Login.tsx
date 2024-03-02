@@ -4,10 +4,12 @@ import Button from '../components/Button';
 
 function Login() {
   return (
-    <section className="flex w-3/4 flex-col text-slate-500">
-      <Logo type="dark" size="lg" className="self-center" />
-      <div className="my-8">
-        <h2 className="mb-3 text-3xl font-semibold text-slate-600">Sign in</h2>
+    <section className="flex w-3/4 flex-col text-slate-500 dark:text-slate-300">
+      <Logo size="lg" className="self-center" />
+      <div className="mb-6 mt-8">
+        <h2 className="mb-3 text-3xl font-semibold text-slate-600 dark:text-slate-300">
+          Sign in
+        </h2>
         <p className="">
           Don't have an account?{' '}
           <Link
@@ -25,10 +27,10 @@ function Login() {
             <input
               type="email"
               name="email"
-              className="rounded-md border-2 border-slate-300 px-3 py-2 text-sm outline-0 ring-blue-500 focus:border-transparent focus-visible:ring-4"
+              className="rounded-md border-2 border-slate-300 px-3 py-2 text-sm outline-0 ring-blue-500 focus:border-transparent focus-visible:ring-4 dark:border-transparent dark:bg-slate-700"
             />
           </label>
-          <span className="absolute bottom-0 left-2 text-xs font-bold text-red-400">
+          <span className="absolute bottom-0 left-2 text-xs font-bold text-red-400 dark:text-red-500">
             Email is required
           </span>
         </div>
@@ -37,10 +39,10 @@ function Login() {
             Password
             <input
               type="password"
-              className="rounded-md border-2 border-slate-300 px-3 py-2 text-sm outline-0 ring-blue-500 focus:border-transparent focus-visible:ring-4"
+              className="rounded-md border-2 border-slate-300 px-3 py-2 text-sm outline-0 ring-blue-500 focus:border-transparent focus-visible:ring-4 dark:border-transparent dark:bg-slate-700"
             />
           </label>
-          <span className="absolute bottom-0 left-2 text-xs font-bold text-red-400">
+          <span className="absolute bottom-0 left-2 text-xs font-bold text-red-400 dark:text-red-500">
             Password is required
           </span>
         </div>
