@@ -12,7 +12,7 @@ function Login() {
           Don't have an account?{' '}
           <Link
             to="/auth/signup"
-            className="font-semibold text-blue-500 transition-all duration-200 hover:underline"
+            className="rounded-md px-1 py-1 font-semibold text-blue-500 outline-0 ring-blue-500 transition-all duration-200 hover:underline focus-visible:ring-2"
           >
             Sign up
           </Link>
@@ -25,7 +25,7 @@ function Login() {
             <input
               type="email"
               name="email"
-              className="rounded-md border-2 border-slate-300 px-2 py-1"
+              className="rounded-md border-2 border-slate-300 px-2 py-1 outline-0  focus:border-blue-500"
             />
           </label>
         </div>
@@ -34,7 +34,7 @@ function Login() {
             Password
             <input
               type="password"
-              className="rounded-md border-2 border-slate-300 px-2 py-1"
+              className="rounded-md border-2 border-slate-300 px-2 py-1 outline-0 focus:border-blue-500"
             />
           </label>
         </div>
@@ -44,7 +44,7 @@ function Login() {
       </form>
       <Link
         to="/"
-        className="mt-6 self-end text-sm font-semibold text-blue-500 transition-all duration-200 hover:underline"
+        className="mt-6 self-end rounded-md px-1 py-1 text-sm font-semibold text-blue-500 outline-0 ring-blue-500 transition-all duration-200 hover:underline focus-visible:ring-2"
       >
         Forgot your password?
       </Link>
