@@ -1,6 +1,7 @@
 interface ButtonProps {
   children: React.ReactNode;
   color: 'primary' | 'secondary' | 'outline' | 'transparent';
+  className?: string;
 }
 
 const buttonColors = {
@@ -11,10 +12,10 @@ const buttonColors = {
   transparent: 'border-0 text-blue-500 font-semibold hover:bg-blue-100',
 };
 
-function Button({ children, color }: ButtonProps) {
+function Button({ children, color, className }: ButtonProps) {
   return (
     <button
-      className={`rounded-lg border px-4 py-2 text-sm transition-all duration-500 ${buttonColors[color]}`}
+      className={`rounded-lg border px-4 py-2 text-sm transition-all duration-500 ${buttonColors[color]} ${className}`}
     >
       {children}
     </button>

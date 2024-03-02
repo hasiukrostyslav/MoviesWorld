@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <nav className="mb-4 flex items-center justify-between">
       <div className="flex items-center justify-between gap-12">
-        <Logo />
+        <Logo type="light" size="base" />
         <ul className="flex items-center gap-8">
           <NavigationLink path="/">Home</NavigationLink>
           <NavigationLink path="/movies">Movies</NavigationLink>
