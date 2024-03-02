@@ -18,25 +18,31 @@ function Login() {
           </Link>
         </p>
       </div>
-      <form className="flex w-full flex-col gap-5 last:mt-4" autoComplete="off">
-        <div>
+      <form className="flex w-full flex-col last:mt-4" autoComplete="off">
+        <div className="relative pb-6 pt-2">
           <label className="flex flex-col gap-1">
             Email Address
             <input
               type="email"
               name="email"
-              className="rounded-md border-2 border-slate-300 px-2 py-1 outline-0  focus:border-blue-500"
+              className="rounded-md border-2 border-slate-300 px-3 py-2 text-sm outline-0 ring-blue-500 focus:border-transparent focus-visible:ring-4"
             />
           </label>
+          <span className="absolute bottom-0 left-2 text-xs font-bold text-red-400">
+            Email is required
+          </span>
         </div>
-        <div>
+        <div className="relative pb-6 pt-2">
           <label className="flex flex-col gap-1">
             Password
             <input
               type="password"
-              className="rounded-md border-2 border-slate-300 px-2 py-1 outline-0 focus:border-blue-500"
+              className="rounded-md border-2 border-slate-300 px-3 py-2 text-sm outline-0 ring-blue-500 focus:border-transparent focus-visible:ring-4"
             />
           </label>
+          <span className="absolute bottom-0 left-2 text-xs font-bold text-red-400">
+            Password is required
+          </span>
         </div>
         <Button color="primary" className="mt-6">
           Sign in
