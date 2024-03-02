@@ -10,7 +10,8 @@ const buttonColors = {
   secondary: '',
   outline:
     'border-slate-300 hover:border-slate-100 hover:text-slate-100 ring-blue-500 focus:border-transparent',
-  transparent: 'border-0 text-blue-500 font-semibold hover:bg-blue-100',
+  transparent:
+    'border-0 text-blue-500 font-semibold hover:bg-blue-100 dark:hover:bg-slate-800',
 };
 
 function Button({ children, color, className }: ButtonProps) {

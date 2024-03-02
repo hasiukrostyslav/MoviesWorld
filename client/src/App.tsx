@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -10,7 +11,6 @@ import Actors from './pages/Actors';
 import User from './pages/User';
 import Cartoons from './pages/Cartoons';
 import OuterLayout from './pages/OuterLayout';
-import { ThemeProvider } from './context/ThemeContext';
 
 const router = createBrowserRouter([
   {
