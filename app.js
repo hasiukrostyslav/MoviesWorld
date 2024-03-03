@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('express-async-errors');
 
 const express = require('express');
 const morgan = require('morgan');
@@ -9,7 +10,9 @@ const cartoonsRoute = require('./routes/cartoonsRoute');
 const showsRoute = require('./routes/showsRoute');
 const actorsRoute = require('./routes/actorsRoute');
 const userRoute = require('./routes/userRoute');
-const notFoundMiddleware = require('./middleware/notFound');
+
+const notFoundMiddleware = require('./middleware/notFoundMiddleware');
+const errorHandlerMiddleware = require('./middleware/errorHandlerMiddleware');
 
 const app = express();
 
@@ -26,6 +29,7 @@ app.use('/tv-shows', showsRoute);
 app.use('/actors', actorsRoute);
 app.use('/user', userRoute);
 
-app.use(notFoundMiddleware);
+app.all('*', notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 module.exports = app;
