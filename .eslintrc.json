@@ -6,7 +6,8 @@
       "error",
       {
         "endOfLine": "auto",
-        "singleQuote": true
+        "singleQuote": true,
+        "trailingComma": "es5"
       }
     ],
     "spaced-comment": "off",

@@ -1,22 +1,22 @@
-const axios = require('axios').default;
 const { StatusCodes } = require('http-status-codes');
+const axiosRequest = require('../utils/axiosInstance');
 
-const baseRequest = axios.create({
-  baseURL: process.env.THIRD_API_URL,
-  params: { api_key: process.env.THIRD_API_KEY },
-});
+const genresTypes = require('../data/genresData.json');
+const { convertGenres } = require('../utils/helpers');
 
 const getTrendingList = async (req, res, next) => {
-  const response = await baseRequest.get('/movie/now_playing');
+  const response = await axiosRequest.get('/movie/now_playing');
   const data = response.data.results;
+
+  const genres = genresTypes.moviesGenres;
 
   const formatData = data.map((movie) => ({
     id: movie.id,
     title: movie.title,
-    genres: movie.genre_ids,
+    overview: movie.overview,
     backdropPath: movie.backdrop_path,
     posterPath: movie.poster_path,
-    overview: movie.overview,
+    genres: convertGenres(movie.genre_ids, genres),
   }));
 
   res

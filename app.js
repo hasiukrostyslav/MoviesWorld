@@ -11,6 +11,7 @@ const showsRoute = require('./routes/showsRoute');
 const actorsRoute = require('./routes/actorsRoute');
 const userRoute = require('./routes/userRoute');
 
+const getGenresMiddleware = require('./middleware/getGenresMiddleware');
 const notFoundMiddleware = require('./middleware/notFoundMiddleware');
 const errorHandlerMiddleware = require('./middleware/errorHandlerMiddleware');
 
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json());
+app.use(getGenresMiddleware);
 
 app.use('/', homeRoute);
 app.use('/movies', moviesRoute);
