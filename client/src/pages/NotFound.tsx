@@ -9,7 +9,7 @@ function NotFound() {
         <span className="text-5xl">|</span>
         <p className="text-xl">This page could not be found.</p>
       </div>
-      <ButtonLink path="/" color="transparent">
+      <ButtonLink size="small" path="/" color="transparent">
         Back to Home
       </ButtonLink>
     </div>

@@ -38,7 +38,7 @@ function Hero() {
           movies.map((movie, i) => (
             <li
               key={movie.id}
-              className={`flex min-w-full ${i === currentMovie ? '' : 'hidden'}`}
+              className={`flex min-w-full text-slate-300 ${i === currentMovie ? '' : 'hidden'}`}
             >
               <img
                 src={`${imgURL}/${imgSize.large}/${movie.backdropPath}`}

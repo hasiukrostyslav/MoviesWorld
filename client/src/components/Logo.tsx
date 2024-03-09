@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 
 interface LogoProps {
   size: 'base' | 'lg';
@@ -6,10 +6,12 @@ interface LogoProps {
 }
 
 function Logo({ size, className }: LogoProps) {
+  const match = useMatch('/');
+
   return (
     <Link
       to="/"
-      className={`font-logo text-slate-500 dark:text-slate-300 ${size === 'base' ? 'text-3xl' : 'text-5xl'} ${className} rounded-md px-2 py-1 outline-0 ring-blue-500 focus-visible:ring-4`}
+      className={`rounded-md px-2 py-1 font-logo outline-0 ring-blue-500 focus-visible:ring-4 ${size === 'base' ? 'text-3xl' : 'text-5xl'} ${className} ${match ? 'text-slate-300' : 'text-slate-500 dark:text-slate-300'}`}
     >
       <span className="text-blue-600">M</span>
       oviesWorld

@@ -20,7 +20,7 @@ function Login() {
           errorMessage=""
         />
 
-        <Button color="primary" className="mt-6">
+        <Button size="small" color="primary" className="mt-6">
           Sign in
         </Button>
       </form>

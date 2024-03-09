@@ -25,7 +25,7 @@ function SignUp() {
           type="password"
           errorMessage=""
         />
-        <Button color="primary" className="mt-6">
+        <Button size="small" color="primary" className="mt-6">
           Sign up
         </Button>
       </form>
