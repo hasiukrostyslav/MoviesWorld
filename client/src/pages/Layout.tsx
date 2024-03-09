@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 
 function Layout() {
   return (
-    <section className="relative px-80 py-10">
+    <section className="3xl:px-80 relative px-52 py-10">
       <Navbar />
       <Outlet />
     </section>

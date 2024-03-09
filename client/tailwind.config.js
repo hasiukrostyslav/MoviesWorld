@@ -7,6 +7,9 @@ export default {
       sans: 'Inter, sans-serif',
       logo: 'Anta, sans-serif',
     },
+    screens: {
+      '3xl': '1920px',
+    },
     extend: {
       backgroundImage: {
         movies: "url('/movies.jpg')",
