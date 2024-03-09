@@ -17,7 +17,7 @@ function NavigationLink({ path, children }: NavigationLinkProps) {
         className={({ isActive }) =>
           isActive
             ? `${baseStyles} ${match ? 'text-blue-500 hover:text-blue-400' : 'text-blue-600 hover:text-blue-500 dark:text-blue-500 dark:hover:text-blue-400'}`
-            : `${baseStyles}  ${match ? 'text-slate-300 hover:text-slate-200' : 'hover:text-slate-500 dark:hover:text-slate-200'}`
+            : `${baseStyles}  ${match ? 'text-slate-200 hover:text-slate-50' : 'hover:text-slate-500 dark:hover:text-slate-50'}`
         }
         to={path}
       >

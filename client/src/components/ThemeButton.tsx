@@ -14,7 +14,7 @@ function ThemeButton({ absolute }: ThemeButtonProps) {
 
   return (
     <button
-      className={`rounded-lg p-2 text-xl outline-0 ring-blue-500 focus-visible:ring-4 ${absolute ? absoluteStyles : ''} ${match ? 'text-slate-300' : ''}`}
+      className={`rounded-lg p-2 text-xl outline-0 ring-blue-500 focus-visible:ring-4 ${absolute ? absoluteStyles : ''} ${match ? 'text-slate-200' : ''}`}
       onClick={() => toggleDarkMode()}
     >
       {theme === 'light' ? <LuSun /> : <LuMoon />}

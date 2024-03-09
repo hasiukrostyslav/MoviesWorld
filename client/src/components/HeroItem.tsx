@@ -13,7 +13,7 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
   return (
     <li
       key={movie.id}
-      className={`flex min-w-full text-slate-300 ${index === currentMovie ? '' : 'hidden'}`}
+      className={`flex min-w-full text-slate-100 ${index === currentMovie ? '' : 'hidden'}`}
     >
       <img
         src={`${imgURL}/${imgSize.large}/${movie.backdropPath}`}
