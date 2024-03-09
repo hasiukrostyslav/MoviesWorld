@@ -4,6 +4,7 @@ interface ButtonLinkProps {
   children: React.ReactNode;
   path: string;
   color: 'primary' | 'secondary' | 'outline' | 'transparent';
+  size: 'small' | 'medium' | 'large';
 }
 
 const buttonColors = {
@@ -16,10 +17,16 @@ const buttonColors = {
     'border-0 text-blue-500 font-semibold hover:bg-blue-100 dark:hover:bg-slate-800',
 };
 
-function ButtonLink({ children, path, color }: ButtonLinkProps) {
+const buttonSize = {
+  small: 'px-4 py-2 text-sm',
+  medium: 'px-5 py-3 text-sm',
+  large: 'px-6 py-3 text-base',
+};
+
+function ButtonLink({ children, path, color, size }: ButtonLinkProps) {
   return (
     <Link
-      className={`rounded-lg px-4 py-2 text-sm font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]}`}
+      className={`rounded-lg font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]}`}
       to={path}
     >
       {children}

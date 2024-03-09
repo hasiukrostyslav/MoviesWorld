@@ -13,6 +13,14 @@ export default {
       },
       height: {
         pad: 'calc(100vh - 2rem)',
+        hero: 'calc(100vh - 8.75rem)',
+        img: '25rem',
+      },
+      aspectRatio: {
+        img: '4 / 3',
+      },
+      brightness: {
+        35: '.35',
       },
     },
   },

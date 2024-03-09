@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import { Outlet } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 function Layout() {
   return (
-    <section className="px-16 py-10">
+    <section className="relative px-80 py-10">
       <Navbar />
       <Outlet />
     </section>
