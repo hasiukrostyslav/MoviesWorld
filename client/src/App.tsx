@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
+import { useAppSelector } from './store';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -44,11 +45,20 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
-  );
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  useEffect(() => {
+    if (
+      theme === 'dark' ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
