@@ -3,6 +3,6 @@ const homeController = require('../controllers/homeController');
 
 const router = express.Router();
 
-router.route('/').get(homeController.getTrendingList);
+router.route('/').get(homeController.getTrendingLists);
 
 module.exports = router;
