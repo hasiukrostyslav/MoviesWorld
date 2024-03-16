@@ -5,6 +5,7 @@ interface ButtonLinkProps {
   path: string;
   color: 'primary' | 'secondary' | 'outline' | 'transparent';
   size: 'small' | 'medium' | 'large';
+  className?: string;
 }
 
 const buttonColors = {
@@ -25,11 +26,17 @@ const buttonSize = {
   large: 'px-6 py-3 text-base',
 };
 
-function ButtonLink({ children, path, color, size }: ButtonLinkProps) {
+function ButtonLink({
+  children,
+  path,
+  color,
+  size,
+  className,
+}: ButtonLinkProps) {
   const match = useMatch('/');
   return (
     <Link
-      className={`rounded-lg font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${match && color === 'outline' ? buttonColors.outlineWhite : ''}`}
+      className={`rounded-lg font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${match && color === 'outline' ? buttonColors.outlineWhite : ''} ${className}`}
       to={path}
     >
       {children}

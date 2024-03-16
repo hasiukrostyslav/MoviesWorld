@@ -3,6 +3,8 @@ interface ButtonProps {
   color: 'primary' | 'secondary' | 'outline' | 'transparent';
   className?: string;
   size: 'small' | 'medium' | 'large';
+  onClick: () => void;
+  disabled?: boolean;
 }
 
 const buttonColors = {
@@ -21,9 +23,18 @@ const buttonSize = {
   large: 'px-6 py-3 text-base',
 };
 
-function Button({ children, color, size, className }: ButtonProps) {
+function Button({
+  children,
+  color,
+  size,
+  className,
+  onClick,
+  disabled,
+}: ButtonProps) {
   return (
     <button
+      disabled={disabled}
+      onClick={onClick}
       className={`rounded-lg border-2 font-semibold outline-0 transition-all duration-500 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${className}`}
     >
       {children}

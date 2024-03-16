@@ -1,7 +1,7 @@
 import type { HeroBaseData } from '../utils/types';
 import { imgSize, imgURL } from '../utils/constants';
 import Poster from './Poster';
-import Button from './Button';
+import ButtonLink from './ButtonLink';
 
 interface HeroItemProps {
   movie: HeroBaseData;
@@ -30,9 +30,14 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
               ? movie.overview
               : movie.overview.slice(0, 200).padEnd(205, '.....')}
           </p>
-          <Button className="z-20 ml-1 self-start" color="primary" size="large">
+          <ButtonLink
+            path="/"
+            className="z-20 ml-1 self-start"
+            color="primary"
+            size="large"
+          >
             View Movie
-          </Button>
+          </ButtonLink>
         </div>
         <div className="basis-1/4">
           <Poster
