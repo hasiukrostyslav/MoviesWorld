@@ -15,7 +15,7 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
       className={`flex min-w-full text-slate-100 ${index === currentMovie ? '' : 'hidden'}`}
     >
       <img
-        src={`${imgURL}/${imgSize.large}/${movie.backdropPath}`}
+        src={`${imgURL}${imgSize.large}${movie.backdropPath}`}
         alt="Film backdrop poster"
         className="absolute left-0 top-0 -z-10 h-screen w-full brightness-35"
       />
@@ -36,7 +36,7 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
         </div>
         <div className="basis-1/4">
           <Poster
-            src={`${imgURL}/${imgSize.medium}/${movie.posterPath}`}
+            src={`${imgURL}${imgSize.medium}${movie.posterPath}`}
             title={movie.title}
           />
         </div>

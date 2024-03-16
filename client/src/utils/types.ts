@@ -50,3 +50,6 @@ export interface GeneralData {
     };
   };
 }
+
+export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
+export type MoviesTypes = MovieBaseData | ShowBaseData;
