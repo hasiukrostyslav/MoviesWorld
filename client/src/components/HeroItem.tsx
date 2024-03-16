@@ -1,10 +1,10 @@
-import type { MovieBaseData } from '../utils/types';
+import type { HeroBaseData } from '../utils/types';
 import { imgSize, imgURL } from '../utils/constants';
 import Poster from './Poster';
 import Button from './Button';
 
 interface HeroItemProps {
-  movie: MovieBaseData;
+  movie: HeroBaseData;
   currentMovie: number;
   index: number;
 }
@@ -12,7 +12,6 @@ interface HeroItemProps {
 function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
   return (
     <li
-      key={movie.id}
       className={`flex min-w-full text-slate-100 ${index === currentMovie ? '' : 'hidden'}`}
     >
       <img

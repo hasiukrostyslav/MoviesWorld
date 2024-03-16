@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import type { MovieBaseData } from '../utils/types';
+import type { HeroBaseData } from '../utils/types';
 import HeroItem from './HeroItem';
 import PaginationButton from './PaginationButton';
 
-function Hero() {
-  const [movies, setMovies] = useState<MovieBaseData[] | []>([]);
-  const [currentMovie, setCurrentMovie] = useState(0);
+interface HeroProps {
+  movies: HeroBaseData[];
+}
 
-  useEffect(() => {
-    axios('/api').then((res) => {
-      setMovies(res.data.data);
-    });
-  }, []);
+function Hero({ movies }: HeroProps) {
+  const [currentMovie, setCurrentMovie] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -31,10 +27,15 @@ function Hero() {
 
   return (
     <>
-      <ul className="h-hero flex overflow-hidden">
+      <ul className="flex h-hero overflow-hidden">
         {movies &&
           movies.map((movie, i) => (
-            <HeroItem movie={movie} index={i} currentMovie={currentMovie} />
+            <HeroItem
+              key={movie.id}
+              movie={movie}
+              index={i}
+              currentMovie={currentMovie}
+            />
           ))}
       </ul>
       <div>
