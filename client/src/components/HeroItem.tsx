@@ -19,7 +19,7 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
         alt="Film backdrop poster"
         className="absolute left-0 top-0 -z-10 h-screen w-full brightness-35"
       />
-      <div className="flex items-center justify-between">
+      <div className="z-20 flex items-center justify-between">
         <div className="flex basis-1/2 flex-col">
           <h1 className="mb-4 text-5xl font-bold">{movie.title}</h1>
           <span className="mb-5 ml-2 text-xs">
@@ -30,7 +30,7 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
               ? movie.overview
               : movie.overview.slice(0, 200).padEnd(205, '.....')}
           </p>
-          <Button className="ml-1 self-start" color="primary" size="large">
+          <Button className="z-20 ml-1 self-start" color="primary" size="large">
             View Movie
           </Button>
         </div>

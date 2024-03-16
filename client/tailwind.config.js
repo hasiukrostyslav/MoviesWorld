@@ -16,7 +16,7 @@ export default {
       },
       height: {
         pad: 'calc(100vh - 2rem)',
-        hero: 'calc(100vh - 8.75rem)',
+        hero: 'calc(100vh - 6.25rem)',
         img: '25rem',
       },
       aspectRatio: {
