@@ -3,7 +3,7 @@ interface ButtonProps {
   color: 'primary' | 'secondary' | 'outline' | 'transparent';
   className?: string;
   size: 'small' | 'medium' | 'large';
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 

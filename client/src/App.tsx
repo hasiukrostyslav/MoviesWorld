@@ -4,7 +4,7 @@ import { useAppSelector } from './store';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import NotFound from './pages/NotFound';
+import NotFoundPage from './pages/NotFoundPage';
 import Layout from './pages/Layout';
 import Movies from './pages/Movies';
 import TVShows from './pages/TVShows';
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <OuterLayout />,
-    children: [{ path: '*', element: <NotFound /> }],
+    children: [{ path: '*', element: <NotFoundPage /> }],
   },
 ]);
 

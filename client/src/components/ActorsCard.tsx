@@ -14,7 +14,7 @@ function ActorsCard({ actor }: ActorsCardProps) {
         src={`${imgURL}${imgSize.small}${actor.imgPath}`}
         alt={`${actor.name} poster`}
       />
-      <Link className="font-semibold">
+      <Link to={`/`} className="font-semibold">
         {actor.name.length < 18
           ? actor.name
           : actor.name.slice(0, 18).padEnd(21, '...')}

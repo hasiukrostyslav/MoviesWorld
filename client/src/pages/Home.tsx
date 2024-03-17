@@ -1,4 +1,4 @@
-import { useGetTrendListQuery } from '../store/api/generalAPI';
+import { useGetTrendListQuery } from '../store';
 import Hero from '../components/Hero';
 import Spinner from '../components/Spinner';
 import ItemsList from '../components/ItemsList';
