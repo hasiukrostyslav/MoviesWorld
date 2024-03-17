@@ -4,9 +4,11 @@ import Footer from '../components/Footer';
 
 function Layout() {
   return (
-    <section className="relative px-52 py-10 3xl:px-80">
-      <Navbar />
-      <Outlet />
+    <section className="">
+      <div className="relative px-40 pt-10 3xl:px-72">
+        <Navbar />
+        <Outlet />
+      </div>
       <Footer />
     </section>
   );
