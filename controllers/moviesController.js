@@ -75,26 +75,11 @@ const getAllMovies = async (req, res, next) => {
   res.status(StatusCodes.OK).json({
     status: 'success',
     data: {
-      newMovies: {
-        results: newMovies.length,
-        data: newMovies,
-      },
-      popularNowMovies: {
-        results: popularNowMovies.length,
-        data: popularNowMovies,
-      },
-      popularAllMovies: {
-        results: popularAllMovies.length,
-        data: popularAllMovies,
-      },
-      topRatingMovies: {
-        results: topRatingMovies.length,
-        data: topRatingMovies,
-      },
-      topBoxOfficeMovies: {
-        results: topBoxOfficeMovies.length,
-        data: topBoxOfficeMovies,
-      },
+      newMovies,
+      popularNowMovies,
+      popularAllMovies,
+      topRatingMovies,
+      topBoxOfficeMovies,
     },
   });
 };

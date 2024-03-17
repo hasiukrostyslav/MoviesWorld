@@ -63,22 +63,10 @@ const getTrendingLists = async (req, res, next) => {
   res.status(StatusCodes.OK).json({
     status: 'success',
     data: {
-      trendingAll: {
-        results: trendingAll.length,
-        data: trendingAll,
-      },
-      trendingMovies: {
-        results: trendingMovies.length,
-        data: trendingMovies,
-      },
-      trendingShows: {
-        results: trendingShows.length,
-        data: trendingShows,
-      },
-      popularActors: {
-        results: popularActors.length,
-        data: popularActors,
-      },
+      trendingAll,
+      trendingMovies,
+      trendingShows,
+      popularActors,
     },
   });
 };
