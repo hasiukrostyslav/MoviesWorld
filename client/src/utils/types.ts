@@ -29,25 +29,24 @@ export interface ActorBaseData {
   imgPath: string;
 }
 
-export interface GeneralData {
+export interface HomePageResponse {
   status: 'success';
   data: {
-    trendingAll: {
-      results: number;
-      data: HeroBaseData[];
-    };
-    trendingMovies: {
-      results: number;
-      data: MovieBaseData[];
-    };
-    trendingShows: {
-      results: number;
-      data: ShowBaseData[];
-    };
-    popularActors: {
-      results: number;
-      data: ActorBaseData[];
-    };
+    trendingAll: HeroBaseData[];
+    trendingMovies: MovieBaseData[];
+    trendingShows: ShowBaseData[];
+    popularActors: ActorBaseData[];
+  };
+}
+
+export interface MoviesPageResponse {
+  status: 'success';
+  data: {
+    newMovies: MovieBaseData[];
+    popularNowMovies: MovieBaseData[];
+    popularAllMovies: MovieBaseData[];
+    topRatingMovies: MovieBaseData[];
+    topBoxOfficeMovies: MovieBaseData[];
   };
 }
 

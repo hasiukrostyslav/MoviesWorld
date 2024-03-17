@@ -7,9 +7,16 @@ import ButtonLink from './ButtonLink';
 interface ItemsListProps {
   movies: MoviesListTypes;
   heading: string;
+  listLength?: 'short' | 'long';
+  className?: string;
 }
 
-function ItemsList({ movies, heading }: ItemsListProps) {
+function ItemsList({
+  movies,
+  heading,
+  listLength = 'short',
+  className,
+}: ItemsListProps) {
   const [visibleItems, setVisibleItems] = useState(10);
 
   const handleClick = () => {
@@ -24,14 +31,14 @@ function ItemsList({ movies, heading }: ItemsListProps) {
   }
 
   return (
-    <div className="flex flex-col py-20">
-      <h2 className="text-4xl font-semibold">{heading}</h2>
+    <div className={`${className} flex flex-col pt-20`}>
+      <h2 className="text-3xl font-semibold">{heading}</h2>
       <ul className="mb-8 mt-6 grid grid-cols-5 justify-between gap-y-16 px-4">
         {items.map((item) => (
           <MoviesCard item={item} key={item.id} />
         ))}
       </ul>
-      {visibleItems === 10 && (
+      {visibleItems === 10 && listLength === 'long' && (
         <Button
           color="primary"
           size="large"
@@ -41,7 +48,7 @@ function ItemsList({ movies, heading }: ItemsListProps) {
           View More {heading}
         </Button>
       )}
-      {visibleItems === 20 && (
+      {(visibleItems === 20 || listLength === 'short') && (
         <ButtonLink
           path="/"
           color="primary"

@@ -1,16 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { HomePageResponse } from '../../utils/types';
+import { MoviesPageResponse } from '../../utils/types';
 
-const generalApi = createApi({
-  reducerPath: 'general',
+const moviesApi = createApi({
+  reducerPath: 'movies',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
-
   endpoints: (builder) => {
     return {
-      getTrendList: builder.query<HomePageResponse, void>({
+      getMoviesLists: builder.query<MoviesPageResponse, void>({
         query: () => {
           return {
-            url: '/api',
+            url: '/api/movies',
             method: 'GET',
           };
         },
@@ -19,5 +18,5 @@ const generalApi = createApi({
   },
 });
 
-export const { useGetTrendListQuery } = generalApi;
-export { generalApi };
+export const { useGetMoviesListsQuery } = moviesApi;
+export { moviesApi };

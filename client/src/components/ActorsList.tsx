@@ -7,9 +7,10 @@ import ButtonLink from './ButtonLink';
 interface ItemsListProps {
   actors: ActorBaseData[];
   heading: string;
+  className?: 'string';
 }
 
-function ActorsList({ actors, heading }: ItemsListProps) {
+function ActorsList({ actors, heading, className }: ItemsListProps) {
   const [visibleItems, setVisibleItems] = useState(10);
 
   const handleClick = () => {
@@ -24,8 +25,8 @@ function ActorsList({ actors, heading }: ItemsListProps) {
   }
 
   return (
-    <div className="flex flex-col py-20">
-      <h2 className="text-4xl font-semibold">{heading}</h2>
+    <div className={`${className} flex flex-col pt-20`}>
+      <h2 className="text-3xl font-semibold">{heading}</h2>
       <ul className="mb-8 mt-6 grid grid-cols-5 justify-between gap-y-16 px-4">
         {items.map((item) => (
           <ActorsCard actor={item} key={item.id} />

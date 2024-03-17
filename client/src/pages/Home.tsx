@@ -11,19 +11,27 @@ function Home() {
   if (isError) return 'Error';
 
   if (data) {
-    const {
-      trendingAll: { data: heroData },
-      trendingMovies: { data: moviesData },
-      trendingShows: { data: showsData },
-      popularActors: { data: actorsData },
-    } = data.data;
+    const { trendingAll, trendingMovies, trendingShows, popularActors } =
+      data.data;
 
     return (
       <section>
-        <Hero movies={heroData} />
-        <ItemsList movies={moviesData} heading="Popular Movies" />
-        <ItemsList movies={showsData} heading="Popular Shows" />
-        <ActorsList actors={actorsData} heading="Popular Actors" />
+        <Hero movies={trendingAll} />
+        <ItemsList
+          movies={trendingMovies}
+          heading="Popular Movies"
+          listLength="long"
+        />
+        <ItemsList
+          movies={trendingShows}
+          heading="Popular Shows"
+          listLength="long"
+        />
+        <ActorsList
+          actors={popularActors}
+          heading="Popular Actors"
+          className="pb-20"
+        />
       </section>
     );
   }
