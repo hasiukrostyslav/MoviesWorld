@@ -8,4 +8,12 @@ const convertGenres = (ids) =>
       ).name
   );
 
-module.exports = { convertGenres };
+const getMoviesData = (movie) => ({
+  id: movie.id,
+  title: movie.title,
+  posterPath: movie.poster_path,
+  year: new Date(movie.release_date).getFullYear(),
+  rating: +movie.vote_average.toFixed(1),
+});
+
+module.exports = { convertGenres, getMoviesData };
