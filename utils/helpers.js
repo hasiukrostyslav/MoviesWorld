@@ -23,4 +23,26 @@ const randomSort = (arr) =>
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value);
 
-module.exports = { convertGenres, getMoviesData, randomSort };
+const convertCollectionResponse = (res, full) => {
+  const collections = res.filter((el) => Object.hasOwn(el, 'collection'));
+  const restMovies = res.filter((el) => !Object.hasOwn(el, 'collection'));
+
+  const moviesRaw = randomSort(
+    [...collections.flatMap((collect) => collect.movies), ...restMovies].filter(
+      (movie) => movie.rating > 0
+    )
+  );
+
+  const movies = full ? moviesRaw : moviesRaw.slice(0, 5);
+  const wallpapers = collections.flatMap((collect) => collect.img.backdropImg);
+  const poster = collections.map((collect) => collect.img.posterImg);
+
+  return { collections, movies, wallpapers, poster };
+};
+
+module.exports = {
+  convertGenres,
+  getMoviesData,
+  randomSort,
+  convertCollectionResponse,
+};
