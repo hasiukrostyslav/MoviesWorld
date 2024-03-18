@@ -47,7 +47,7 @@ const getMoviesCollections = async (req, res, next) => {
   const MARVELCollection = await getCollection(collectionsIDs.MARVEL);
   const DCCollection = await getCollection(collectionsIDs.DC);
   const SWCollection = await getCollection(collectionsIDs.StarWars);
-  const JSCollection = await getCollection(collectionsIDs.JS);
+  const JB007Collection = await getCollection(collectionsIDs.JB007);
 
   res.status(StatusCodes.OK).json({
     status: 'success',
@@ -57,7 +57,7 @@ const getMoviesCollections = async (req, res, next) => {
       marvel: MARVELCollection,
       dc: DCCollection,
       starWars: SWCollection,
-      js: JSCollection,
+      jb007: JB007Collection,
     },
   });
 };

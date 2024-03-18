@@ -1,5 +1,5 @@
 const collectionsIDs = {
-  JS: [645],
+  JB007: [645],
   HP: [1241, 435259],
   LOR: [119, 121938],
   MARVEL: [
