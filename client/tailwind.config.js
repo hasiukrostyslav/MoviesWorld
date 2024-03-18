@@ -25,6 +25,9 @@ export default {
       brightness: {
         35: '.35',
       },
+      colors: {
+        opacity: 'rgba(100, 116, 139, 0.6)',
+      },
     },
   },
   plugins: [],

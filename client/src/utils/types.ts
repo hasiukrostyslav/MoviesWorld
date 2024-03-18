@@ -50,5 +50,24 @@ export interface MoviesPageResponse {
   };
 }
 
+export interface CollectionData {
+  id: number[];
+  collection: string[];
+  backdropImg: string[];
+  movies: MovieBaseData[];
+}
+
+export interface CollectionsPageResponse {
+  status: 'success';
+  data: {
+    hp: CollectionData;
+    lotr: CollectionData;
+    marvel: CollectionData;
+    dc: CollectionData;
+    starWars: CollectionData;
+    jb007: CollectionData;
+  };
+}
+
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
 export type MoviesTypes = MovieBaseData | ShowBaseData;

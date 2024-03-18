@@ -6,8 +6,6 @@ import ErrorPage from './ErrorPage';
 function Movies() {
   const { data, isFetching, isError } = useGetMoviesListsQuery();
 
-  console.log(data);
-
   if (isFetching && !data) return <Spinner />;
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
 

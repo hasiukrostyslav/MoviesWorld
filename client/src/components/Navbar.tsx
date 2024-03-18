@@ -5,13 +5,14 @@ import TopBar from './TopBar';
 function Navbar() {
   return (
     <nav className="relative z-30 mb-4 flex items-center justify-between">
-      <div className="flex items-center justify-between gap-7 3xl:gap-12">
+      <div className="flex items-center justify-between gap-7 3xl:gap-10">
         <Logo size="base" />
-        <ul className="flex items-center gap-3 3xl:gap-8">
+        <ul className="flex items-center gap-3 3xl:gap-6">
           <NavigationLink path="/">Home</NavigationLink>
           <NavigationLink path="/movies">Movies</NavigationLink>
-          <NavigationLink path="/cartoons">Cartoons</NavigationLink>
-          <NavigationLink path="/tv-shows">Shows</NavigationLink>
+          <NavigationLink path="/cartoons">Kids</NavigationLink>
+          <NavigationLink path="/tv-shows">TV</NavigationLink>
+          <NavigationLink path="/collections">Collections</NavigationLink>
           <NavigationLink path="/actors">Actors</NavigationLink>
         </ul>
       </div>
