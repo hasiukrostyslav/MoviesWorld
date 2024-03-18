@@ -7,7 +7,7 @@ import ButtonLink from './ButtonLink';
 interface ItemsListProps {
   actors: ActorBaseData[];
   heading: string;
-  className?: 'string';
+  className?: string;
 }
 
 function ActorsList({ actors, heading, className }: ItemsListProps) {

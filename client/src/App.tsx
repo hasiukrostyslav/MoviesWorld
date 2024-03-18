@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useAppSelector } from './store';
+import Layout from './pages/Layout';
+import OuterLayout from './pages/OuterLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFoundPage from './pages/NotFoundPage';
-import Layout from './pages/Layout';
 import Movies from './pages/Movies';
+import Cartoons from './pages/Cartoons';
 import TVShows from './pages/TVShows';
+import Collections from './pages/Collections';
 import Actors from './pages/Actors';
 import User from './pages/User';
-import Cartoons from './pages/Cartoons';
-import OuterLayout from './pages/OuterLayout';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'cartoons', element: <Cartoons /> },
       { path: 'tv-shows', element: <TVShows /> },
       { path: 'actors', element: <Actors /> },
+      { path: 'collections', element: <Collections /> },
       { path: 'user', element: <User /> },
     ],
   },
