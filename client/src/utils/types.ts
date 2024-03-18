@@ -52,21 +52,20 @@ export interface MoviesPageResponse {
 
 export interface CollectionData {
   id: number[];
+  key: string;
   collection: string[];
   backdropImg: string[];
+  img: {
+    posterImg: string;
+    backdropImg: string[];
+  };
   movies: MovieBaseData[];
 }
 
 export interface CollectionsPageResponse {
   status: 'success';
-  data: {
-    hp: CollectionData;
-    lotr: CollectionData;
-    marvel: CollectionData;
-    dc: CollectionData;
-    starWars: CollectionData;
-    jb007: CollectionData;
-  };
+  results: number;
+  data: CollectionData[];
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
