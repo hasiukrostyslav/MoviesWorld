@@ -8,6 +8,7 @@ const homeRoute = require('./routes/homeRoute');
 const moviesRoute = require('./routes/moviesRoute');
 const cartoonsRoute = require('./routes/cartoonsRoute');
 const showsRoute = require('./routes/showsRoute');
+const collectionsRoute = require('./routes/collectionsRoute');
 const actorsRoute = require('./routes/actorsRoute');
 const userRoute = require('./routes/userRoute');
 
@@ -28,6 +29,7 @@ app.use('/', homeRoute);
 app.use('/movies', moviesRoute);
 app.use('/cartoons', cartoonsRoute);
 app.use('/tv-shows', showsRoute);
+app.use('/collections', collectionsRoute);
 app.use('/actors', actorsRoute);
 app.use('/user', userRoute);
 
