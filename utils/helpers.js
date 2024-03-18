@@ -16,4 +16,11 @@ const getMoviesData = (movie) => ({
   rating: +movie.vote_average.toFixed(1),
 });
 
-module.exports = { convertGenres, getMoviesData };
+const randomSort = (arr) =>
+  arr
+    .filter((value) => value)
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+
+module.exports = { convertGenres, getMoviesData, randomSort };

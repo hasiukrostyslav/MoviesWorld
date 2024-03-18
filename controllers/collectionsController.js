@@ -1,9 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-const { getMoviesData } = require('../utils/helpers');
+const { getMoviesData, randomSort } = require('../utils/helpers');
 const { collectionsIDs } = require('../utils/constants');
 
-const getCollection = async (ids) => {
+const getCollection = async (ids, full = false) => {
   const requests = ids.flatMap((id) =>
     typeof id === 'number'
       ? axiosRequest.get(`/collection/${id}`)
@@ -20,7 +20,7 @@ const getCollection = async (ids) => {
                 id: res.data.id,
                 collection: res.data.name,
                 movies: res.data.parts.map((movie) => getMoviesData(movie)),
-                backdropImg: res.data.backdrop_path,
+                backdropImg: res.data.parts.map((movie) => movie.backdrop_path),
               }
             : getMoviesData(res.data)
         )
@@ -30,20 +30,26 @@ const getCollection = async (ids) => {
   const collections = response.filter((el) => Object.hasOwn(el, 'collection'));
   const restMovies = response.filter((el) => !Object.hasOwn(el, 'collection'));
 
+  const moviesRaw = randomSort(
+    [...collections.flatMap((collect) => collect.movies), ...restMovies].filter(
+      (movie) => movie.rating > 0
+    )
+  );
+
+  const movies = full ? moviesRaw : moviesRaw.slice(0, 5);
+  const wallpapers = collections.flatMap((collect) => collect.backdropImg);
+
   return {
     id: collections.map((collect) => collect.id),
     collections: collections.map((collect) => collect.collection),
-    backdropImg: collections.map((collect) => collect.backdropImg),
-    movies: [
-      ...collections.flatMap((collect) => collect.movies),
-      ...restMovies,
-    ],
+    backdropImg: randomSort(wallpapers),
+    movies,
   };
 };
 
 const getMoviesCollections = async (req, res, next) => {
   const HPCollection = await getCollection(collectionsIDs.HP);
-  const LORCollection = await getCollection(collectionsIDs.LOR);
+  const LOTRCollection = await getCollection(collectionsIDs.LOTR);
   const MARVELCollection = await getCollection(collectionsIDs.MARVEL);
   const DCCollection = await getCollection(collectionsIDs.DC);
   const SWCollection = await getCollection(collectionsIDs.StarWars);
@@ -53,7 +59,7 @@ const getMoviesCollections = async (req, res, next) => {
     status: 'success',
     data: {
       hp: HPCollection,
-      lor: LORCollection,
+      lotr: LOTRCollection,
       marvel: MARVELCollection,
       dc: DCCollection,
       starWars: SWCollection,
