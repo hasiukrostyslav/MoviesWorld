@@ -1,29 +1,14 @@
-import { useEffect, useState } from 'react';
 import type { HeroBaseData } from '../utils/types';
 import HeroItem from './HeroItem';
 import PaginationButton from './PaginationButton';
+import useSlider from '../hooks/useSlider';
 
 interface HeroProps {
   movies: HeroBaseData[];
 }
 
 function Hero({ movies }: HeroProps) {
-  const [currentMovie, setCurrentMovie] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentMovie(
-        currentMovie === movies.length - 1 ? 0 : currentMovie + 1,
-      );
-    }, 3000);
-
-    return () => clearInterval(intervalId);
-  }, [movies, currentMovie]);
-
-  const nextMovie = () =>
-    setCurrentMovie((c) => (c === movies.length - 1 ? 0 : c + 1));
-  const prevMovie = () =>
-    setCurrentMovie((c) => (c === 0 ? movies.length - 1 : c - 1));
+  const { currentMovie, nextMovie, prevMovie } = useSlider(movies, 3000);
 
   return (
     <>

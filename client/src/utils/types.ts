@@ -54,10 +54,10 @@ export interface CollectionData {
   id: number[];
   key: string;
   collection: string[];
-  backdropImg: string[];
+  backdropImg: string;
   img: {
     posterImg: string;
-    backdropImg: string[];
+    backdropImg: string;
   };
   movies: MovieBaseData[];
 }
@@ -66,6 +66,14 @@ export interface CollectionsPageResponse {
   status: 'success';
   results: number;
   data: CollectionData[];
+}
+
+export interface CollectionPoster {
+  key: string;
+  img: {
+    posterImg: string;
+    backdropImg: string;
+  };
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];

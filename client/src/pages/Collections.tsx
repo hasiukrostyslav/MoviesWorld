@@ -2,6 +2,7 @@ import { useGetAllCollectionQuery } from '../store';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 import CollectionList from '../components/CollectionList';
+import HeroCollections from '../components/HeroCollections';
 
 function Collections() {
   const { data, isFetching, isError } = useGetAllCollectionQuery();
@@ -12,8 +13,14 @@ function Collections() {
   if (data) {
     const { data: collections, results: length } = data;
 
+    const posters = collections.map((el) => ({
+      key: el.key,
+      img: el.img,
+    }));
+
     return (
       <section>
+        <HeroCollections posters={posters} />
         {collections.map((collection, i) => (
           <CollectionList
             key={collection.key}
