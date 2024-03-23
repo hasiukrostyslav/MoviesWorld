@@ -15,7 +15,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'Popular',
+    key: 'Popular Cartoons',
     path: 'movie',
     params: {
       with_genres: 16,
@@ -24,7 +24,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'Top Rated',
+    key: 'Top Rated Cartoons',
     path: 'movie',
     params: {
       with_genres: 16,
@@ -35,7 +35,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'Highest Grossing',
+    key: 'Highest Grossing Cartoons',
     path: 'movie',
     params: {
       with_genres: 16,
@@ -44,7 +44,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'New',
+    key: 'New Cartoons Series',
     path: 'tv',
     params: {
       with_genres: 16,
@@ -55,7 +55,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'Popular',
+    key: 'Popular Cartoons Series',
     path: 'tv',
     params: {
       with_genres: 16,
@@ -65,7 +65,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'Top Rated',
+    key: 'Top Rated Cartoons Series',
     path: 'tv',
     params: {
       with_genres: 16,
