@@ -2,92 +2,67 @@ const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { getMoviesData } = require('../utils/helpers');
 
-const getNewMovies = async () => {
-  const response = await axiosRequest.get('/discover/movie', {
+const searchCategoriesParams = [
+  {
+    key: 'New',
     params: {
       primary_release_year: new Date().getFullYear(),
       'vote_count.gte': 50,
       sort_by: 'primary_release_date.desc',
       page: 1,
     },
-  });
-
-  const data = response.data.results;
-
-  return data.map((movie) => getMoviesData(movie));
-};
-
-const getPopularNowMovies = async () => {
-  const response = await axiosRequest.get('/discover/movie', {
+  },
+  {
+    key: 'Trending',
     params: {
       sort_by: 'popularity.desc',
       page: 1,
     },
-  });
-
-  const data = response.data.results;
-
-  return data.map((movie) => getMoviesData(movie));
-};
-
-const getPopularAllMovies = async () => {
-  const response = await axiosRequest.get('/discover/movie', {
+  },
+  {
+    key: 'Popular',
     params: {
       sort_by: 'vote_count.desc',
       page: 1,
     },
-  });
-
-  const data = response.data.results;
-
-  return data.map((movie) => getMoviesData(movie));
-};
-
-const getTopRatingMovies = async () => {
-  const response = await axiosRequest.get('/discover/movie', {
+  },
+  {
+    key: 'Top Rated',
     params: {
       'vote_count.gte': 1000,
       sort_by: 'vote_average.desc',
       with_original_language: 'en',
       page: 1,
     },
-  });
-
-  const data = response.data.results;
-
-  return data.map((movie) => getMoviesData(movie));
-};
-
-const getTopBoxOfficeMovies = async () => {
-  const response = await axiosRequest.get('/discover/movie', {
+  },
+  {
+    key: 'Highest Grossing',
     params: {
       sort_by: 'revenue.desc',
       page: 1,
     },
-  });
+  },
+];
 
-  const data = response.data.results;
+const getMoviesByCategory = async (req, res, next) => {
+  const request = searchCategoriesParams.map((category) =>
+    axiosRequest.get('/discover/movie', { params: category.params })
+  );
 
-  return data.map((movie) => getMoviesData(movie));
-};
+  const response = await Promise.all(request)
+    .then((res1) => res1)
+    .then((res2) => Promise.all(res2.map((el) => el.data.results)));
 
-const getAllMovies = async (req, res, next) => {
-  const newMovies = await getNewMovies();
-  const popularNowMovies = await getPopularNowMovies();
-  const popularAllMovies = await getPopularAllMovies();
-  const topRatingMovies = await getTopRatingMovies();
-  const topBoxOfficeMovies = await getTopBoxOfficeMovies();
+  const data = response.map((resData, index) => ({
+    category: searchCategoriesParams[index].key,
+    data: resData.map((movie) => getMoviesData(movie)),
+  }));
 
   res.status(StatusCodes.OK).json({
     status: 'success',
-    data: {
-      newMovies: newMovies.slice(0, 10),
-      popularNowMovies: popularNowMovies.slice(0, 10),
-      popularAllMovies: popularAllMovies.slice(0, 10),
-      topRatingMovies: topRatingMovies.slice(0, 10),
-      topBoxOfficeMovies: topBoxOfficeMovies.slice(0, 10),
-    },
+    results: response.length,
+    data: data,
   });
 };
 
-module.exports = { getAllMovies };
+module.exports = { getMoviesByCategory };

@@ -1,7 +1,4 @@
 const collectionsIDs = [
-  { jamesBond: [645] },
-  { harryPotter: [1241, 435259] },
-  { lordOfTheRings: [119, 121938] },
   {
     marvel: [
       131292,
@@ -20,7 +17,7 @@ const collectionsIDs = [
     ],
   },
   {
-    detectiveComics: [
+    detective_Comics: [
       209131,
       468552,
       573693,
@@ -32,8 +29,11 @@ const collectionsIDs = [
       [141052, 495764, 791373, 436270, 298618, 565770],
     ],
   },
-  { starWars: [10, [330459, 348350]] },
-  { jurassicWorld: [328] },
+  { star_Wars: [10, [330459, 348350]] },
+  { jurassic_World: [328] },
+  { harry_Potter: [1241, 435259] },
+  { lord_Of_The_Rings: [119, 121938] },
+  { james_Bond: [645] },
 ];
 
 module.exports = { collectionsIDs };

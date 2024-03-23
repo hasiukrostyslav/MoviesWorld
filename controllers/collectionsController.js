@@ -1,11 +1,11 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
+const { collectionsIDs } = require('../utils/constants');
 const {
   getMoviesData,
   randomSort,
   convertCollectionResponse,
 } = require('../utils/helpers');
-const { collectionsIDs } = require('../utils/constants');
 
 const getCollection = async (ids, key) => {
   const requests = ids.flatMap((id) =>
@@ -63,6 +63,7 @@ const getMoviesCollections = async (req, res, next) => {
 
   res.status(StatusCodes.OK).json({
     status: 'success',
+    results: data.length,
     data,
   });
 };
