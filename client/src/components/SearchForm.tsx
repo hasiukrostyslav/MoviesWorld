@@ -2,7 +2,9 @@ import { useMatch } from 'react-router-dom';
 import { IoSearch } from 'react-icons/io5';
 
 function SearchForm() {
-  const match = useMatch('/');
+  const matchHome = useMatch('/');
+  const matchCollection = useMatch('collections');
+  const match = matchHome || matchCollection;
 
   return (
     <form className="relative">

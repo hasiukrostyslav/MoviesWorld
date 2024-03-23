@@ -6,7 +6,9 @@ interface LogoProps {
 }
 
 function Logo({ size, className }: LogoProps) {
-  const match = useMatch('/');
+  const matchHome = useMatch('/');
+  const matchCollection = useMatch('collections');
+  const match = matchHome || matchCollection;
 
   return (
     <Link

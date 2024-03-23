@@ -9,7 +9,9 @@ interface ThemeButtonProps {
 const absoluteStyles = 'absolute right-1 top-1';
 
 function ThemeButton({ absolute }: ThemeButtonProps) {
-  const match = useMatch('/');
+  const matchHome = useMatch('/');
+  const matchCollection = useMatch('collections');
+  const match = matchHome || matchCollection;
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.theme.theme);
 
