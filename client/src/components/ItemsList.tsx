@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MoviesListTypes } from '../utils/types';
+import type { MoviesListTypes } from '../utils/types';
 import Button from './Button';
 import MoviesCard from './MoviesCard';
 import ButtonLink from './ButtonLink';

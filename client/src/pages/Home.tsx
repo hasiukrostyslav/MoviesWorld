@@ -3,6 +3,11 @@ import Hero from '../components/Hero';
 import Spinner from '../components/Spinner';
 import ItemsList from '../components/ItemsList';
 import ActorsList from '../components/ActorsList';
+import type {
+  HeroBaseData,
+  HomeGeneralTypes,
+  MoviesListTypes,
+} from '../utils/types';
 
 function Home() {
   const { data, isFetching, isError } = useGetTrendListQuery();
@@ -11,27 +16,43 @@ function Home() {
   if (isError) return 'Error';
 
   if (data) {
-    const { trendingAll, trendingMovies, trendingShows, popularActors } =
-      data.data;
+    const categories = data.data;
+
+    const IsHeroData = (data: HomeGeneralTypes): data is HeroBaseData[] => {
+      if (data.every((el) => Object.hasOwn(el, 'backdropPath'))) return true;
+      else return false;
+    };
+
+    const IsMoviesData = (data: HomeGeneralTypes): data is MoviesListTypes => {
+      if (data.every((el) => Object.hasOwn(el, 'year'))) return true;
+      else return false;
+    };
 
     return (
       <section>
-        <Hero movies={trendingAll} />
-        <ItemsList
-          movies={trendingMovies}
-          heading="Popular Movies"
-          listLength="long"
-        />
-        <ItemsList
-          movies={trendingShows}
-          heading="Popular Shows"
-          listLength="long"
-        />
-        <ActorsList
-          actors={popularActors}
-          heading="Popular Actors"
-          className="pb-20"
-        />
+        {categories.map((category) => {
+          if (IsHeroData(category.data)) {
+            return <Hero key={category.category} movies={category.data} />;
+          } else if (IsMoviesData(category.data)) {
+            return (
+              <ItemsList
+                key={category.category}
+                movies={category.data}
+                heading={category.category}
+                listLength="long"
+              />
+            );
+          } else {
+            return (
+              <ActorsList
+                key={category.category}
+                actors={category.data}
+                heading={category.category}
+                className="pb-20"
+              />
+            );
+          }
+        })}
       </section>
     );
   }

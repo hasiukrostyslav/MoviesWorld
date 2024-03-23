@@ -29,27 +29,6 @@ export interface ActorBaseData {
   imgPath: string;
 }
 
-export interface HomePageResponse {
-  status: 'success';
-  data: {
-    trendingAll: HeroBaseData[];
-    trendingMovies: MovieBaseData[];
-    trendingShows: ShowBaseData[];
-    popularActors: ActorBaseData[];
-  };
-}
-
-export interface MoviesPageResponse {
-  status: 'success';
-  data: {
-    newMovies: MovieBaseData[];
-    popularNowMovies: MovieBaseData[];
-    popularAllMovies: MovieBaseData[];
-    topRatingMovies: MovieBaseData[];
-    topBoxOfficeMovies: MovieBaseData[];
-  };
-}
-
 export interface CollectionData {
   id: number[];
   key: string;
@@ -62,18 +41,42 @@ export interface CollectionData {
   movies: MovieBaseData[];
 }
 
-export interface CollectionsPageResponse {
-  status: 'success';
-  results: number;
-  data: CollectionData[];
-}
-
 export interface CollectionPoster {
   key: string;
   img: {
     posterImg: string;
     backdropImg: string;
   };
+}
+
+export type HomeGeneralTypes =
+  | HeroBaseData[]
+  | MovieBaseData[]
+  | ShowBaseData[]
+  | ActorBaseData[];
+
+export interface HomePageResponse {
+  status: 'success';
+  results: number;
+  data: {
+    category: string;
+    data: HomeGeneralTypes;
+  }[];
+}
+
+export interface MoviesPageResponse {
+  status: 'success';
+  results: number;
+  data: {
+    category: string;
+    data: MovieBaseData[];
+  }[];
+}
+
+export interface CollectionsPageResponse {
+  status: 'success';
+  results: number;
+  data: CollectionData[];
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];

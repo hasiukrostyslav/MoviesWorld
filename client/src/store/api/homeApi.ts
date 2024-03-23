@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { HomePageResponse } from '../../utils/types';
 
-const generalApi = createApi({
-  reducerPath: 'general',
+const homeApi = createApi({
+  reducerPath: 'home',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
 
   endpoints: (builder) => {
@@ -19,5 +19,5 @@ const generalApi = createApi({
   },
 });
 
-export const { useGetTrendListQuery } = generalApi;
-export { generalApi };
+export const { useGetTrendListQuery } = homeApi;
+export { homeApi };
