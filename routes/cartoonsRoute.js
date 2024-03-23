@@ -3,6 +3,6 @@ const cartoonsController = require('../controllers/cartoonsController');
 
 const router = express.Router();
 
-router.route('/').get(cartoonsController.getAllCartoons);
+router.route('/').get(cartoonsController.getCartoonsByCategory);
 
 module.exports = router;
