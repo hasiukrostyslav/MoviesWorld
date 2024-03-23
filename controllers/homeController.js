@@ -26,9 +26,11 @@ const convertResponseData = (data, category) => {
     default: {
       return data.map((movie) => ({
         id: movie.id,
-        title: movie.title,
+        title: movie.title || movie.name,
         posterPath: movie.poster_path,
-        year: new Date(movie.release_date).getFullYear(),
+        year: new Date(
+          movie.release_date || movie.first_air_date
+        ).getFullYear(),
         rating: +movie.vote_average.toFixed(1),
       }));
     }
