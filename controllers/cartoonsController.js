@@ -4,13 +4,12 @@ const { getMoviesData, getShowsData } = require('../utils/helpers');
 
 const searchCategoriesParams = [
   {
-    key: 'New Cartoons',
+    key: 'Trending Cartoons',
     path: 'movie',
     params: {
       with_genres: 16,
-      primary_release_year: new Date().getFullYear(),
-      'vote_count.gte': 50,
-      sort_by: 'primary_release_date.desc',
+
+      sort_by: 'popularity.desc',
       page: 1,
     },
   },
@@ -44,18 +43,17 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'New Cartoons Series',
+    key: 'Trending Series',
     path: 'tv',
     params: {
       with_genres: 16,
       with_original_language: 'en',
       page: 1,
-      'vote_count.gte': 50,
-      first_air_date_year: new Date().getFullYear(),
+      sort_by: 'popularity.desc',
     },
   },
   {
-    key: 'Popular Cartoons Series',
+    key: 'Popular Series',
     path: 'tv',
     params: {
       with_genres: 16,
@@ -65,7 +63,7 @@ const searchCategoriesParams = [
     },
   },
   {
-    key: 'Top Rated Cartoons Series',
+    key: 'Top Rated Series',
     path: 'tv',
     params: {
       with_genres: 16,
