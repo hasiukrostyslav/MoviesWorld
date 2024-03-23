@@ -16,6 +16,14 @@ const getMoviesData = (movie) => ({
   rating: +movie.vote_average.toFixed(1),
 });
 
+const getShowsData = (show) => ({
+  id: show.id,
+  title: show.name,
+  posterPath: show.poster_path,
+  year: new Date(show.first_air_date).getFullYear(),
+  rating: +show.vote_average.toFixed(1),
+});
+
 const randomSort = (arr) =>
   arr
     .filter((value) => value)
@@ -43,6 +51,7 @@ const convertCollectionResponse = (res, full) => {
 module.exports = {
   convertGenres,
   getMoviesData,
+  getShowsData,
   randomSort,
   convertCollectionResponse,
 };

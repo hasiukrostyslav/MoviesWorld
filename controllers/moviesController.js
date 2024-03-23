@@ -55,7 +55,7 @@ const getMoviesByCategory = async (req, res, next) => {
 
   const data = response.map((resData, index) => ({
     category: searchCategoriesParams[index].key,
-    data: resData.map((movie) => getMoviesData(movie)),
+    data: resData.map((movie) => getMoviesData(movie)).slice(0, 10),
   }));
 
   res.status(StatusCodes.OK).json({

@@ -3,6 +3,6 @@ const showsController = require('../controllers/showsController');
 
 const router = express.Router();
 
-router.route('/').get(showsController.getAllShows);
+router.route('/').get(showsController.getShowsByCategory);
 
 module.exports = router;
