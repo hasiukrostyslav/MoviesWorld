@@ -31,7 +31,7 @@ function ItemsList({
   }
 
   return (
-    <div className={`${className} flex flex-col pt-20`}>
+    <div className={`flex flex-col pt-20 ${className}`}>
       <h2 className="text-3xl font-semibold">{heading}</h2>
       <ul className="mb-8 mt-6 grid grid-cols-5 justify-items-center gap-y-16 px-4">
         {items.map((item) => (
