@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { themeReducer } from './slice/themeSlice';
 import { homeApi } from './api/homeApi';
 import { moviesApi } from './api/moviesAPI';
+import { showsApi } from './api/showsAPI';
 import { collectionsApi } from './api/collectionsAPI';
 
 export const store = configureStore({
@@ -11,12 +12,14 @@ export const store = configureStore({
     theme: themeReducer,
     [homeApi.reducerPath]: homeApi.reducer,
     [moviesApi.reducerPath]: moviesApi.reducer,
+    [showsApi.reducerPath]: showsApi.reducer,
     [collectionsApi.reducerPath]: collectionsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
       .concat(homeApi.middleware)
       .concat(moviesApi.middleware)
+      .concat(showsApi.middleware)
       .concat(collectionsApi.middleware);
   },
 });
