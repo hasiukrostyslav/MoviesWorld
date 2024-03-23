@@ -2,8 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeReducer } from './slice/themeSlice';
-import { homeApi } from './api/homeApi';
+import { homeApi } from './api/homeAPI';
 import { moviesApi } from './api/moviesAPI';
+import { cartoonsApi } from './api/cartoonsAPI';
 import { showsApi } from './api/showsAPI';
 import { collectionsApi } from './api/collectionsAPI';
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     theme: themeReducer,
     [homeApi.reducerPath]: homeApi.reducer,
     [moviesApi.reducerPath]: moviesApi.reducer,
+    [cartoonsApi.reducerPath]: cartoonsApi.reducer,
     [showsApi.reducerPath]: showsApi.reducer,
     [collectionsApi.reducerPath]: collectionsApi.reducer,
   },
@@ -19,6 +21,7 @@ export const store = configureStore({
     return getDefaultMiddleware()
       .concat(homeApi.middleware)
       .concat(moviesApi.middleware)
+      .concat(cartoonsApi.middleware)
       .concat(showsApi.middleware)
       .concat(collectionsApi.middleware);
   },
@@ -33,6 +36,8 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector = useSelector.withTypes<RootState>();
 
 export * from './slice/themeSlice';
-export * from './api/homeApi';
+export * from './api/homeAPI';
 export * from './api/moviesAPI';
+export * from './api/cartoonsAPI';
+export * from './api/showsAPI';
 export * from './api/collectionsAPI';
