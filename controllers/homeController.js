@@ -1,74 +1,78 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-
 const { convertGenres } = require('../utils/helpers');
 
-const getTrendingAll = async () => {
-  const response = await axiosRequest.get('/trending/all/week');
-  const data = response.data.results;
+const convertResponseData = (data, category) => {
+  switch (category) {
+    case 'all': {
+      return data.map((movie) => ({
+        id: movie.id,
+        title: movie.title || movie.name,
+        overview: movie.overview,
+        backdropPath: movie.backdrop_path,
+        posterPath: movie.poster_path,
+        genres: convertGenres(movie.genre_ids),
+      }));
+    }
 
-  return data.map((movie) => ({
-    id: movie.id,
-    title: movie.title || movie.name,
-    overview: movie.overview,
-    backdropPath: movie.backdrop_path,
-    posterPath: movie.poster_path,
-    genres: convertGenres(movie.genre_ids),
-  }));
+    case 'person': {
+      return data.map((person) => ({
+        id: person.id,
+        name: person.name,
+        imgPath: person.profile_path,
+      }));
+    }
+
+    default: {
+      return data.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        posterPath: movie.poster_path,
+        year: new Date(movie.release_date).getFullYear(),
+        rating: +movie.vote_average.toFixed(1),
+      }));
+    }
+  }
 };
 
-const getTrendingMovies = async () => {
-  const response = await axiosRequest.get('/trending/movie/week');
-  const data = response.data.results;
+const searchParams = [
+  {
+    pathId: 'all',
+    key: 'Trending All',
+  },
+  {
+    pathId: 'movie',
+    key: 'Trending Movies',
+  },
+  {
+    pathId: 'tv',
+    key: 'Trending Shows',
+  },
+  {
+    pathId: 'person',
+    key: 'Trending Actors',
+  },
+];
 
-  return data.map((movie) => ({
-    id: movie.id,
-    title: movie.title,
-    posterPath: movie.poster_path,
-    year: new Date(movie.release_date).getFullYear(),
-    rating: +movie.vote_average.toFixed(1),
+const getHomePageData = async (req, res, next) => {
+  const request = searchParams.map((param) =>
+    axiosRequest.get(`/trending/${param.pathId}/week`)
+  );
+
+  const response = await Promise.all(request)
+    .then((res1) => res1)
+    .then((res2) => Promise.all(res2.map((el) => el.data.results)));
+
+  const data = response.map((resData, index) => ({
+    category: searchParams[index].key,
+    data: convertResponseData(resData, searchParams[index].pathId),
   }));
-};
-
-const getTrendingShows = async () => {
-  const response = await axiosRequest.get('/trending/tv/week');
-  const data = response.data.results;
-
-  return data.map((show) => ({
-    id: show.id,
-    title: show.name,
-    posterPath: show.poster_path,
-    year: new Date(show.first_air_date).getFullYear(),
-    rating: +show.vote_average.toFixed(1),
-  }));
-};
-
-const getPopularActors = async () => {
-  const response = await axiosRequest.get('person/popular');
-  const data = response.data.results;
-
-  return data.map((person) => ({
-    id: person.id,
-    name: person.name,
-    imgPath: person.profile_path,
-  }));
-};
-
-const getTrendingLists = async (req, res, next) => {
-  const trendingAll = await getTrendingAll();
-  const trendingMovies = await getTrendingMovies();
-  const trendingShows = await getTrendingShows();
-  const popularActors = await getPopularActors();
 
   res.status(StatusCodes.OK).json({
     status: 'success',
-    data: {
-      trendingAll,
-      trendingMovies,
-      trendingShows,
-      popularActors,
-    },
+    results: response.length,
+    data,
   });
 };
 
-module.exports = { getTrendingLists };
+module.exports = { getHomePageData };
