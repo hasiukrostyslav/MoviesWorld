@@ -1,6 +1,6 @@
 import type { HeroBaseData } from '../utils/types';
 import HeroItem from './HeroItem';
-import PaginationButton from './PaginationButton';
+import SliderButton from './SliderButton';
 import useSlider from '../hooks/useSlider';
 
 interface HeroProps {
@@ -24,8 +24,8 @@ function Hero({ movies }: HeroProps) {
           ))}
       </ul>
       <div className="absolute left-0 top-0 z-10 h-screen w-full">
-        <PaginationButton onClick={prevMovie} direction="prev" />
-        <PaginationButton onClick={nextMovie} direction="next" />
+        <SliderButton onClick={prevMovie} direction="prev" />
+        <SliderButton onClick={nextMovie} direction="next" />
       </div>
     </>
   );

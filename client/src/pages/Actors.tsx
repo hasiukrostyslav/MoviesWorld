@@ -1,4 +1,5 @@
 import ActorsCard from '../components/ActorsCard';
+import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import { useGetActorsListQuery } from '../store';
 import ErrorPage from './ErrorPage';
@@ -21,6 +22,7 @@ function Actors() {
             <ActorsCard actor={actor} key={actor.id} />
           ))}
         </ul>
+        <Pagination />
       </section>
     );
   }

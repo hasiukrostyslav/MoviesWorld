@@ -27,6 +27,9 @@ export default {
       },
       colors: {
         opacity: 'rgba(100, 116, 139, 0.6)',
+        slate: {
+          150: '#d5dee9',
+        },
       },
     },
   },

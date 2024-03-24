@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import useSlider from '../hooks/useSlider';
 import { imgSize, imgURL } from '../utils/constants';
 import { CollectionPoster } from '../utils/types';
-import PaginationButton from './PaginationButton';
+import SliderButton from './SliderButton';
 
 interface HeroCollectionsProps {
   posters: CollectionPoster[];
@@ -53,8 +53,8 @@ function HeroCollections({ posters }: HeroCollectionsProps) {
         ))}
       </ul>
       <div className="absolute left-0 top-0 z-10 h-screen w-full">
-        <PaginationButton onClick={prevMovie} direction="prev" />
-        <PaginationButton onClick={nextMovie} direction="next" />
+        <SliderButton onClick={prevMovie} direction="prev" />
+        <SliderButton onClick={nextMovie} direction="next" />
       </div>
     </div>
   );
