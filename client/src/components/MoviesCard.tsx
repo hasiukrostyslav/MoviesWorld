@@ -24,14 +24,17 @@ function MoviesCard({ item, frame, className }: MoviesCardProps) {
           </span>
         </div>
 
-        <Link to="/" className="font-semibold">
+        <Link
+          to="/"
+          className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
+        >
           {item.title.length < 18
             ? item.title
             : item.title.slice(0, 18).padEnd(21, '...')}
         </Link>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-sm font-light">{item.year}</span>
-          <button>
+          <button className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4">
             <FaHeart />
           </button>
         </div>

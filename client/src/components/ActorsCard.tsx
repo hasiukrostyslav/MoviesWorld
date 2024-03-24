@@ -14,10 +14,13 @@ function ActorsCard({ actor }: ActorsCardProps) {
         src={`${imgURL}${imgSize.small}${actor.imgPath}`}
         alt={`${actor.name} poster`}
       />
-      <Link to={`/`} className="font-semibold">
+      <Link
+        to={`/`}
+        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
+      >
         {actor.name.length < 18
           ? actor.name
-          : actor.name.slice(0, 18).padEnd(21, '...')}
+          : actor.name.slice(0, 16).padEnd(18, '...')}
       </Link>
     </li>
   );

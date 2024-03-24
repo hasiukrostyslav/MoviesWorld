@@ -42,7 +42,10 @@ function HeroCollections({ posters }: HeroCollectionsProps) {
           <li
             className={`z-40 flex cursor-pointer ${sortItem(index, collection)}`}
           >
-            <Link to={'/'} className="">
+            <Link
+              to={'/'}
+              className="rounded-md font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
+            >
               <img
                 src={`${imgURL}${index === currentMovie ? imgSize.medium : imgSize.small}${movie.img.posterImg}`}
                 alt="Collection poster"
