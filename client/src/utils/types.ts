@@ -79,5 +79,11 @@ export interface CollectionsPageResponse {
   data: CollectionData[];
 }
 
+export interface ActorsPageResponse {
+  status: 'success';
+  results: number;
+  data: ActorBaseData[];
+}
+
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
 export type MoviesTypes = MovieBaseData | ShowBaseData;

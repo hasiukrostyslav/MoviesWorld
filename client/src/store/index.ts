@@ -7,6 +7,7 @@ import { moviesApi } from './api/moviesAPI';
 import { cartoonsApi } from './api/cartoonsAPI';
 import { showsApi } from './api/showsAPI';
 import { collectionsApi } from './api/collectionsAPI';
+import { actorsApi } from './api/actorsAPI';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     [cartoonsApi.reducerPath]: cartoonsApi.reducer,
     [showsApi.reducerPath]: showsApi.reducer,
     [collectionsApi.reducerPath]: collectionsApi.reducer,
+    [actorsApi.reducerPath]: actorsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
@@ -23,7 +25,8 @@ export const store = configureStore({
       .concat(moviesApi.middleware)
       .concat(cartoonsApi.middleware)
       .concat(showsApi.middleware)
-      .concat(collectionsApi.middleware);
+      .concat(collectionsApi.middleware)
+      .concat(actorsApi.middleware);
   },
 });
 
@@ -41,3 +44,4 @@ export * from './api/moviesAPI';
 export * from './api/cartoonsAPI';
 export * from './api/showsAPI';
 export * from './api/collectionsAPI';
+export * from './api/actorsAPI';
