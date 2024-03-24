@@ -81,6 +81,8 @@ export interface CollectionsPageResponse {
 
 export interface ActorsPageResponse {
   status: 'success';
+  page: number;
+  totalPages: number;
   results: number;
   data: ActorBaseData[];
 }

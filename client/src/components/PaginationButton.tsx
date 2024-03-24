@@ -6,6 +6,7 @@ interface PaginationButtonProps {
   prev?: boolean;
   next?: boolean;
   active?: boolean;
+  onClick: () => void;
 }
 
 function PaginationButton({
@@ -14,6 +15,7 @@ function PaginationButton({
   next,
   active,
   disabled,
+  onClick,
 }: PaginationButtonProps) {
   const styles = {
     active:
@@ -27,8 +29,9 @@ function PaginationButton({
   return (
     <li>
       <button
+        onClick={onClick}
         disabled={disabled}
-        className={`flex h-10 w-10 items-center justify-center rounded-md border  outline-0 ring-blue-400 transition-all duration-500 focus-visible:ring-4  ${disabled ? styles.disabled : active ? styles.active : styles.regular}`}
+        className={`flex h-8 w-8 items-center justify-center rounded-md border  text-sm outline-0 ring-blue-400 transition-all duration-500 focus-visible:ring-4  ${disabled ? styles.disabled : active ? styles.active : styles.regular}`}
       >
         {prev ? <IoIosArrowBack /> : next ? <IoIosArrowForward /> : page}
       </button>

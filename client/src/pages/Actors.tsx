@@ -1,18 +1,21 @@
+import { useSearchParams } from 'react-router-dom';
+import { useGetActorsListQuery } from '../store';
 import ActorsCard from '../components/ActorsCard';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
-import { useGetActorsListQuery } from '../store';
 import ErrorPage from './ErrorPage';
 
 function Actors() {
-  const { data, isFetching, isError } = useGetActorsListQuery();
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page') || 1;
+
+  const { data, isFetching, isError } = useGetActorsListQuery(+page);
 
   if (isFetching && !data) return <Spinner />;
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
 
   if (data) {
-    const actors = data.data;
-    console.log(actors);
+    const { data: actors, page: currentPage, totalPages } = data;
 
     return (
       <section className="flex flex-col pt-20">
@@ -22,7 +25,7 @@ function Actors() {
             <ActorsCard actor={actor} key={actor.id} />
           ))}
         </ul>
-        <Pagination />
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       </section>
     );
   }
