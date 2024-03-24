@@ -56,7 +56,7 @@ const getShowsByCategory = async (req, res, next) => {
   res.status(StatusCodes.OK).json({
     status: 'success',
     results: response.length,
-    data: data,
+    data,
   });
 };
 
