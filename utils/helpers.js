@@ -1,4 +1,5 @@
 const genresTypes = require('../data/genresData.json');
+const axiosRequest = require('./axiosInstance');
 
 const convertGenres = (ids) =>
   ids.map(
@@ -48,10 +49,21 @@ const convertCollectionResponse = (res, full) => {
   return { collections, movies, wallpapers, poster };
 };
 
+const getMaxPage = async (path) => {
+  const response = await axiosRequest.get(path, {
+    params: { page: 100 },
+  });
+
+  const { data } = response;
+
+  return data.results.length ? 100 : data.total_pages;
+};
+
 module.exports = {
   convertGenres,
   getMoviesData,
   getShowsData,
   randomSort,
   convertCollectionResponse,
+  getMaxPage,
 };
