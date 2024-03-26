@@ -1,11 +1,7 @@
-const { StatusCodes } = require('http-status-codes');
+const { NotFoundError } = require('../errors');
 
-const notFound = (req, res) => {
-  res.status(StatusCodes.NOT_FOUND).json({
-    status: 'fail',
-    statusCode: StatusCodes.NOT_FOUND,
-    message: 'This page could not be found.',
-  });
+const notFound = (req, res, next) => {
+  next(new NotFoundError(`This page ${req.originalUrl} could not be found`));
 };
 
 module.exports = notFound;

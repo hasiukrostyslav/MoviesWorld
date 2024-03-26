@@ -18,8 +18,9 @@ const errorHandlerMiddleware = require('./middleware/errorHandlerMiddleware');
 
 const app = express();
 
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('tiny'));
+  app.use(morgan('dev'));
 }
 
 app.use(express.json());
