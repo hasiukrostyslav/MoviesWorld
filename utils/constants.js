@@ -36,4 +36,6 @@ const collectionsIDs = [
   { james_Bond: [645] },
 ];
 
-module.exports = { collectionsIDs };
+const uniquePoster = ['detective_Comics', 'marvel'];
+
+module.exports = { collectionsIDs, uniquePoster };

@@ -1,5 +1,6 @@
 const genresTypes = require('../data/genresData.json');
 const axiosRequest = require('./axiosInstance');
+const { uniquePoster } = require('./constants');
 
 const convertGenres = (ids) =>
   ids.map(
@@ -49,6 +50,17 @@ const convertCollectionResponse = (res, full) => {
   return { collections, movies, wallpapers, poster };
 };
 
+const checkCollectionPoster = (key, poster) => {
+  if (uniquePoster.find((title) => title === key)) {
+    if (key === 'marvel') {
+      return poster.at(3);
+    }
+    return poster.at(-2);
+  }
+
+  return poster.at(0);
+};
+
 const getMaxPage = async (path) => {
   const response = await axiosRequest.get(path, {
     params: { page: 100 },
@@ -64,6 +76,7 @@ module.exports = {
   getMoviesData,
   getShowsData,
   randomSort,
+  checkCollectionPoster,
   convertCollectionResponse,
   getMaxPage,
 };

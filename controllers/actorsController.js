@@ -3,7 +3,7 @@ const axiosRequest = require('../utils/axiosInstance');
 const { getMaxPage } = require('../utils/helpers');
 
 const getAllActors = async (req, res, next) => {
-  const path = 'person/popular';
+  const path = 'trending/person/week';
   const { page } = req.query;
 
   const maxPage = await getMaxPage(path);

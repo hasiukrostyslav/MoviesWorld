@@ -5,6 +5,7 @@ const {
   getMoviesData,
   randomSort,
   convertCollectionResponse,
+  checkCollectionPoster,
 } = require('../utils/helpers');
 
 const getCollection = async (ids, key) => {
@@ -44,7 +45,7 @@ const getCollection = async (ids, key) => {
     key,
     collections: collections.map((collect) => collect.collection),
     img: {
-      posterImg: randomSort(poster).at(0),
+      posterImg: checkCollectionPoster(key, poster),
       backdropImg: randomSort(wallpapers).at(0),
     },
     backdropImg: randomSort(wallpapers).at(0),
