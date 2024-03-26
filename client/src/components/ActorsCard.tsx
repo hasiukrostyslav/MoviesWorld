@@ -12,7 +12,7 @@ function ActorsCard({ actor }: ActorsCardProps) {
       <img
         className="mb-3 w-full rounded-md"
         src={`${imgURL}${imgSize.small}${actor.imgPath}`}
-        alt={`${actor.name} poster`}
+        alt={`${actor.name} photo`}
       />
       <Link
         to={`/`}

@@ -40,6 +40,7 @@ function HeroCollections({ posters }: HeroCollectionsProps) {
       <ul className="relative flex h-full w-full items-center justify-center">
         {posters.map((movie, index, collection) => (
           <li
+            key={movie.key}
             className={`z-40 flex cursor-pointer ${sortItem(index, collection)}`}
           >
             <Link
