@@ -40,6 +40,34 @@ const searchCategoriesParams = [
   },
 ];
 
+const getCollectionData = async (id) => {
+  if (!id) return null;
+
+  const response = await axiosRequest.get(`/collection/${id}`);
+
+  return response.data.parts.map((movie) => ({
+    id: movie.id,
+    posterPath: movie.poster_path,
+    title: movie.title,
+    year: movie.release_date,
+    rating: +movie.vote_average.toFixed(1),
+  }));
+};
+
+const getCast = async (id) => {
+  if (!id) return null;
+
+  const response = await axiosRequest.get(`/movie/${id}/credits`);
+
+  return response.data.cast
+    .filter((el) => el.profile_path && el.character)
+    .map((actor) => ({
+      id: actor.id,
+      name: actor.name,
+      imgPath: actor.profile_path,
+    }));
+};
+
 const getMovieListsByCategory = async (req, res, next) => {
   const request = searchCategoriesParams.map((category) =>
     axiosRequest.get('/discover/movie', { params: category.params })
@@ -63,11 +91,11 @@ const getMovieListsByCategory = async (req, res, next) => {
 
 const getMoviesList = async (req, res, next) => {
   const path = '/discover/movie';
-  const { id } = req.params;
+  const { key } = req.params;
   const { page } = req.query;
 
   const { params } = searchCategoriesParams.find(
-    (el) => el.key.toLowerCase() === id
+    (el) => el.key.toLowerCase() === key
   );
 
   const maxPage = await getMaxPage(path, { ...params, page: page || 1 });
@@ -92,4 +120,38 @@ const getMoviesList = async (req, res, next) => {
   });
 };
 
-module.exports = { getMovieListsByCategory, getMoviesList };
+const getMovie = async (req, res, next) => {
+  const { id } = req.params;
+
+  const response = await axiosRequest.get(`/movie/${id}`);
+  const { data } = response;
+
+  const collection = await getCollectionData(data.belongs_to_collection.id);
+  const cast = await getCast(data.id);
+
+  const movie = {
+    id: data.id,
+    title: data.title,
+    status: data.status,
+    releaseDate: data.release_date,
+    overview: data.overview,
+    backdropPath: data.backdrop_path,
+    posterPath: data.poster_path,
+    genres: data.genres.map((genre) => genre.name),
+    rating: +data.vote_average.toFixed(1),
+    runtime: data.runtime,
+    budget: data.budget,
+    revenue: data.revenue,
+    languages: data.spoken_languages.map((language) => language.english_name),
+    countries: data.production_countries.map((country) => country.name),
+    collection,
+    cast,
+  };
+
+  res.status(StatusCodes.OK).json({
+    status: 'success',
+    data: movie,
+  });
+};
+
+module.exports = { getMovieListsByCategory, getMoviesList, getMovie };
