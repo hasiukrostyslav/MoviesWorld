@@ -1,6 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { getMaxPage } = require('../utils/helpers');
+const { NotFoundError } = require('../errors');
 
 const getAllActors = async (req, res, next) => {
   const path = 'trending/person/week';
@@ -9,7 +10,9 @@ const getAllActors = async (req, res, next) => {
   const maxPage = await getMaxPage(path);
 
   if (page > maxPage)
-    throw new Error(`Invalid page: Pages start at 1 and max at ${maxPage}.`);
+    throw new NotFoundError(
+      `Invalid page: Pages start at 1 and max at ${maxPage}.`
+    );
 
   const response = await axiosRequest.get(path, {
     params: { page },

@@ -61,9 +61,9 @@ const checkCollectionPoster = (key, poster) => {
   return poster.at(0);
 };
 
-const getMaxPage = async (path) => {
+const getMaxPage = async (path, params) => {
   const response = await axiosRequest.get(path, {
-    params: { page: 100 },
+    params: { ...params, page: 100 },
   });
 
   const { data } = response;
