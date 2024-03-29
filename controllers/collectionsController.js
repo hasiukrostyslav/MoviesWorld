@@ -7,8 +7,9 @@ const {
   convertCollectionResponse,
   checkCollectionPoster,
 } = require('../utils/helpers');
+const { NotFoundError } = require('../errors');
 
-const getCollection = async (ids, key) => {
+const getCollectionsData = async (ids, key, full) => {
   const requests = ids.flatMap((id) =>
     typeof id === 'number'
       ? axiosRequest.get(`/collection/${id}`)
@@ -37,8 +38,10 @@ const getCollection = async (ids, key) => {
       )
     );
 
-  const { collections, movies, wallpapers, poster } =
-    convertCollectionResponse(response);
+  const { collections, movies, wallpapers, poster } = convertCollectionResponse(
+    response,
+    full
+  );
 
   return {
     id: collections.map((collect) => collect.id),
@@ -53,12 +56,12 @@ const getCollection = async (ids, key) => {
   };
 };
 
-const getMoviesCollections = async (req, res, next) => {
+const getAllCollections = async (req, res, next) => {
   const keys = collectionsIDs.flatMap((el) => Object.keys(el));
 
   const data = await Promise.all(
     keys.map((key) =>
-      getCollection(collectionsIDs.find((el) => el[key])[key], key)
+      getCollectionsData(collectionsIDs.find((el) => el[key])[key], key)
     )
   );
 
@@ -69,4 +72,25 @@ const getMoviesCollections = async (req, res, next) => {
   });
 };
 
-module.exports = { getMoviesCollections };
+const getCollection = async (req, res, next) => {
+  const { id } = req.params;
+
+  if (!collectionsIDs.find((item) => item[id.replaceAll('-', '_')]))
+    throw new NotFoundError(
+      `This collection "${id.replaceAll('-', ' ')}" could not be found.`
+    );
+
+  const data = await getCollectionsData(
+    collectionsIDs.find((el) => el[id])[id],
+    id,
+    true
+  );
+
+  res.status(StatusCodes.OK).json({
+    status: 'success',
+    results: data.movies.length,
+    data,
+  });
+};
+
+module.exports = { getAllCollections, getCollection };
