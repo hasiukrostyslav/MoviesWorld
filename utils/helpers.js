@@ -100,6 +100,25 @@ const getListOfItems = async (path, req, searchParams) => {
   return { response, maxPage };
 };
 
+const getTrendingListOfItem = async (path, req) => {
+  const { page } = req.query;
+
+  const maxPage = await getMaxPage(path, {
+    page: page || 1,
+  });
+
+  if (page > maxPage)
+    throw new NotFoundError(
+      `Invalid page: Pages start at 1 and max at ${maxPage}.`
+    );
+
+  const response = await axiosRequest.get(path, {
+    params: { page: page || 1 },
+  });
+
+  return { response, maxPage };
+};
+
 const getCollectionData = async function (isCollection) {
   if (!isCollection) return null;
   const { id } = isCollection;
@@ -140,4 +159,5 @@ module.exports = {
   getListOfItems,
   getCast,
   getCollectionData,
+  getTrendingListOfItem,
 };
