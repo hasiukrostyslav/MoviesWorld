@@ -1,5 +1,6 @@
-const genresTypes = require('../data/genresData.json');
 const axiosRequest = require('./axiosInstance');
+const genresTypes = require('../data/genresData.json');
+const { NotFoundError } = require('../errors');
 const { uniquePoster } = require('./constants');
 
 const convertGenres = (ids) =>
@@ -71,6 +72,48 @@ const getMaxPage = async (path, params) => {
   return data.results.length ? 100 : data.total_pages;
 };
 
+const getListOfItems = async (path, req, searchParams) => {
+  const { key } = req.params;
+  const { page } = req.query;
+
+  const param = searchParams.find(
+    (el) => el.key.toLowerCase() === key.toLowerCase().replaceAll('-', ' ')
+  )?.params;
+
+  if (!param)
+    throw new NotFoundError(`Invalid category: Can't find category "${key}".`);
+
+  const maxPage = await getMaxPage(path, {
+    ...param,
+    page: page || 1,
+  });
+
+  if (page > maxPage)
+    throw new NotFoundError(
+      `Invalid page: Pages start at 1 and max at ${maxPage}.`
+    );
+
+  const response = await axiosRequest.get(path, {
+    params: { ...param, page: page || 1 },
+  });
+
+  return { response, maxPage };
+};
+
+const getCast = async (type, id) => {
+  if (!id) return null;
+
+  const response = await axiosRequest.get(`/${type}/${id}/credits`);
+
+  return response.data.cast
+    .filter((el) => el.profile_path && el.character)
+    .map((actor) => ({
+      id: actor.id,
+      name: actor.name,
+      imgPath: actor.profile_path,
+    }));
+};
+
 module.exports = {
   convertGenres,
   getMoviesData,
@@ -79,4 +122,6 @@ module.exports = {
   checkCollectionPoster,
   convertCollectionResponse,
   getMaxPage,
+  getListOfItems,
+  getCast,
 };

@@ -38,4 +38,83 @@ const collectionsIDs = [
 
 const uniquePoster = ['detective_Comics', 'marvel'];
 
-module.exports = { collectionsIDs, uniquePoster };
+const showSearchParams = [
+  {
+    key: 'New',
+    params: {
+      with_original_language: 'en',
+      page: 1,
+      'vote_count.gte': 50,
+      first_air_date_year: new Date().getFullYear(),
+    },
+  },
+  {
+    key: 'Trending',
+    params: {
+      with_original_language: 'en',
+      page: 1,
+      sort_by: 'popularity.desc',
+    },
+  },
+  {
+    key: 'Popular',
+    params: {
+      with_original_language: 'en',
+      page: 1,
+      sort_by: 'vote_count.desc',
+    },
+  },
+  {
+    key: 'Top Rated',
+    params: {
+      with_original_language: 'en',
+      page: 1,
+      sort_by: 'vote_average.desc',
+      'vote_count.gte': 1000,
+    },
+  },
+];
+
+const movieSearchParams = [
+  {
+    key: 'New',
+    params: {
+      primary_release_year: new Date().getFullYear(),
+      'vote_count.gte': 50,
+      sort_by: 'primary_release_date.desc',
+    },
+  },
+  {
+    key: 'Trending',
+    params: {
+      sort_by: 'popularity.desc',
+    },
+  },
+  {
+    key: 'Popular',
+    params: {
+      sort_by: 'vote_count.desc',
+    },
+  },
+  {
+    key: 'Top Rated',
+    params: {
+      'vote_count.gte': 1000,
+      sort_by: 'vote_average.desc',
+      with_original_language: 'en',
+    },
+  },
+  {
+    key: 'Highest Grossing',
+    params: {
+      sort_by: 'revenue.desc',
+    },
+  },
+];
+
+module.exports = {
+  collectionsIDs,
+  uniquePoster,
+  showSearchParams,
+  movieSearchParams,
+};

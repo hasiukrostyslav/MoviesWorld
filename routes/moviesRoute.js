@@ -7,6 +7,6 @@ router.route('/').get(moviesController.getMovieListsByCategory);
 
 router.route('/category/:key').get(moviesController.getMoviesList);
 
-router.route('/movie/:id').get(moviesController.getMovie);
+router.route('/view/movie/:id').get(moviesController.getMovie);
 
 module.exports = router;

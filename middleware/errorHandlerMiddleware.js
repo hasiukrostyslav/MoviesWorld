@@ -1,4 +1,12 @@
 const { StatusCodes } = require('http-status-codes');
+const { NotFoundError } = require('../errors');
+
+const handleAxiosError = (err) => {
+  const { url } = err.config;
+  return new NotFoundError(
+    `This page ${url} could not be found. Please check the address and try again.`
+  );
+};
 
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
@@ -31,7 +39,13 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
-  } else sendErrorProd(err, res);
+  } else {
+    let error = { ...err };
+
+    if (error.name === 'AxiosError') error = handleAxiosError(error);
+
+    sendErrorProd(error, res);
+  }
 };
 
 module.exports = errorHandlerMiddleware;

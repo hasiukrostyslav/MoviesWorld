@@ -1,47 +1,11 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-const { getMoviesData, getMaxPage } = require('../utils/helpers');
-const { NotFoundError } = require('../errors');
+const { movieSearchParams } = require('../utils/constants');
+const { getMoviesData, getListOfItems, getCast } = require('../utils/helpers');
 
-const searchCategoriesParams = [
-  {
-    key: 'New',
-    params: {
-      primary_release_year: new Date().getFullYear(),
-      'vote_count.gte': 50,
-      sort_by: 'primary_release_date.desc',
-    },
-  },
-  {
-    key: 'Trending',
-    params: {
-      sort_by: 'popularity.desc',
-    },
-  },
-  {
-    key: 'Popular',
-    params: {
-      sort_by: 'vote_count.desc',
-    },
-  },
-  {
-    key: 'Top Rated',
-    params: {
-      'vote_count.gte': 1000,
-      sort_by: 'vote_average.desc',
-      with_original_language: 'en',
-    },
-  },
-  {
-    key: 'Highest Grossing',
-    params: {
-      sort_by: 'revenue.desc',
-    },
-  },
-];
-
-const getCollectionData = async (id) => {
-  if (!id) return null;
+const getCollectionData = async function (isCollection) {
+  if (!isCollection) return null;
+  const { id } = isCollection;
 
   const response = await axiosRequest.get(`/collection/${id}`);
 
@@ -54,22 +18,8 @@ const getCollectionData = async (id) => {
   }));
 };
 
-const getCast = async (id) => {
-  if (!id) return null;
-
-  const response = await axiosRequest.get(`/movie/${id}/credits`);
-
-  return response.data.cast
-    .filter((el) => el.profile_path && el.character)
-    .map((actor) => ({
-      id: actor.id,
-      name: actor.name,
-      imgPath: actor.profile_path,
-    }));
-};
-
 const getMovieListsByCategory = async (req, res, next) => {
-  const request = searchCategoriesParams.map((category) =>
+  const request = movieSearchParams.map((category) =>
     axiosRequest.get('/discover/movie', { params: category.params })
   );
 
@@ -78,7 +28,7 @@ const getMovieListsByCategory = async (req, res, next) => {
     .then((res2) => Promise.all(res2.map((el) => el.data.results)));
 
   const data = response.map((resData, index) => ({
-    category: searchCategoriesParams[index].key,
+    category: movieSearchParams[index].key,
     data: resData.map((movie) => getMoviesData(movie)).slice(0, 10),
   }));
 
@@ -90,24 +40,11 @@ const getMovieListsByCategory = async (req, res, next) => {
 };
 
 const getMoviesList = async (req, res, next) => {
-  const path = '/discover/movie';
-  const { key } = req.params;
-  const { page } = req.query;
-
-  const { params } = searchCategoriesParams.find(
-    (el) => el.key.toLowerCase() === key
+  const { response, maxPage } = await getListOfItems(
+    '/discover/movie',
+    req,
+    movieSearchParams
   );
-
-  const maxPage = await getMaxPage(path, { ...params, page: page || 1 });
-
-  if (page > maxPage)
-    throw new NotFoundError(
-      `Invalid page: Pages start at 1 and max at ${maxPage}.`
-    );
-
-  const response = await axiosRequest.get(path, {
-    params: { ...params, page: page || 1 },
-  });
 
   const data = response.data.results.map((movie) => getMoviesData(movie));
 
@@ -126,8 +63,8 @@ const getMovie = async (req, res, next) => {
   const response = await axiosRequest.get(`/movie/${id}`);
   const { data } = response;
 
-  const collection = await getCollectionData(data.belongs_to_collection.id);
-  const cast = await getCast(data.id);
+  const collection = await getCollectionData(data.belongs_to_collection);
+  const cast = await getCast('movie', data.id);
 
   const movie = {
     id: data.id,
