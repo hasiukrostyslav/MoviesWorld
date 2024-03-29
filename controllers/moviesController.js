@@ -1,22 +1,12 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { movieSearchParams } = require('../utils/constants');
-const { getMoviesData, getListOfItems, getCast } = require('../utils/helpers');
-
-const getCollectionData = async function (isCollection) {
-  if (!isCollection) return null;
-  const { id } = isCollection;
-
-  const response = await axiosRequest.get(`/collection/${id}`);
-
-  return response.data.parts.map((movie) => ({
-    id: movie.id,
-    posterPath: movie.poster_path,
-    title: movie.title,
-    year: movie.release_date,
-    rating: +movie.vote_average.toFixed(1),
-  }));
-};
+const {
+  getMoviesData,
+  getListOfItems,
+  getCast,
+  getCollectionData,
+} = require('../utils/helpers');
 
 const getMovieListsByCategory = async (req, res, next) => {
   const request = movieSearchParams.map((category) =>

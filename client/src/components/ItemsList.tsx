@@ -5,6 +5,7 @@ import MoviesCard from './MoviesCard';
 import ButtonLink from './ButtonLink';
 
 interface ItemsListProps {
+  category: string;
   movies: MoviesListTypes;
   heading: string;
   listLength?: 'short' | 'long';
@@ -12,6 +13,7 @@ interface ItemsListProps {
 }
 
 function ItemsList({
+  category,
   movies,
   heading,
   listLength = 'short',
@@ -50,7 +52,7 @@ function ItemsList({
       )}
       {(visibleItems === 20 || listLength === 'short') && (
         <ButtonLink
-          path="/"
+          path={`:${category}`}
           color="primary"
           size="large"
           className="mt-10 self-center"

@@ -1,82 +1,14 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-const { getMoviesData, getShowsData } = require('../utils/helpers');
+const { cartoonSearchParams } = require('../utils/constants');
+const {
+  getMoviesData,
+  getShowsData,
+  getListOfItems,
+} = require('../utils/helpers');
 
-const searchCategoriesParams = [
-  {
-    key: 'Trending Cartoons',
-    path: 'movie',
-    params: {
-      with_genres: 16,
-
-      sort_by: 'popularity.desc',
-      page: 1,
-    },
-  },
-  {
-    key: 'Popular Cartoons',
-    path: 'movie',
-    params: {
-      with_genres: 16,
-      sort_by: 'vote_count.desc',
-      page: 1,
-    },
-  },
-  {
-    key: 'Top Rated Cartoons',
-    path: 'movie',
-    params: {
-      with_genres: 16,
-      'vote_count.gte': 1000,
-      sort_by: 'vote_average.desc',
-      with_original_language: 'en',
-      page: 1,
-    },
-  },
-  {
-    key: 'Highest Grossing Cartoons',
-    path: 'movie',
-    params: {
-      with_genres: 16,
-      sort_by: 'revenue.desc',
-      page: 1,
-    },
-  },
-  {
-    key: 'Trending Series',
-    path: 'tv',
-    params: {
-      with_genres: 16,
-      with_original_language: 'en',
-      page: 1,
-      sort_by: 'popularity.desc',
-    },
-  },
-  {
-    key: 'Popular Series',
-    path: 'tv',
-    params: {
-      with_genres: 16,
-      with_original_language: 'en',
-      page: 1,
-      sort_by: 'vote_count.desc',
-    },
-  },
-  {
-    key: 'Top Rated Series',
-    path: 'tv',
-    params: {
-      with_genres: 16,
-      with_original_language: 'en',
-      page: 1,
-      sort_by: 'vote_average.desc',
-      'vote_count.gte': 1000,
-    },
-  },
-];
-
-const getCartoonsByCategory = async (req, res, next) => {
-  const request = searchCategoriesParams.map((category) =>
+const getCartoonListsByCategory = async (req, res, next) => {
+  const request = cartoonSearchParams.map((category) =>
     axiosRequest.get(`/discover/${category.path}`, { params: category.params })
   );
 
@@ -85,10 +17,11 @@ const getCartoonsByCategory = async (req, res, next) => {
     .then((res2) => Promise.all(res2.map((el) => el.data.results)));
 
   const data = response.map((resData, index) => ({
-    category: searchCategoriesParams[index].key,
+    category: cartoonSearchParams[index].key,
+    type: cartoonSearchParams[index].path,
     data: resData
       .map((movie) =>
-        searchCategoriesParams[index].path === 'movie'
+        cartoonSearchParams[index].path === 'movie'
           ? getMoviesData(movie)
           : getShowsData(movie)
       )
@@ -102,4 +35,28 @@ const getCartoonsByCategory = async (req, res, next) => {
   });
 };
 
-module.exports = { getCartoonsByCategory };
+const getCartoonList = async (req, res, next) => {
+  const { type } = req.params;
+  const { response, maxPage } = await getListOfItems(
+    `/discover/${type}`,
+    req,
+    cartoonSearchParams
+  );
+
+  const data = response.data.results.map((movie) =>
+    type === 'movie' ? getMoviesData(movie) : getShowsData(movie)
+  );
+
+  res.status(StatusCodes.OK).json({
+    status: 'success',
+    page: response.data.page,
+    maxPage,
+    results: data.length,
+    data,
+  });
+};
+
+module.exports = {
+  getCartoonListsByCategory,
+  getCartoonList,
+};

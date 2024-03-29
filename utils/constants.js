@@ -112,9 +112,83 @@ const movieSearchParams = [
   },
 ];
 
+const cartoonSearchParams = [
+  {
+    key: 'Trending',
+    path: 'movie',
+    params: {
+      with_genres: 16,
+
+      sort_by: 'popularity.desc',
+      page: 1,
+    },
+  },
+  {
+    key: 'Popular',
+    path: 'movie',
+    params: {
+      with_genres: 16,
+      sort_by: 'vote_count.desc',
+      page: 1,
+    },
+  },
+  {
+    key: 'Top Rated',
+    path: 'movie',
+    params: {
+      with_genres: 16,
+      'vote_count.gte': 1000,
+      sort_by: 'vote_average.desc',
+      with_original_language: 'en',
+      page: 1,
+    },
+  },
+  {
+    key: 'Highest Grossing',
+    path: 'movie',
+    params: {
+      with_genres: 16,
+      sort_by: 'revenue.desc',
+      page: 1,
+    },
+  },
+  {
+    key: 'Trending',
+    path: 'tv',
+    params: {
+      with_genres: 16,
+      with_original_language: 'en',
+      page: 1,
+      sort_by: 'popularity.desc',
+    },
+  },
+  {
+    key: 'Popular',
+    path: 'tv',
+    params: {
+      with_genres: 16,
+      with_original_language: 'en',
+      page: 1,
+      sort_by: 'vote_count.desc',
+    },
+  },
+  {
+    key: 'Top Rated',
+    path: 'tv',
+    params: {
+      with_genres: 16,
+      with_original_language: 'en',
+      page: 1,
+      sort_by: 'vote_average.desc',
+      'vote_count.gte': 1000,
+    },
+  },
+];
+
 module.exports = {
   collectionsIDs,
   uniquePoster,
   showSearchParams,
   movieSearchParams,
+  cartoonSearchParams,
 };

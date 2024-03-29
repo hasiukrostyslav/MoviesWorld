@@ -100,6 +100,21 @@ const getListOfItems = async (path, req, searchParams) => {
   return { response, maxPage };
 };
 
+const getCollectionData = async function (isCollection) {
+  if (!isCollection) return null;
+  const { id } = isCollection;
+
+  const response = await axiosRequest.get(`/collection/${id}`);
+
+  return response.data.parts.map((movie) => ({
+    id: movie.id,
+    posterPath: movie.poster_path,
+    title: movie.title,
+    year: movie.release_date,
+    rating: +movie.vote_average.toFixed(1),
+  }));
+};
+
 const getCast = async (type, id) => {
   if (!id) return null;
 
@@ -124,4 +139,5 @@ module.exports = {
   getMaxPage,
   getListOfItems,
   getCast,
+  getCollectionData,
 };
