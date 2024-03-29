@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-const { getMaxPage } = require('../utils/helpers');
+const { getMaxPage, getMoviesData, getShowsData } = require('../utils/helpers');
 const { NotFoundError } = require('../errors');
 
 const getAllActors = async (req, res, next) => {
@@ -33,4 +33,36 @@ const getAllActors = async (req, res, next) => {
   });
 };
 
-module.exports = { getAllActors };
+const getActor = async (req, res, next) => {
+  const { id } = req.params;
+
+  const actorResponse = await axiosRequest.get(`/person/${id}`);
+  const movieResponse = await axiosRequest.get(`/person/${id}/movie_credits`);
+  const tvResponse = await axiosRequest.get(`/person/${id}/tv_credits`);
+
+  const { data: actorData } = actorResponse;
+  const moviesData = movieResponse.data.cast.map((movie) =>
+    getMoviesData(movie)
+  );
+
+  const tvData = tvResponse.data.cast.map((movie) => getShowsData(movie));
+
+  const actor = {
+    id: actorData.id,
+    name: actorData.name,
+    birthday: actorData.birthday,
+    deathday: actorData.deathday,
+    birthplace: actorData.place_of_birth,
+    imgPath: actorData.profile_path,
+    biography: actorData.biography,
+    movies: moviesData,
+    tv: tvData,
+  };
+
+  res.status(StatusCodes.OK).json({
+    status: 'success',
+    data: actor,
+  });
+};
+
+module.exports = { getAllActors, getActor };
