@@ -75,13 +75,18 @@ const getAllCollections = async (req, res, next) => {
 const getCollection = async (req, res, next) => {
   const { id } = req.params;
 
-  if (!collectionsIDs.find((item) => item[id.replaceAll('-', '_')]))
+  const formatId = id
+    .split('-')
+    .map((el, i) => (i === 0 ? el : el[0].toUpperCase() + el.slice(1)))
+    .join('_');
+
+  if (!collectionsIDs.find((item) => item[formatId]))
     throw new NotFoundError(
       `This collection "${id.replaceAll('-', ' ')}" could not be found.`
     );
 
   const data = await getCollectionsData(
-    collectionsIDs.find((el) => el[id])[id],
+    collectionsIDs.find((el) => el[formatId])[formatId],
     id,
     true
   );
