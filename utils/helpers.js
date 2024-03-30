@@ -13,6 +13,7 @@ const convertGenres = (ids) =>
 
 const getMoviesData = (movie) => ({
   id: movie.id,
+  type: 'movie',
   title: movie.title,
   posterPath: movie.poster_path,
   year: new Date(movie.release_date).getFullYear(),
@@ -21,6 +22,7 @@ const getMoviesData = (movie) => ({
 
 const getShowsData = (show) => ({
   id: show.id,
+  type: 'tv',
   title: show.name,
   posterPath: show.poster_path,
   year: new Date(show.first_air_date).getFullYear(),

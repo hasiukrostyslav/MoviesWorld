@@ -12,6 +12,7 @@ const convertResponseData = (data, category) => {
     case 'all': {
       return data.map((movie) => ({
         id: movie.id,
+        type: movie.title ? 'movie' : 'tv',
         title: movie.title || movie.name,
         overview: movie.overview,
         backdropPath: movie.backdrop_path,
@@ -29,15 +30,11 @@ const convertResponseData = (data, category) => {
     }
 
     default: {
-      return data.slice(0, 10).map((movie) => ({
-        id: movie.id,
-        title: movie.title || movie.name,
-        posterPath: movie.poster_path,
-        year: new Date(
-          movie.release_date || movie.first_air_date
-        ).getFullYear(),
-        rating: +movie.vote_average.toFixed(1),
-      }));
+      return data
+        .slice(0, 10)
+        .map((movie) =>
+          movie.title ? getMoviesData(movie) : getShowsData(movie)
+        );
     }
   }
 };
