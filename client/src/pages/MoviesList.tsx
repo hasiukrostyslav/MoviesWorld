@@ -12,7 +12,7 @@ function MoviesList() {
   const page = searchParams.get('page') || 1;
 
   const { data, isFetching, isError } = useGetMoviesByCategoryQuery({
-    key: key,
+    key,
     page: +page,
   });
 

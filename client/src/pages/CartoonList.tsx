@@ -1,18 +1,19 @@
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useGetShowsByCategoryQuery } from '../store';
+import { useGetCartoonsByCategoryQuery } from '../store';
 import ItemsList from '../components/FilmListLong';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function TVList() {
+function CartoonList() {
   const params = useParams();
   const [searchParams] = useSearchParams();
-  const { key } = params;
+  const { key, type } = params;
   const page = searchParams.get('page') || 1;
 
-  const { data, isFetching, isError } = useGetShowsByCategoryQuery({
+  const { data, isFetching, isError } = useGetCartoonsByCategoryQuery({
     key,
+    type,
     page: +page,
   });
 
@@ -31,4 +32,4 @@ function TVList() {
   }
 }
 
-export default TVList;
+export default CartoonList;

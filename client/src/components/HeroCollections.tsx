@@ -44,7 +44,7 @@ function HeroCollections({ posters }: HeroCollectionsProps) {
             className={`z-40 flex cursor-pointer ${sortItem(index, collection)}`}
           >
             <Link
-              to={'/'}
+              to={`${movie.key.replaceAll('_', '-').toLowerCase()}`}
               className="rounded-md font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
             >
               <img

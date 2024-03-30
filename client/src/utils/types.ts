@@ -72,11 +72,25 @@ export interface MoviesPageResponse {
     data: MovieBaseData[];
   }[];
 }
+export interface CartoonsPageResponse {
+  status: 'success';
+  results: number;
+  data: {
+    category: string;
+    type: string;
+    data: MovieBaseData[];
+  }[];
+}
 
 export interface CollectionsPageResponse {
   status: 'success';
   results: number;
   data: CollectionData[];
+}
+export interface CollectionsList {
+  status: 'success';
+  results: number;
+  data: CollectionData;
 }
 
 export interface ActorsPageResponse {
@@ -100,6 +114,13 @@ export interface ShowCategoryResponse {
   totalPages: number;
   results: number;
   data: ShowBaseData[];
+}
+export interface CartoonsCategoryResponse {
+  status: 'success';
+  page: number;
+  totalPages: number;
+  results: number;
+  data: MovieBaseData[];
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];

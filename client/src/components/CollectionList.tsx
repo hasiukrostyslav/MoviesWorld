@@ -5,17 +5,11 @@ import { imgSize, imgURL } from '../utils/constants';
 
 interface CollectionListProps {
   collection: CollectionData;
-  listLength?: 'short' | 'full';
   index: number;
   length: number;
 }
 
-function CollectionList({
-  collection,
-  listLength = 'short',
-  index,
-  length,
-}: CollectionListProps) {
+function CollectionList({ collection, index, length }: CollectionListProps) {
   const { movies, backdropImg, key } = collection;
 
   const title = `${key.replace(key[0], key[0].toUpperCase()).replaceAll('_', ' ')}`;
@@ -28,11 +22,14 @@ function CollectionList({
           alt={`${title} collection logo`}
           className="h-20"
         />
-        {listLength === 'short' && (
-          <ButtonLink path="/" color="primary" size="medium">
-            View All Movies
-          </ButtonLink>
-        )}
+
+        <ButtonLink
+          path={`${key.replaceAll('_', '-').toLowerCase()}`}
+          color="primary"
+          size="medium"
+        >
+          View All Movies
+        </ButtonLink>
       </div>
       <div className="relative mt-4 flex flex-col overflow-hidden rounded-md px-2 pb-8 pt-52">
         <img

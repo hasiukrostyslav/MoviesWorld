@@ -14,15 +14,20 @@ function Cartoons() {
 
     return (
       <section>
-        {categories.map((category, i, arr) => (
-          <FilmListShort
-            path={``}
-            key={category.category}
-            movies={category.data}
-            heading={`${category.category}`}
-            className={i === arr.length - 1 ? 'pb-20' : ''}
-          />
-        ))}
+        {categories.map((list, i, arr) => {
+          const { category, type, data } = list;
+          const pathKey = category.replaceAll(' ', '-').toLowerCase();
+          console.log('compo', type, pathKey);
+          return (
+            <FilmListShort
+              path={`category/${type}/${pathKey}`}
+              key={`${type}-${category}`}
+              movies={data}
+              heading={`${category}`}
+              className={i === arr.length - 1 ? 'pb-20' : ''}
+            />
+          );
+        })}
       </section>
     );
   }

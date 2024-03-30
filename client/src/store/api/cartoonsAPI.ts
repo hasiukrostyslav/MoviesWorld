@@ -1,12 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { MoviesPageResponse } from '../../utils/types';
+import {
+  CartoonsCategoryResponse,
+  CartoonsPageResponse,
+} from '../../utils/types';
+
+interface CartoonsByCategory {
+  key: string | undefined;
+  type: string | undefined;
+  page: number;
+}
 
 const cartoonsApi = createApi({
   reducerPath: 'cartoons',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: (builder) => {
     return {
-      getCartoonsLists: builder.query<MoviesPageResponse, void>({
+      getCartoonsLists: builder.query<CartoonsPageResponse, void>({
         query: () => {
           return {
             url: '/api/cartoons',
@@ -14,9 +23,23 @@ const cartoonsApi = createApi({
           };
         },
       }),
+
+      getCartoonsByCategory: builder.query<
+        CartoonsCategoryResponse,
+        CartoonsByCategory
+      >({
+        query: ({ key, type, page }) => {
+          return {
+            url: `/api/cartoons/category/${type}/${key}`,
+            method: 'GET',
+            params: { page },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetCartoonsListsQuery } = cartoonsApi;
+export const { useGetCartoonsListsQuery, useGetCartoonsByCategoryQuery } =
+  cartoonsApi;
 export { cartoonsApi };

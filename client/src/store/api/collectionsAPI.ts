@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CollectionsPageResponse } from '../../utils/types';
+import { CollectionsList, CollectionsPageResponse } from '../../utils/types';
 
 const collectionsApi = createApi({
   reducerPath: 'collections',
@@ -14,9 +14,19 @@ const collectionsApi = createApi({
           };
         },
       }),
+
+      getCollection: builder.query<CollectionsList, string | undefined>({
+        query: (id) => {
+          return {
+            url: `/api/collections/${id}`,
+            method: 'GET',
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetAllCollectionQuery } = collectionsApi;
+export const { useGetAllCollectionQuery, useGetCollectionQuery } =
+  collectionsApi;
 export { collectionsApi };
