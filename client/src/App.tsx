@@ -13,6 +13,8 @@ import TVShows from './pages/TVShows';
 import Collections from './pages/Collections';
 import Actors from './pages/Actors';
 import User from './pages/User';
+import TrendingMovies from './pages/TrendingMovies';
+import TrendingShows from './pages/TrendingShows';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      { path: '/trending/movies', element: <TrendingMovies /> },
+      { path: '/trending/tv', element: <TrendingShows /> },
       { path: 'movies', element: <Movies /> },
       { path: 'cartoons', element: <Cartoons /> },
       { path: 'tv-shows', element: <TVShows /> },

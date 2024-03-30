@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { MoviesPageResponse } from '../../utils/types';
+import type {
+  MoviesPageResponse,
+  ShowCategoryResponse,
+} from '../../utils/types';
 
 const showsApi = createApi({
   reducerPath: 'shows',
@@ -14,9 +17,19 @@ const showsApi = createApi({
           };
         },
       }),
+
+      getTrendingShows: builder.query<ShowCategoryResponse, number>({
+        query: (page) => {
+          return {
+            url: '/api/trending/tv',
+            method: 'GET',
+            params: { page },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetShowsListsQuery } = showsApi;
+export const { useGetShowsListsQuery, useGetTrendingShowsQuery } = showsApi;
 export { showsApi };

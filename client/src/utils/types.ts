@@ -87,5 +87,20 @@ export interface ActorsPageResponse {
   data: ActorBaseData[];
 }
 
+export interface MovieCategoryResponse {
+  status: 'success';
+  page: number;
+  totalPages: number;
+  results: number;
+  data: MovieBaseData[];
+}
+export interface ShowCategoryResponse {
+  status: 'success';
+  page: number;
+  totalPages: number;
+  results: number;
+  data: ShowBaseData[];
+}
+
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
 export type MoviesTypes = MovieBaseData | ShowBaseData;

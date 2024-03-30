@@ -17,7 +17,6 @@ function Movies() {
         {categories.map((category, i, arr) => (
           <ItemsList
             key={category.category}
-            category={category.category}
             movies={category.data}
             heading={`${category.category} Movies`}
             className={i === arr.length - 1 ? 'pb-20' : ''}
