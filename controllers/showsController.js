@@ -36,7 +36,7 @@ const getShowList = async (req, res, next) => {
   res.status(StatusCodes.OK).json({
     status: 'success',
     page: response.data.page,
-    maxPage,
+    totalPages: maxPage,
     results: data.length,
     data,
   });
