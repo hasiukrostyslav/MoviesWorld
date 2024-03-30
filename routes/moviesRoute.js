@@ -4,9 +4,6 @@ const moviesController = require('../controllers/moviesController');
 const router = express.Router();
 
 router.route('/').get(moviesController.getMovieListsByCategory);
-
 router.route('/category/:key').get(moviesController.getMoviesList);
-
-router.route('/view/movie/:id').get(moviesController.getMovie);
 
 module.exports = router;

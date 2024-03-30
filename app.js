@@ -11,6 +11,7 @@ const showsRoute = require('./routes/showsRoute');
 const collectionsRoute = require('./routes/collectionsRoute');
 const actorsRoute = require('./routes/actorsRoute');
 const userRoute = require('./routes/userRoute');
+const viewRoute = require('./routes/viewRoute');
 
 const getGenresMiddleware = require('./middleware/getGenresMiddleware');
 const notFoundMiddleware = require('./middleware/notFoundMiddleware');
@@ -32,6 +33,7 @@ app.use('/cartoons', cartoonsRoute);
 app.use('/tv-shows', showsRoute);
 app.use('/collections', collectionsRoute);
 app.use('/actors', actorsRoute);
+app.use('/view', viewRoute);
 app.use('/user', userRoute);
 
 app.all('*', notFoundMiddleware);
