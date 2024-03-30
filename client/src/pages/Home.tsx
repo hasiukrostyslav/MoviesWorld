@@ -40,17 +40,7 @@ function Home() {
                 key={category.category}
                 movies={category.data}
                 heading={category.category}
-                isShort
-              >
-                <ButtonLink
-                  path={`/trending/${category.category.includes('Movies') ? 'movies' : 'tv'}`}
-                  color="primary"
-                  size="large"
-                  className="mt-10 self-center"
-                >
-                  View All {category.category}
-                </ButtonLink>
-              </ItemsList>
+              />
             );
           } else {
             return (
