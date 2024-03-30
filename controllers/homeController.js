@@ -21,7 +21,7 @@ const convertResponseData = (data, category) => {
     }
 
     case 'person': {
-      return data.map((person) => ({
+      return data.slice(0, 10).map((person) => ({
         id: person.id,
         name: person.name,
         imgPath: person.profile_path,
@@ -29,7 +29,7 @@ const convertResponseData = (data, category) => {
     }
 
     default: {
-      return data.map((movie) => ({
+      return data.slice(0, 10).map((movie) => ({
         id: movie.id,
         title: movie.title || movie.name,
         posterPath: movie.poster_path,
