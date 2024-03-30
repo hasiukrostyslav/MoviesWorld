@@ -1,6 +1,5 @@
 import { useGetCartoonsListsQuery } from '../store';
-
-import ItemsList from '../components/ItemsList';
+import FilmListShort from '../components/FilmsListShort';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
@@ -16,7 +15,8 @@ function Cartoons() {
     return (
       <section>
         {categories.map((category, i, arr) => (
-          <ItemsList
+          <FilmListShort
+            path={``}
             key={category.category}
             movies={category.data}
             heading={`${category.category}`}

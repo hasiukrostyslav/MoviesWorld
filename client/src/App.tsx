@@ -15,6 +15,8 @@ import Actors from './pages/Actors';
 import User from './pages/User';
 import TrendingMovies from './pages/TrendingMovies';
 import TrendingShows from './pages/TrendingShows';
+import MoviesList from './pages/MoviesList';
+import TVList from './pages/TVList';
 
 const router = createBrowserRouter([
   {
@@ -27,9 +29,22 @@ const router = createBrowserRouter([
       },
       { path: '/trending/movies', element: <TrendingMovies /> },
       { path: '/trending/tv', element: <TrendingShows /> },
-      { path: 'movies', element: <Movies /> },
+      {
+        path: 'movies',
+        children: [
+          { index: true, element: <Movies /> },
+          { path: 'category/:key', element: <MoviesList /> },
+        ],
+      },
+
       { path: 'cartoons', element: <Cartoons /> },
-      { path: 'tv-shows', element: <TVShows /> },
+      {
+        path: 'tv-shows',
+        children: [
+          { index: true, element: <TVShows /> },
+          { path: 'category/:key', element: <TVList /> },
+        ],
+      },
       { path: 'actors', element: <Actors /> },
       { path: 'collections', element: <Collections /> },
       { path: 'user', element: <User /> },

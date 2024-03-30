@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useGetTrendingShowsQuery } from '../store';
-import ItemsList from '../components/ItemsList';
+import ItemsList from '../components/FilmListLong';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 import Pagination from '../components/Pagination';

@@ -19,7 +19,7 @@ function ActorsList({ actors, heading, className }: ItemsListProps) {
       </ul>
 
       <ButtonLink
-        path="/"
+        path="/actors"
         color="primary"
         size="large"
         className="mt-10 self-center"

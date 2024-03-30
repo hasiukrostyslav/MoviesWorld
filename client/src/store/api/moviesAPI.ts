@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { MovieCategoryResponse, MoviesPageResponse } from '../../utils/types';
 
+interface MoviesByCategory {
+  key: string | undefined;
+  page: number;
+}
+
 const moviesApi = createApi({
   reducerPath: 'movies',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
@@ -24,9 +29,26 @@ const moviesApi = createApi({
           };
         },
       }),
+
+      getMoviesByCategory: builder.query<
+        MovieCategoryResponse,
+        MoviesByCategory
+      >({
+        query: ({ key, page }) => {
+          return {
+            url: `/api/movies/category/${key}`,
+            method: 'GET',
+            params: { page },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetMoviesListsQuery, useGetTrendingMoviesQuery } = moviesApi;
+export const {
+  useGetMoviesListsQuery,
+  useGetTrendingMoviesQuery,
+  useGetMoviesByCategoryQuery,
+} = moviesApi;
 export { moviesApi };

@@ -1,15 +1,20 @@
-import { useSearchParams } from 'react-router-dom';
-import { useGetTrendingMoviesQuery } from '../store';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useGetMoviesByCategoryQuery } from '../store';
 import ItemsList from '../components/FilmListLong';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function TrendingMovies() {
+function MoviesList() {
+  const params = useParams();
   const [searchParams] = useSearchParams();
+  const { key } = params;
   const page = searchParams.get('page') || 1;
 
-  const { data, isFetching, isError } = useGetTrendingMoviesQuery(+page);
+  const { data, isFetching, isError } = useGetMoviesByCategoryQuery({
+    key: key,
+    page: +page,
+  });
 
   if (isFetching && !data) return <Spinner />;
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
@@ -26,4 +31,4 @@ function TrendingMovies() {
   }
 }
 
-export default TrendingMovies;
+export default MoviesList;

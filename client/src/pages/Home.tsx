@@ -1,9 +1,10 @@
 import { useGetTrendListQuery } from '../store';
 import Hero from '../components/Hero';
 import Spinner from '../components/Spinner';
-import ItemsList from '../components/ItemsList';
+import FilmListShort from '../components/FilmsListShort';
 import ActorsList from '../components/ActorsList';
-import ButtonLink from '../components/ButtonLink';
+import ErrorPage from './ErrorPage';
+
 import type {
   HeroBaseData,
   HomeGeneralTypes,
@@ -14,7 +15,7 @@ function Home() {
   const { data, isFetching, isError } = useGetTrendListQuery();
 
   if (isFetching && !data) return <Spinner />;
-  if (isError) return 'Error';
+  if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
 
   if (data) {
     const categories = data.data;
@@ -36,10 +37,11 @@ function Home() {
             return <Hero key={category.category} movies={category.data} />;
           } else if (IsMoviesData(category.data)) {
             return (
-              <ItemsList
+              <FilmListShort
                 key={category.category}
                 movies={category.data}
                 heading={category.category}
+                path={`/trending/${category.category.includes('Movies') ? 'movies' : 'tv'}`}
               />
             );
           } else {

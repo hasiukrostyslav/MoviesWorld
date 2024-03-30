@@ -1,15 +1,20 @@
 import type { MoviesListTypes } from '../utils/types';
+import ButtonLink from './ButtonLink';
 import MoviesCard from './MoviesCard';
 
-interface ItemsListProps {
-  path?: string;
+interface FilmListShortProps {
+  path: string;
   movies: MoviesListTypes;
   heading: string;
   className?: string;
-  children?: React.ReactNode;
 }
 
-function ItemsList({ movies, heading, className, children }: ItemsListProps) {
+function FilmListShort({
+  movies,
+  heading,
+  className,
+  path,
+}: FilmListShortProps) {
   return (
     <div className={`flex flex-col pt-20 ${className}`}>
       <h2 className="text-3xl font-semibold">{heading}</h2>
@@ -18,9 +23,16 @@ function ItemsList({ movies, heading, className, children }: ItemsListProps) {
           <MoviesCard item={movie} key={movie.id} />
         ))}
       </ul>
-      {children}
+      <ButtonLink
+        path={path}
+        color="primary"
+        size="large"
+        className="mt-10 self-center"
+      >
+        View All {heading}
+      </ButtonLink>
     </div>
   );
 }
 
-export default ItemsList;
+export default FilmListShort;

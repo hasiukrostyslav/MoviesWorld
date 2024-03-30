@@ -1,5 +1,5 @@
 import { useGetMoviesListsQuery } from '../store';
-import ItemsList from '../components/ItemsList';
+import FilmListShort from '../components/FilmsListShort';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
@@ -14,14 +14,20 @@ function Movies() {
 
     return (
       <section>
-        {categories.map((category, i, arr) => (
-          <ItemsList
-            key={category.category}
-            movies={category.data}
-            heading={`${category.category} Movies`}
-            className={i === arr.length - 1 ? 'pb-20' : ''}
-          />
-        ))}
+        {categories.map((list, i, arr) => {
+          const { category, data } = list;
+          const pathKey = category.replaceAll(' ', '-').toLowerCase();
+
+          return (
+            <FilmListShort
+              path={`category/${pathKey}`}
+              key={category}
+              movies={data}
+              heading={`${category} Movies`}
+              className={i === arr.length - 1 ? 'pb-20' : ''}
+            />
+          );
+        })}
       </section>
     );
   }
