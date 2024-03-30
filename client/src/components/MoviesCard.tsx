@@ -25,7 +25,7 @@ function MoviesCard({ item, frame, className }: MoviesCardProps) {
         </div>
 
         <Link
-          to="/"
+          to={`/view/${item.type}/${item.id}`}
           className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
         >
           {item.title.length < 18

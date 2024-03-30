@@ -31,7 +31,7 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
               : movie.overview.slice(0, 200).padEnd(205, '.....')}
           </p>
           <ButtonLink
-            path="/"
+            path={`/view/${movie.type}/${movie.id}`}
             className="z-20 ml-1 self-start"
             color="primary"
             size="large"

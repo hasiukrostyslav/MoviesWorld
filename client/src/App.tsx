@@ -19,6 +19,11 @@ import MoviesList from './pages/MoviesList';
 import TVList from './pages/TVList';
 import CartoonList from './pages/CartoonList';
 import CollectionListPage from './pages/CollectionListPage';
+import MoviePage from './pages/MoviePage';
+import ActorPage from './pages/ActorPage';
+import ShowPage from './pages/ShowPage';
+import ShowSeasonPage from './pages/ShowSeasonPage';
+import ShowEpisodePage from './pages/ShowEpisodePage';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +64,31 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Collections /> },
           { path: ':id', element: <CollectionListPage /> },
+        ],
+      },
+      {
+        path: 'view',
+        children: [
+          {
+            path: 'movie/:id',
+            element: <MoviePage />,
+          },
+          {
+            path: 'actor/:id',
+            element: <ActorPage />,
+          },
+          {
+            path: 'tv/:id',
+            element: <ShowPage />,
+          },
+          {
+            path: 'tv/:id/season/:seasonId',
+            element: <ShowSeasonPage />,
+          },
+          {
+            path: 'tv/:id/season/:seasonId/episode/:episodeId',
+            element: <ShowEpisodePage />,
+          },
         ],
       },
       { path: 'user', element: <User /> },

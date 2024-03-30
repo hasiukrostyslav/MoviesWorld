@@ -1,5 +1,6 @@
 export interface HeroBaseData {
   id: number;
+  type: 'movie' | 'tv';
   title: string;
   overview: string;
   backdropPath: string;
@@ -9,6 +10,7 @@ export interface HeroBaseData {
 
 export interface MovieBaseData {
   id: number;
+  type: 'movie';
   title: string;
   posterPath: string;
   year: number;
@@ -17,6 +19,7 @@ export interface MovieBaseData {
 
 export interface ShowBaseData {
   id: number;
+  type: 'tv';
   title: string;
   posterPath: string;
   year: number;

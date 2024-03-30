@@ -15,7 +15,7 @@ function ActorsCard({ actor }: ActorsCardProps) {
         alt={`${actor.name} photo`}
       />
       <Link
-        to={`/`}
+        to={`/view/actor/${actor.id}`}
         className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
       >
         {actor.name.length < 18
