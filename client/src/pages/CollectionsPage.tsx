@@ -2,9 +2,9 @@ import { useGetAllCollectionQuery } from '../store';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 import CollectionList from '../components/CollectionList';
-import HeroCollections from '../components/HeroCollections';
+import CollectionsHero from '../components/CollectionsHero';
 
-function Collections() {
+function CollectionsPage() {
   const { data, isFetching, isError } = useGetAllCollectionQuery();
 
   if (isFetching && !data) return <Spinner />;
@@ -20,7 +20,7 @@ function Collections() {
 
     return (
       <section>
-        <HeroCollections posters={posters} />
+        <CollectionsHero posters={posters} />
         {collections.map((collection, i) => (
           <CollectionList
             key={collection.key}
@@ -34,4 +34,4 @@ function Collections() {
   }
 }
 
-export default Collections;
+export default CollectionsPage;

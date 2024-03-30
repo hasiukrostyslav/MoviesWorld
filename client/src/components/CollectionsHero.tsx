@@ -4,11 +4,11 @@ import { imgSize, imgURL } from '../utils/constants';
 import { CollectionPoster } from '../utils/types';
 import SliderButton from './SliderButton';
 
-interface HeroCollectionsProps {
+interface CollectionsHeroProps {
   posters: CollectionPoster[];
 }
 
-function HeroCollections({ posters }: HeroCollectionsProps) {
+function CollectionsHero({ posters }: CollectionsHeroProps) {
   const { currentMovie, nextMovie, prevMovie } = useSlider(posters, 5000);
 
   const sortItem = (index: number, collection: CollectionPoster[]) => {
@@ -64,4 +64,4 @@ function HeroCollections({ posters }: HeroCollectionsProps) {
   );
 }
 
-export default HeroCollections;
+export default CollectionsHero;

@@ -3,7 +3,7 @@ import FilmListShort from '../components/FilmsListShort';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function TVShows() {
+function ShowsPage() {
   const { data, isFetching, isError } = useGetShowsListsQuery();
 
   if (isFetching && !data) return <Spinner />;
@@ -33,4 +33,4 @@ function TVShows() {
   }
 }
 
-export default TVShows;
+export default ShowsPage;

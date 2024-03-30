@@ -1,10 +1,10 @@
-import { useGetCartoonsListsQuery } from '../store';
+import { useGetMoviesListsQuery } from '../store';
 import FilmListShort from '../components/FilmsListShort';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function Cartoons() {
-  const { data, isFetching, isError } = useGetCartoonsListsQuery();
+function MoviesPage() {
+  const { data, isFetching, isError } = useGetMoviesListsQuery();
 
   if (isFetching && !data) return <Spinner />;
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
@@ -15,15 +15,15 @@ function Cartoons() {
     return (
       <section>
         {categories.map((list, i, arr) => {
-          const { category, type, data } = list;
+          const { category, data } = list;
           const pathKey = category.replaceAll(' ', '-').toLowerCase();
-          console.log('compo', type, pathKey);
+
           return (
             <FilmListShort
-              path={`category/${type}/${pathKey}`}
-              key={`${type}-${category}`}
+              path={`category/${pathKey}`}
+              key={category}
               movies={data}
-              heading={`${category}`}
+              heading={`${category} Movies`}
               className={i === arr.length - 1 ? 'pb-20' : ''}
             />
           );
@@ -33,4 +33,4 @@ function Cartoons() {
   }
 }
 
-export default Cartoons;
+export default MoviesPage;

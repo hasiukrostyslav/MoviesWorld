@@ -1,11 +1,11 @@
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useGetCartoonsByCategoryQuery } from '../store';
-import ItemsList from '../components/FilmListLong';
+import FilmListLong from '../components/FilmListLong';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function CartoonList() {
+function CartoonsByCategoryPage() {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const { key, type } = params;
@@ -25,11 +25,11 @@ function CartoonList() {
 
     return (
       <section className="flex flex-col py-20">
-        <ItemsList movies={movies} heading="Trending Movies" />
+        <FilmListLong movies={movies} heading="Trending Movies" />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </section>
     );
   }
 }
 
-export default CartoonList;
+export default CartoonsByCategoryPage;

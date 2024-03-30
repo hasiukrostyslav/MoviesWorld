@@ -9,7 +9,7 @@ interface HeroItemProps {
   index: number;
 }
 
-function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
+function HomeHeroItem({ movie, currentMovie, index }: HeroItemProps) {
   return (
     <li
       className={`flex min-w-full text-slate-100 ${index === currentMovie ? '' : 'hidden'}`}
@@ -50,4 +50,4 @@ function HeroItem({ movie, currentMovie, index }: HeroItemProps) {
   );
 }
 
-export default HeroItem;
+export default HomeHeroItem;

@@ -4,7 +4,7 @@ import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 import FilmListLong from '../components/FilmListLong';
 
-function CollectionListPage() {
+function CollectionPage() {
   const params = useParams();
   const { id } = params;
 
@@ -31,4 +31,4 @@ function CollectionListPage() {
   }
 }
 
-export default CollectionListPage;
+export default CollectionPage;

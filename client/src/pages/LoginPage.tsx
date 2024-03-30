@@ -3,7 +3,7 @@ import AuthFormLayout from '../components/AuthFormLayout';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-function Login() {
+function LoginPage() {
   return (
     <AuthFormLayout formType="signIn">
       <form className="flex w-full flex-col" autoComplete="off">
@@ -34,4 +34,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

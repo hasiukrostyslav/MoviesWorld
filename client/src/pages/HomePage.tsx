@@ -1,5 +1,5 @@
 import { useGetTrendListQuery } from '../store';
-import Hero from '../components/Hero';
+import HomeHero from '../components/HomeHero';
 import Spinner from '../components/Spinner';
 import FilmListShort from '../components/FilmsListShort';
 import ActorsList from '../components/ActorsList';
@@ -11,7 +11,7 @@ import type {
   MoviesListTypes,
 } from '../utils/types';
 
-function Home() {
+function HomePage() {
   const { data, isFetching, isError } = useGetTrendListQuery();
 
   if (isFetching && !data) return <Spinner />;
@@ -34,7 +34,7 @@ function Home() {
       <section>
         {categories.map((category) => {
           if (IsHeroData(category.data)) {
-            return <Hero key={category.category} movies={category.data} />;
+            return <HomeHero key={category.category} movies={category.data} />;
           } else if (IsMoviesData(category.data)) {
             return (
               <FilmListShort
@@ -60,4 +60,4 @@ function Home() {
   }
 }
 
-export default Home;
+export default HomePage;

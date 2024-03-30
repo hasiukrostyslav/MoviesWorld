@@ -1,20 +1,15 @@
-import { useParams, useSearchParams } from 'react-router-dom';
-import { useGetShowsByCategoryQuery } from '../store';
-import ItemsList from '../components/FilmListLong';
+import { useSearchParams } from 'react-router-dom';
+import { useGetTrendingMoviesQuery } from '../store';
+import FilmListLong from '../components/FilmListLong';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function TVList() {
-  const params = useParams();
+function TrendingMoviesPage() {
   const [searchParams] = useSearchParams();
-  const { key } = params;
   const page = searchParams.get('page') || 1;
 
-  const { data, isFetching, isError } = useGetShowsByCategoryQuery({
-    key,
-    page: +page,
-  });
+  const { data, isFetching, isError } = useGetTrendingMoviesQuery(+page);
 
   if (isFetching && !data) return <Spinner />;
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
@@ -24,11 +19,11 @@ function TVList() {
 
     return (
       <section className="flex flex-col py-20">
-        <ItemsList movies={movies} heading="Trending Movies" />
+        <FilmListLong movies={movies} heading="Trending Movies" />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </section>
     );
   }
 }
 
-export default TVList;
+export default TrendingMoviesPage;

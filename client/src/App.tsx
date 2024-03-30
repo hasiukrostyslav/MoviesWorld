@@ -3,22 +3,22 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useAppSelector } from './store';
 import Layout from './pages/Layout';
 import OuterLayout from './pages/OuterLayout';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 import NotFoundPage from './pages/NotFoundPage';
-import Movies from './pages/Movies';
-import Cartoons from './pages/Cartoons';
-import TVShows from './pages/TVShows';
-import Collections from './pages/Collections';
-import Actors from './pages/Actors';
-import User from './pages/User';
-import TrendingMovies from './pages/TrendingMovies';
-import TrendingShows from './pages/TrendingShows';
-import MoviesList from './pages/MoviesList';
-import TVList from './pages/TVList';
-import CartoonList from './pages/CartoonList';
-import CollectionListPage from './pages/CollectionListPage';
+import MoviesPage from './pages/MoviesPage';
+import CartoonsPage from './pages/CartoonsPage';
+import ShowsPage from './pages/ShowsPage';
+import CollectionsPage from './pages/CollectionsPage';
+import ActorsPage from './pages/ActorsPage';
+import UserPage from './pages/UserPage';
+import TrendingMoviesPage from './pages/TrendingMoviesPage';
+import TrendingShowsPage from './pages/TrendingShowsPage';
+import MoviesByCategoryPage from './pages/MoviesByCategoryPage';
+import ShowsByCategoryPage from './pages/ShowsByCategoryPage';
+import CartoonsByCategoryPage from './pages/CartoonsByCategoryPage';
+import CollectionPage from './pages/CollectionPage';
 import MoviePage from './pages/MoviePage';
 import ActorPage from './pages/ActorPage';
 import ShowPage from './pages/ShowPage';
@@ -32,38 +32,38 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <HomePage />,
       },
-      { path: '/trending/movies', element: <TrendingMovies /> },
-      { path: '/trending/tv', element: <TrendingShows /> },
+      { path: '/trending/movies', element: <TrendingMoviesPage /> },
+      { path: '/trending/tv', element: <TrendingShowsPage /> },
       {
         path: 'movies',
         children: [
-          { index: true, element: <Movies /> },
-          { path: 'category/:key', element: <MoviesList /> },
+          { index: true, element: <MoviesPage /> },
+          { path: 'category/:key', element: <MoviesByCategoryPage /> },
         ],
       },
 
       {
         path: 'cartoons',
         children: [
-          { index: true, element: <Cartoons /> },
-          { path: 'category/:type/:key', element: <CartoonList /> },
+          { index: true, element: <CartoonsPage /> },
+          { path: 'category/:type/:key', element: <CartoonsByCategoryPage /> },
         ],
       },
       {
         path: 'tv-shows',
         children: [
-          { index: true, element: <TVShows /> },
-          { path: 'category/:key', element: <TVList /> },
+          { index: true, element: <ShowsPage /> },
+          { path: 'category/:key', element: <ShowsByCategoryPage /> },
         ],
       },
-      { path: 'actors', element: <Actors /> },
+      { path: 'actors', element: <ActorsPage /> },
       {
         path: 'collections',
         children: [
-          { index: true, element: <Collections /> },
-          { path: ':id', element: <CollectionListPage /> },
+          { index: true, element: <CollectionsPage /> },
+          { path: ':id', element: <CollectionPage /> },
         ],
       },
       {
@@ -91,15 +91,15 @@ const router = createBrowserRouter([
           },
         ],
       },
-      { path: 'user', element: <User /> },
+      { path: 'user', element: <UserPage /> },
     ],
   },
   {
     path: '/auth',
     element: <OuterLayout />,
     children: [
-      { path: 'login', element: <Login /> },
-      { path: 'signup', element: <SignUp /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'signup', element: <SignUpPage /> },
     ],
   },
   {

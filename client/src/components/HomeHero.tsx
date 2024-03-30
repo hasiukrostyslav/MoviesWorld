@@ -1,5 +1,5 @@
 import type { HeroBaseData } from '../utils/types';
-import HeroItem from './HeroItem';
+import HomeHeroItem from './HomeHeroItem';
 import SliderButton from './SliderButton';
 import useSlider from '../hooks/useSlider';
 
@@ -7,7 +7,7 @@ interface HeroProps {
   movies: HeroBaseData[];
 }
 
-function Hero({ movies }: HeroProps) {
+function HomeHero({ movies }: HeroProps) {
   const { currentMovie, nextMovie, prevMovie } = useSlider(movies, 3000);
 
   return (
@@ -15,7 +15,7 @@ function Hero({ movies }: HeroProps) {
       <ul className="flex h-hero overflow-hidden">
         {movies &&
           movies.map((movie, i) => (
-            <HeroItem
+            <HomeHeroItem
               key={movie.id}
               movie={movie}
               index={i}
@@ -31,4 +31,4 @@ function Hero({ movies }: HeroProps) {
   );
 }
 
-export default Hero;
+export default HomeHero;

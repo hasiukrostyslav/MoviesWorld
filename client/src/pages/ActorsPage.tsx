@@ -5,7 +5,7 @@ import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
 
-function Actors() {
+function ActorsPage() {
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') || 1;
 
@@ -31,4 +31,4 @@ function Actors() {
   }
 }
 
-export default Actors;
+export default ActorsPage;

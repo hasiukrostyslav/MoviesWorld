@@ -2,7 +2,7 @@ import AuthFormLayout from '../components/AuthFormLayout';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-function SignUp() {
+function SignUpPage() {
   return (
     <AuthFormLayout formType="signUp">
       <form className="flex w-full flex-col" autoComplete="off">
@@ -33,4 +33,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;
