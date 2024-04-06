@@ -146,6 +146,7 @@ const getCast = async (type, id) => {
     .map((actor) => ({
       id: actor.id,
       name: actor.name,
+      character: actor.character,
       imgPath: actor.profile_path,
     }));
 };
