@@ -2,6 +2,7 @@ import type { HeroBaseData } from '../utils/types';
 import { imgSize, imgURL } from '../utils/constants';
 import Poster from './Poster';
 import ButtonLink from './ButtonLink';
+import BackdropPoster from './BackdropPoster';
 
 interface HeroItemProps {
   movie: HeroBaseData;
@@ -14,11 +15,8 @@ function HomeHeroItem({ movie, currentMovie, index }: HeroItemProps) {
     <li
       className={`flex min-w-full text-slate-100 ${index === currentMovie ? '' : 'hidden'}`}
     >
-      <img
-        src={`${imgURL}${imgSize.large}${movie.backdropPath}`}
-        alt="Film backdrop poster"
-        className="absolute left-0 top-0 -z-10 h-screen w-full brightness-35"
-      />
+      <BackdropPoster src={movie.backdropPath} title={movie.title} />
+
       <div className="z-20 flex items-center justify-between">
         <div className="flex basis-1/2 flex-col">
           <h1 className="mb-4 text-5xl font-bold">{movie.title}</h1>

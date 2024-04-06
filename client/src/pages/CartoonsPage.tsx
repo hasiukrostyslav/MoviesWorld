@@ -9,28 +9,26 @@ function CartoonsPage() {
   if (isFetching && !data) return <Spinner />;
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
 
-  if (data) {
-    const categories = data.data;
+  const categories = data?.data;
 
-    return (
-      <section>
-        {categories.map((list, i, arr) => {
-          const { category, type, data } = list;
-          const pathKey = category.replaceAll(' ', '-').toLowerCase();
-          console.log('compo', type, pathKey);
-          return (
-            <FilmListShort
-              path={`category/${type}/${pathKey}`}
-              key={`${type}-${category}`}
-              movies={data}
-              heading={`${category}`}
-              className={i === arr.length - 1 ? 'pb-20' : ''}
-            />
-          );
-        })}
-      </section>
-    );
-  }
+  return (
+    <section>
+      {categories?.map((list, i, arr) => {
+        const { category, type, data } = list;
+        const pathKey = category.replaceAll(' ', '-').toLowerCase();
+        console.log('compo', type, pathKey);
+        return (
+          <FilmListShort
+            path={`category/${type}/${pathKey}`}
+            key={`${type}-${category}`}
+            movies={data}
+            heading={`${category}`}
+            className={i === arr.length - 1 ? 'pb-20' : ''}
+          />
+        );
+      })}
+    </section>
+  );
 }
 
 export default CartoonsPage;

@@ -3,6 +3,7 @@ import useSlider from '../hooks/useSlider';
 import { imgSize, imgURL } from '../utils/constants';
 import { CollectionPoster } from '../utils/types';
 import SliderButton from './SliderButton';
+import BackdropPoster from './BackdropPoster';
 
 interface CollectionsHeroProps {
   posters: CollectionPoster[];
@@ -29,11 +30,11 @@ function CollectionsHero({ posters }: CollectionsHeroProps) {
   return (
     <div className="flex h-hero items-center overflow-hidden">
       {posters.map((movie, index) => (
-        <img
+        <BackdropPoster
           key={movie.key}
-          src={`${imgURL}${imgSize.large}${movie.img.backdropImg}`}
-          alt="Collection backdrop poster"
-          className={`absolute left-0 top-0 -z-10 h-screen w-full brightness-35 ${index === currentMovie ? '' : 'hidden'}`}
+          src={movie.img.backdropImg}
+          title={movie.key}
+          className={`${index === currentMovie ? '' : 'hidden'}`}
         />
       ))}
 

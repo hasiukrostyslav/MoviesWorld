@@ -1,6 +1,6 @@
-import { LuSun, LuMoon } from 'react-icons/lu';
 import { useMatch } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, toggleTheme } from '../store';
+import Icon from './Icon';
 
 interface ThemeButtonProps {
   absolute?: boolean;
@@ -20,7 +20,7 @@ function ThemeButton({ absolute }: ThemeButtonProps) {
       className={`rounded-lg p-2 text-xl outline-0 ring-blue-500 focus-visible:ring-4 ${absolute ? absoluteStyles : ''} ${match ? 'text-slate-200' : ''}`}
       onClick={() => dispatch(toggleTheme())}
     >
-      {theme === 'light' ? <LuSun /> : <LuMoon />}
+      {theme === 'light' ? <Icon name="sun" /> : <Icon name="moon" />}
     </button>
   );
 }

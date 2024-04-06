@@ -38,7 +38,7 @@ function ButtonLink({
   const match = matchHome || matchCollection;
   return (
     <Link
-      className={`rounded-lg font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${match && color === 'outline' ? buttonColors.outlineWhite : ''} ${className}`}
+      className={`flex items-center gap-2 rounded-lg font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${match && color === 'outline' ? buttonColors.outlineWhite : ''} ${className}`}
       to={path}
     >
       {children}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { FaHeart } from 'react-icons/fa6';
 import { imgSize, imgURL } from '../utils/constants';
 import { MoviesTypes } from '../utils/types';
+import Icon from './Icon';
 
 interface MoviesCardProps {
   item: MoviesTypes;
@@ -35,7 +35,7 @@ function MoviesCard({ item, frame, className }: MoviesCardProps) {
         <div className="mt-2 flex items-center justify-between">
           <span className="text-sm font-light">{item.year}</span>
           <button className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4">
-            <FaHeart />
+            <Icon name="favorite" />
           </button>
         </div>
       </div>

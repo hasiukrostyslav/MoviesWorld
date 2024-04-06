@@ -1,9 +1,4 @@
-import {
-  FaSquareFacebook,
-  FaSquareInstagram,
-  FaYoutube,
-  FaSquareXTwitter,
-} from 'react-icons/fa6';
+import Icon from './Icon';
 
 interface SocialLinkProps {
   linkTo: 'facebook' | 'instagram' | 'youtube' | 'twitter';
@@ -17,10 +12,7 @@ function SocialLink({ linkTo }: SocialLinkProps) {
         target="_blank"
         href={`https://${linkTo}.com/`}
       >
-        {linkTo === 'facebook' && <FaSquareFacebook />}
-        {linkTo === 'instagram' && <FaSquareInstagram />}
-        {linkTo === 'youtube' && <FaYoutube />}
-        {linkTo === 'twitter' && <FaSquareXTwitter />}
+        <Icon name={linkTo} />
       </a>
     </li>
   );

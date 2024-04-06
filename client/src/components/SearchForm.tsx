@@ -1,5 +1,5 @@
 import { useMatch } from 'react-router-dom';
-import { IoSearch } from 'react-icons/io5';
+import Icon from './Icon';
 
 function SearchForm() {
   const matchHome = useMatch('/');
@@ -16,7 +16,7 @@ function SearchForm() {
       <button
         className={`absolute right-1 top-1 rounded p-2 outline-0 ring-blue-500 focus-visible:ring-4 ${match ? 'text-slate-200' : 'text-slate-400 dark:text-slate-200'}`}
       >
-        <IoSearch />
+        <Icon name="search" />
       </button>
     </form>
   );

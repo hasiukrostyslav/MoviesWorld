@@ -1,4 +1,4 @@
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import Icon from './Icon';
 
 interface PaginationButtonProps {
   page?: number;
@@ -33,7 +33,7 @@ function PaginationButton({
         disabled={disabled}
         className={`flex h-8 w-8 items-center justify-center rounded-md border  text-sm outline-0 ring-blue-400 transition-all duration-500 focus-visible:ring-4  ${disabled ? styles.disabled : active ? styles.active : styles.regular}`}
       >
-        {prev ? <IoIosArrowBack /> : next ? <IoIosArrowForward /> : page}
+        {prev ? <Icon name="previous" /> : next ? <Icon name="next" /> : page}
       </button>
     </li>
   );

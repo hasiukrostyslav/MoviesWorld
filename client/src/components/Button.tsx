@@ -35,7 +35,7 @@ function Button({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`rounded-lg border-2 font-semibold outline-0 transition-all duration-500 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${className}`}
+      className={`flex items-center gap-2 rounded-lg border-2 font-semibold outline-0 transition-all duration-500 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${className}`}
     >
       {children}
     </button>
