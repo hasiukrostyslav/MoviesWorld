@@ -150,6 +150,16 @@ const getCast = async (type, id) => {
     }));
 };
 
+const getTrailer = async (id) => {
+  if (!id) return null;
+
+  const response = await axiosRequest.get(`/movie/${id}/videos`);
+
+  return response.data.results.find(
+    (video) => video.type.toLowerCase() === 'trailer' && video.official
+  );
+};
+
 module.exports = {
   convertGenres,
   getMoviesData,
@@ -160,6 +170,7 @@ module.exports = {
   getMaxPage,
   getListOfItems,
   getCast,
+  getTrailer,
   getCollectionData,
   getTrendingListOfItem,
 };

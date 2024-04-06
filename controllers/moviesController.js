@@ -6,6 +6,7 @@ const {
   getListOfItems,
   getCast,
   getCollectionData,
+  getTrailer,
 } = require('../utils/helpers');
 
 const getMovieListsByCategory = async (req, res, next) => {
@@ -55,6 +56,7 @@ const getMovie = async (req, res, next) => {
 
   const collection = await getCollectionData(data.belongs_to_collection);
   const cast = await getCast('movie', data.id);
+  const video = await getTrailer(id);
 
   const movie = {
     id: data.id,
@@ -73,6 +75,7 @@ const getMovie = async (req, res, next) => {
     countries: data.production_countries.map((country) => country.name),
     collection,
     cast,
+    videoKey: video?.key,
   };
 
   res.status(StatusCodes.OK).json({
