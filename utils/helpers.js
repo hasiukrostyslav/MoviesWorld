@@ -162,6 +162,17 @@ const getTrailer = async (id) => {
   );
 };
 
+const getAge = (birthday, deathday) => {
+  const dueDate = deathday ? new Date(deathday) : new Date();
+
+  return Math.trunc((dueDate - new Date(birthday)) / (365 * 24 * 3600 * 1000));
+};
+
+const formatBiography = (text) => {
+  const exception = 'Description above from the Wikipedia article';
+  return text.match(exception) ? text.split(exception).at(0) : text;
+};
+
 module.exports = {
   convertGenres,
   getMoviesData,
@@ -175,4 +186,6 @@ module.exports = {
   getTrailer,
   getCollectionData,
   getTrendingListOfItem,
+  getAge,
+  formatBiography,
 };

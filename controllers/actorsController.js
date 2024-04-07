@@ -1,6 +1,12 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-const { getMaxPage, getMoviesData, getShowsData } = require('../utils/helpers');
+const {
+  getMaxPage,
+  getMoviesData,
+  getShowsData,
+  getAge,
+  formatBiography,
+} = require('../utils/helpers');
 const { NotFoundError } = require('../errors');
 
 const getAllActors = async (req, res, next) => {
@@ -46,18 +52,21 @@ const getActor = async (req, res, next) => {
     getMoviesData(movie)
   );
 
+  const age = getAge(actorData.birthday, actorData.deathday);
+  const biography = formatBiography(actorData.biography);
   const tvData = tvResponse.data.cast.map((movie) => getShowsData(movie));
+  const credits = [...moviesData, ...tvData].sort((a, b) => b.year - a.year);
 
   const actor = {
     id: actorData.id,
     name: actorData.name,
     birthday: actorData.birthday,
+    age,
     deathday: actorData.deathday,
     birthplace: actorData.place_of_birth,
     imgPath: actorData.profile_path,
-    biography: actorData.biography,
-    movies: moviesData,
-    tv: tvData,
+    biography,
+    credits,
   };
 
   res.status(StatusCodes.OK).json({

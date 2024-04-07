@@ -75,7 +75,7 @@ const getMovie = async (req, res, next) => {
     countries: data.production_countries.map((country) => country.name),
     collection: collection?.filter((item) => item.year && item.id !== data.id),
     cast,
-    videoKey: video?.key,
+    videoKey: video?.key || null,
   };
 
   res.status(StatusCodes.OK).json({
