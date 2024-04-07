@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'tv-shows',
+        path: 'tv',
         children: [
           { index: true, element: <ShowsPage /> },
           { path: 'category/:key', element: <ShowsByCategoryPage /> },

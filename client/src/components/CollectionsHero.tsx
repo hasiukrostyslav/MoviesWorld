@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import useSlider from '../hooks/useSlider';
+import { useSlider } from '../hooks/useSlider';
 import { imgSize, imgURL } from '../utils/constants';
-import { CollectionPoster } from '../utils/types';
+import type { CollectionPoster } from '../utils/types';
 import SliderButton from './SliderButton';
 import BackdropPoster from './BackdropPoster';
 

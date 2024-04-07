@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function usePagination(currentPage: number, totalPages: number) {
+export function usePagination(currentPage: number, totalPages: number) {
   const navigate = useNavigate();
   const [schema, setSchema] = useState<(number | null)[] | []>([]);
   const [curPage, setCurPage] = useState<number>(currentPage);
@@ -79,5 +79,3 @@ function usePagination(currentPage: number, totalPages: number) {
 
   return { schema, curPage, setCurPage, prevPage, nextPage, selectPage };
 }
-
-export default usePagination;

@@ -11,7 +11,7 @@ function Navbar() {
           <NavigationLink path="/">Home</NavigationLink>
           <NavigationLink path="/movies">Movies</NavigationLink>
           <NavigationLink path="/cartoons">Kids</NavigationLink>
-          <NavigationLink path="/tv-shows">TV</NavigationLink>
+          <NavigationLink path="/tv">TV</NavigationLink>
           <NavigationLink path="/collections">Collections</NavigationLink>
           <NavigationLink path="/actors">Actors</NavigationLink>
         </ul>

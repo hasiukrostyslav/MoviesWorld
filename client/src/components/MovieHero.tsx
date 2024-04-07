@@ -1,5 +1,5 @@
 import { imgSize, imgURL } from '../utils/constants';
-import { Movie } from '../utils/types';
+import type { Movie } from '../utils/types';
 import BackdropPoster from './BackdropPoster';
 import Button from './Button';
 import Icon from './Icon';

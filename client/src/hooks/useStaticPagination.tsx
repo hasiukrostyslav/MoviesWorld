@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { ActorBaseData, MovieBaseData, ShowBaseData } from '../utils/types';
 
-function useStaticPagination(
+export function useStaticPagination(
   items: ActorBaseData[] | (MovieBaseData | ShowBaseData)[],
 ) {
   const [searchParams] = useSearchParams();
@@ -11,4 +11,4 @@ function useStaticPagination(
   return { currentPage, totalPages, itemsPerPage };
 }
 
-export default useStaticPagination;
+

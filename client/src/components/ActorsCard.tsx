@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { imgSize, imgURL } from '../utils/constants';
-import { ActorBaseData } from '../utils/types';
+import type { ActorBaseData } from '../utils/types';
 
 interface ActorsCardProps {
   actor: ActorBaseData;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { imgSize, imgURL } from '../utils/constants';
-import { MoviesTypes } from '../utils/types';
+import type { MoviesTypes } from '../utils/types';
 import Icon from './Icon';
 
 interface MoviesCardProps {

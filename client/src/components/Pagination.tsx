@@ -1,4 +1,4 @@
-import usePagination from '../hooks/usePagination';
+import { usePagination } from '../hooks/usePagination';
 import PaginationButton from './PaginationButton';
 import PaginationSpot from './PaginationSpot';
 

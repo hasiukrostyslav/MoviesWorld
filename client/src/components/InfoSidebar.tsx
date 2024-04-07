@@ -1,4 +1,4 @@
-import { Movie } from '../utils/types';
+import type { Movie } from '../utils/types';
 import InfoItem from './InfoItem';
 
 interface InfoSidebarProps {

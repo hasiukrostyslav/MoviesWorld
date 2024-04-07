@@ -1,7 +1,7 @@
+import { useSlider } from '../hooks/useSlider';
 import type { HeroBaseData } from '../utils/types';
 import HomeHeroItem from './HomeHeroItem';
 import SliderButton from './SliderButton';
-import useSlider from '../hooks/useSlider';
 
 interface HeroProps {
   movies: HeroBaseData[];

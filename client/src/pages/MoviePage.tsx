@@ -1,11 +1,11 @@
+import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
 import { useGetMovieByIdQuery } from '../store';
+import { useVideoFrame } from '../hooks/useVideoFrame';
 import MovieHero from '../components/MovieHero';
 import ErrorPage from './ErrorPage';
 import Spinner from '../components/Spinner';
-import useVideoFrame from '../hooks/useVideoFrame';
 import FrameOverlay from '../components/FrameOverlay';
-import { createPortal } from 'react-dom';
 import CastList from '../components/CastList';
 import InfoSidebar from '../components/InfoSidebar';
 import FilmListLong from '../components/FilmListLong';

@@ -152,6 +152,33 @@ export interface Movie {
   videoKey: string | null;
 }
 
+export interface ShowResponse {
+  status: 'success';
+  data: Show;
+}
+
+export interface Show {
+  id: number;
+  title: string;
+  overview: string;
+  posterPath: string;
+  backdropPath: string;
+  status: string;
+  releaseDate: string;
+  runtime: number;
+  revenue: number;
+  rating: number;
+  budget: number;
+  genres: string[];
+  countries: string[];
+  languages: string[];
+  numberOfSeasons: number;
+  numberOfEpisodes: number;
+  cast: ActorBaseData[];
+  seasons: ShowBaseData[];
+  videoKey: string | null;
+}
+
 export interface ActorResponse {
   status: 'success';
   data: Actor;

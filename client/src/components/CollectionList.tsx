@@ -1,7 +1,7 @@
 import type { CollectionData } from '../utils/types';
+import { imgSize, imgURL } from '../utils/constants';
 import MoviesCard from './MoviesCard';
 import ButtonLink from './ButtonLink';
-import { imgSize, imgURL } from '../utils/constants';
 
 interface CollectionListProps {
   collection: CollectionData;

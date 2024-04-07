@@ -1,5 +1,5 @@
-import type { HeroBaseData } from '../utils/types';
 import { imgSize, imgURL } from '../utils/constants';
+import type { HeroBaseData } from '../utils/types';
 import Poster from './Poster';
 import ButtonLink from './ButtonLink';
 import BackdropPoster from './BackdropPoster';

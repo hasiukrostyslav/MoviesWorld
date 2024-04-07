@@ -4,7 +4,7 @@ import { CollectionPoster, HeroBaseData } from '../utils/types';
 type List = HeroBaseData[] | CollectionPoster[];
 type TimeOut = 3000 | 5000;
 
-function useSlider(list: List, timeout: TimeOut) {
+export function useSlider(list: List, timeout: TimeOut) {
   const [currentMovie, setCurrentMovie] = useState(0);
 
   useEffect(() => {
@@ -22,5 +22,3 @@ function useSlider(list: List, timeout: TimeOut) {
 
   return { currentMovie, nextMovie, prevMovie };
 }
-
-export default useSlider;

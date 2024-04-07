@@ -1,7 +1,7 @@
+import { useStaticPagination } from '../hooks/useStaticPagination';
+import type { ActorBaseData } from '../utils/types';
 import ActorsCard from './ActorsCard';
 import Pagination from './Pagination';
-import { ActorBaseData } from '../utils/types';
-import useStaticPagination from '../hooks/useStaticPagination';
 
 interface CastListProps {
   cast: ActorBaseData[];

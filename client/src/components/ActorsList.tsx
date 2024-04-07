@@ -1,4 +1,4 @@
-import { ActorBaseData } from '../utils/types';
+import type { ActorBaseData } from '../utils/types';
 import ActorsCard from './ActorsCard';
 import ButtonLink from './ButtonLink';
 

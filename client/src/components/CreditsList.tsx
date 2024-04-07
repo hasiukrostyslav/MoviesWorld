@@ -1,7 +1,7 @@
+import { useStaticPagination } from '../hooks/useStaticPagination';
 import type { MovieBaseData, ShowBaseData } from '../utils/types';
 import MoviesCard from './MoviesCard';
 import Pagination from './Pagination';
-import useStaticPagination from '../hooks/useStaticPagination';
 
 interface FilmListLongProps {
   movies: (MovieBaseData | ShowBaseData)[];
