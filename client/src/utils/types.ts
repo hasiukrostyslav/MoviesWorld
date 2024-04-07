@@ -149,7 +149,24 @@ export interface Movie {
   languages: string[];
   cast: ActorBaseData[];
   collection: MovieBaseData[];
-  videoKey: string;
+  videoKey: string | null;
+}
+
+export interface ActorResponse {
+  status: 'success';
+  data: Actor;
+}
+
+export interface Actor {
+  id: number;
+  name: string;
+  birthday: string;
+  age: number;
+  deathday: string | null;
+  birthplace: string;
+  imgPath: string;
+  biography: string;
+  credits: (MovieBaseData | ShowBaseData)[];
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];

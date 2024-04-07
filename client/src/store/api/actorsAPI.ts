@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ActorsPageResponse } from '../../utils/types';
+import type { ActorResponse, ActorsPageResponse } from '../../utils/types';
 
 type PageParam = number;
 
@@ -19,9 +19,19 @@ const actorsApi = createApi({
           };
         },
       }),
+
+      getActor: builder.query<ActorResponse, string | undefined>({
+        query: (id) => {
+          return {
+            url: `api/view/actor/${id}`,
+            method: 'GET',
+            params: { id },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetActorsListQuery } = actorsApi;
+export const { useGetActorsListQuery, useGetActorQuery } = actorsApi;
 export { actorsApi };

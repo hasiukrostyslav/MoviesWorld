@@ -26,13 +26,17 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
 
   return (
     <div className="h-hero">
-      <BackdropPoster src={backdropPath} title={title} />
-      {isOpenFrame && <Video videoKey={videoKey} />}
+      {backdropPath && <BackdropPoster src={backdropPath} title={title} />}
+      {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 
       <div className="flex h-full items-center gap-10">
         <div className="basis-1/4">
           <Poster
-            src={`${imgURL}${imgSize.large}${posterPath}`}
+            src={
+              posterPath
+                ? `${imgURL}${imgSize.large}${posterPath}`
+                : '/imgMovieAlt.jpg'
+            }
             title={title}
           />
         </div>
@@ -42,26 +46,32 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
             <h2 className="mb-4 flex items-end gap-2 text-3xl font-bold">
               {title}
               <span className="text-xl font-normal text-slate-400">
-                {new Date(releaseDate).getFullYear()}
+                {new Date(releaseDate).getFullYear() || ''}
               </span>
             </h2>
 
-            <p className="flex items-center gap-1 text-sm">
-              <Icon name="star" />
-              <span className="italic text-slate-400">{rating}</span>
-            </p>
+            {rating > 0 && (
+              <p className="flex items-center gap-1 text-sm">
+                <Icon name="star" />
+                <span className="italic text-slate-400">{rating}</span>
+              </p>
+            )}
 
-            <span className="mb-5 mt-3 text-sm italic text-slate-400">
-              {genres.join('  /  ')}
-            </span>
+            {genres.length > 0 && (
+              <span className="mb-5 mt-3 text-sm italic text-slate-400">
+                {genres.join('  /  ')}
+              </span>
+            )}
 
             <p className="mb-6 ml-1 text-sm leading-8">{overview}</p>
           </div>
 
           <div className="mt-10 flex gap-8">
-            <Button onClick={openVideoFrame} color="primary" size="large">
-              Watch Trailer <Icon name="play" />
-            </Button>
+            {videoKey && (
+              <Button onClick={openVideoFrame} color="primary" size="large">
+                Watch Trailer <Icon name="play" />
+              </Button>
+            )}
             <Button size="large" color="outline">
               Favorite <Icon name="favorite" />
             </Button>

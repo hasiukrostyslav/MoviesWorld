@@ -7,21 +7,30 @@ interface MoviesCardProps {
   item: MoviesTypes;
   frame?: boolean;
   className?: string;
+  hidden?: 'hidden' | '';
 }
 
-function MoviesCard({ item, frame, className }: MoviesCardProps) {
+function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
   return (
-    <li className={`relative min-w-44 ${frame ? 'text-slate-100' : ''}`}>
+    <li
+      className={`relative min-w-44 ${frame ? 'text-slate-100' : ''} ${hidden || ''}`}
+    >
       <div className={`rounded-md ${className}`}>
         <div className="relative">
           <img
             className="mb-3 w-full rounded-md"
-            src={`${imgURL}${imgSize.small}${item.posterPath}`}
+            src={
+              item.posterPath
+                ? `${imgURL}${imgSize.small}${item.posterPath}`
+                : `/imgMovieAlt.jpg`
+            }
             alt={`${item.title} poster`}
           />
-          <span className="absolute top-0 bg-red-600 px-4 text-slate-100">
-            {item.rating.toFixed(1)}
-          </span>
+          {item.rating > 0 && (
+            <span className="absolute top-0 bg-red-600 px-4 text-slate-100">
+              {item.rating.toFixed(1)}
+            </span>
+          )}
         </div>
 
         <Link

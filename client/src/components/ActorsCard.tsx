@@ -23,7 +23,7 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
         src={
           actor.imgPath
             ? `${imgURL}${imgSize.small}${actor.imgPath}`
-            : `imgActorAlt.jpg`
+            : `/imgActorAlt.jpg`
         }
         alt={`${actor.name} photo`}
       />

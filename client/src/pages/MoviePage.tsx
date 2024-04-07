@@ -23,7 +23,7 @@ function MoviePage() {
     const movie = data.data;
 
     return (
-      <section>
+      <section className="mb-10">
         {isOpenFrame &&
           createPortal(
             <FrameOverlay onClick={closeVideoFrame} />,
