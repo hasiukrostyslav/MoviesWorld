@@ -22,6 +22,7 @@ const getAllActors = async (req, res, next) => {
     id: actor.id,
     name: actor.name,
     imgPath: actor.profile_path,
+    character: null,
   }));
 
   res.status(StatusCodes.OK).json({

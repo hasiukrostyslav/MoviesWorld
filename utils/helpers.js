@@ -133,6 +133,7 @@ const getCollectionData = async function (isCollection) {
     title: movie.title,
     year: movie.release_date,
     rating: +movie.vote_average.toFixed(1),
+    type: 'movie',
   }));
 };
 

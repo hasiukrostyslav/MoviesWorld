@@ -73,7 +73,7 @@ const getMovie = async (req, res, next) => {
     revenue: data.revenue,
     languages: data.spoken_languages.map((language) => language.english_name),
     countries: data.production_countries.map((country) => country.name),
-    collection,
+    collection: collection?.filter((item) => item.year && item.id !== data.id),
     cast,
     videoKey: video?.key,
   };
