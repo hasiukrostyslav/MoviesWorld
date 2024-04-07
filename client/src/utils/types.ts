@@ -30,10 +30,7 @@ export interface ActorBaseData {
   id: number;
   name: string;
   imgPath: string;
-}
-
-export interface ActorData extends ActorBaseData {
-  character: string;
+  character: string | null;
 }
 
 export interface CollectionData {
@@ -150,7 +147,7 @@ export interface Movie {
   genres: string[];
   countries: string[];
   languages: string[];
-  cast: ActorData[];
+  cast: ActorBaseData[];
   collection: MovieBaseData[];
   videoKey: string;
 }

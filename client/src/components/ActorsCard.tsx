@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 import { imgSize, imgURL } from '../utils/constants';
-import { ActorBaseData, ActorData } from '../utils/types';
+import { ActorBaseData } from '../utils/types';
 
 interface ActorsCardProps {
-  actor: ActorBaseData | ActorData;
+  actor: ActorBaseData;
   cast?: boolean;
   className?: string;
 }
 
 function ActorsCard({ actor, cast, className }: ActorsCardProps) {
-  const character = actor ? actor.character?.replace('(uncredited)', '') : '';
+  const character = actor.character
+    ? actor.character.replace('(uncredited)', '')
+    : '';
 
   const formatNameLength = (name: string, num: number) =>
     name.length < 18 ? name : name.slice(0, num).padEnd(num + 2, '...');

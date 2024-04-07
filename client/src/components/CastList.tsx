@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
-import { ActorData } from '../utils/types';
 import ActorsCard from './ActorsCard';
 import Pagination from './Pagination';
+import { ActorBaseData } from '../utils/types';
 
 interface CastListProps {
-  cast: ActorData[];
+  cast: ActorBaseData[];
 }
 
 function CastList({ cast }: CastListProps) {
