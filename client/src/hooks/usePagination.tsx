@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function usePagination(currentPage: number, totalPage: number) {
+function usePagination(currentPage: number, totalPages: number) {
   const navigate = useNavigate();
   const [schema, setSchema] = useState<(number | null)[] | []>([]);
   const [curPage, setCurPage] = useState<number>(currentPage);
@@ -11,15 +11,15 @@ function usePagination(currentPage: number, totalPage: number) {
       length: 7,
       buttons: 6,
       firstButtons: 4,
-      lastButtons: totalPage - 3,
+      lastButtons: totalPages - 3,
       diff: 3,
     }),
-    [totalPage],
+    [totalPages],
   );
 
   useEffect(() => {
-    if (totalPage <= schemaParams.buttons) {
-      const array = Array.from({ length: totalPage }, (_, i) => i + 1);
+    if (totalPages <= schemaParams.buttons) {
+      const array = Array.from({ length: totalPages }, (_, i) => i + 1);
       setSchema(array);
     } else {
       if (curPage <= schemaParams.firstButtons) {
@@ -27,7 +27,7 @@ function usePagination(currentPage: number, totalPage: number) {
           if (i <= schemaParams.firstButtons) return i + 1;
           if (i > schemaParams.firstButtons && i < schemaParams.length - 1)
             return null;
-          else return totalPage;
+          else return totalPages;
         });
         setSchema(array);
       }
@@ -54,13 +54,13 @@ function usePagination(currentPage: number, totalPage: number) {
             if (i === 3) return curPage;
             if (i === 4) return curPage + 1;
           }
-          if (i === schemaParams.length - 1) return totalPage;
+          if (i === schemaParams.length - 1) return totalPages;
           else return null;
         });
         setSchema(array);
       }
     }
-  }, [totalPage, curPage, schemaParams]);
+  }, [totalPages, curPage, schemaParams]);
 
   const prevPage = () => {
     setCurPage((c) => c - 1);

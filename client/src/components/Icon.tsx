@@ -1,4 +1,4 @@
-import { IoSearch } from 'react-icons/io5';
+import { IoSearch, IoStar } from 'react-icons/io5';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import {
@@ -26,7 +26,8 @@ interface IconProps {
     | 'youtube'
     | 'twitter'
     | 'sun'
-    | 'moon';
+    | 'moon'
+    | 'star';
 }
 
 function Icon({ name }: IconProps) {
@@ -57,6 +58,8 @@ function Icon({ name }: IconProps) {
       return <LuSun />;
     case 'moon':
       return <LuMoon />;
+    case 'star':
+      return <IoStar className="text-yellow-500" />;
 
     default:
       return null;

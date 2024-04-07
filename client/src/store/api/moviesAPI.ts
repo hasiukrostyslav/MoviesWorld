@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { MovieCategoryResponse, MoviesPageResponse } from '../../utils/types';
+import {
+  MovieCategoryResponse,
+  MovieResponse,
+  MoviesPageResponse,
+} from '../../utils/types';
 
 interface MoviesByCategory {
   key: string | undefined;
@@ -42,6 +46,16 @@ const moviesApi = createApi({
           };
         },
       }),
+
+      getMovieById: builder.query<MovieResponse, string | undefined>({
+        query: (id) => {
+          return {
+            url: `/api/view/movie/${id}`,
+            method: 'GET',
+            params: { id },
+          };
+        },
+      }),
     };
   },
 });
@@ -50,5 +64,6 @@ export const {
   useGetMoviesListsQuery,
   useGetTrendingMoviesQuery,
   useGetMoviesByCategoryQuery,
+  useGetMovieByIdQuery,
 } = moviesApi;
 export { moviesApi };

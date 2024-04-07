@@ -10,7 +10,7 @@ export interface HeroBaseData {
 
 export interface MovieBaseData {
   id: number;
-  type: 'movie';
+  type?: 'movie';
   title: string;
   posterPath: string;
   year: number;
@@ -19,7 +19,7 @@ export interface MovieBaseData {
 
 export interface ShowBaseData {
   id: number;
-  type: 'tv';
+  type?: 'tv';
   title: string;
   posterPath: string;
   year: number;
@@ -30,6 +30,10 @@ export interface ActorBaseData {
   id: number;
   name: string;
   imgPath: string;
+}
+
+export interface ActorData extends ActorBaseData {
+  character: string;
 }
 
 export interface CollectionData {
@@ -124,6 +128,31 @@ export interface CartoonsCategoryResponse {
   totalPages: number;
   results: number;
   data: MovieBaseData[];
+}
+
+export interface MovieResponse {
+  status: 'success';
+  data: Movie;
+}
+
+export interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  posterPath: string;
+  backdropPath: string;
+  status: string;
+  releaseDate: string;
+  runtime: number;
+  revenue: number;
+  rating: number;
+  budget: number;
+  genres: string[];
+  countries: string[];
+  languages: string[];
+  cast: ActorData[];
+  collection: MovieBaseData[];
+  videoKey: string;
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
