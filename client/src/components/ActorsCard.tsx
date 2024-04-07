@@ -20,7 +20,11 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
     <li className={`relative flex w-44 flex-col ${className}`}>
       <img
         className="mb-3 w-full rounded-md"
-        src={`${imgURL}${imgSize.small}${actor.imgPath}`}
+        src={
+          actor.imgPath
+            ? `${imgURL}${imgSize.small}${actor.imgPath}`
+            : `imgActorAlt.jpg`
+        }
         alt={`${actor.name} photo`}
       />
       <Link

@@ -8,6 +8,7 @@ import FrameOverlay from '../components/FrameOverlay';
 import { createPortal } from 'react-dom';
 import CastList from '../components/CastList';
 import InfoSidebar from '../components/InfoSidebar';
+import FilmListLong from '../components/FilmListLong';
 
 function MoviePage() {
   const params = useParams();
@@ -39,6 +40,14 @@ function MoviePage() {
           <CastList cast={movie.cast} />
           <InfoSidebar movie={movie} />
         </section>
+
+        {movie.collection && (
+          <FilmListLong
+            heading="Recommended movies"
+            movies={movie.collection}
+            className="pb-20"
+          />
+        )}
       </section>
     );
   }
