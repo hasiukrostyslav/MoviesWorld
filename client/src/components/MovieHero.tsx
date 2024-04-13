@@ -1,5 +1,5 @@
 import { imgSize, imgURL } from '../utils/constants';
-import type { Movie } from '../utils/types';
+import type { Movie, Show } from '../utils/types';
 import BackdropPoster from './BackdropPoster';
 import Button from './Button';
 import Icon from './Icon';
@@ -7,7 +7,7 @@ import Poster from './Poster';
 import Video from './Video';
 
 interface MovieHeroProps {
-  movie: Movie;
+  movie: Movie | Show;
   isOpenFrame: boolean;
   openVideoFrame(): void;
 }

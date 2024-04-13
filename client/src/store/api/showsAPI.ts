@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type {
   MoviesPageResponse,
   ShowCategoryResponse,
+  ShowResponse,
 } from '../../utils/types';
 
 interface ShowsByCategory {
@@ -17,7 +18,7 @@ const showsApi = createApi({
       getShowsLists: builder.query<MoviesPageResponse, void>({
         query: () => {
           return {
-            url: '/api/tv-shows',
+            url: '/api/tv',
             method: 'GET',
           };
         },
@@ -36,9 +37,19 @@ const showsApi = createApi({
       getShowsByCategory: builder.query<ShowCategoryResponse, ShowsByCategory>({
         query: ({ key, page }) => {
           return {
-            url: `/api/tv-shows/category/${key}`,
+            url: `/api/tv/category/${key}`,
             method: 'GET',
             params: { page },
+          };
+        },
+      }),
+
+      getShowById: builder.query<ShowResponse, string | undefined>({
+        query: (id) => {
+          return {
+            url: `/api/view/tv/${id}`,
+            method: 'GET',
+            params: { id },
           };
         },
       }),
@@ -50,5 +61,6 @@ export const {
   useGetShowsListsQuery,
   useGetTrendingShowsQuery,
   useGetShowsByCategoryQuery,
+  useGetShowByIdQuery,
 } = showsApi;
 export { showsApi };
