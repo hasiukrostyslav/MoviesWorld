@@ -26,6 +26,11 @@ export interface ShowBaseData {
   rating: number;
 }
 
+export interface SeasonBaseData extends ShowBaseData {
+  seasonId: number;
+  season: true;
+}
+
 export interface ActorBaseData {
   id: number;
   name: string;
@@ -197,4 +202,4 @@ export interface Actor {
 }
 
 export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
-export type MoviesTypes = MovieBaseData | ShowBaseData;
+export type MoviesTypes = MovieBaseData | ShowBaseData | SeasonBaseData;

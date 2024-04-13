@@ -74,10 +74,13 @@ const getShow = async (req, res, next) => {
     seasons: data.seasons
       .filter((item) => item.season_number !== 0)
       .map((season) => ({
-        id: season.id,
+        id: data.id,
+        seasonId: season.id,
+        type: 'tv',
+        season: true,
         title: season.name,
         posterPath: season.poster_path,
-        releaseDate: new Date(season.air_date).getFullYear(),
+        year: new Date(season.air_date).getFullYear(),
         rating: season.vote_average,
       })),
     cast,

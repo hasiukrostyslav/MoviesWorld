@@ -1,9 +1,9 @@
 import { createMoviesInfoList, createRenderedValue } from '../utils/helper';
 
 type ArrayData = ReturnType<typeof createMoviesInfoList>;
-type Data = ArrayData[0];
+
 interface InfoItemProps {
-  data: Data;
+  data: ArrayData[0];
 }
 
 function InfoItem({ data }: InfoItemProps) {

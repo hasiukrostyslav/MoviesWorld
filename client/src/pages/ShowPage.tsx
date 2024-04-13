@@ -8,6 +8,7 @@ import FrameOverlay from '../components/FrameOverlay';
 import MovieHero from '../components/MovieHero';
 import CastList from '../components/CastList';
 import InfoSidebar from '../components/InfoSidebar';
+import FilmListLong from '../components/FilmListLong';
 
 function ShowPage() {
   const params = useParams();
@@ -39,6 +40,14 @@ function ShowPage() {
           <CastList cast={show.cast} />
           <InfoSidebar movie={show} />
         </section>
+
+        {show.seasons && (
+          <FilmListLong
+            heading="Seasons"
+            movies={show.seasons}
+            className="pb-20"
+          />
+        )}
       </section>
     );
   }
