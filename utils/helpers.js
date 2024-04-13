@@ -152,10 +152,10 @@ const getCast = async (type, id) => {
     }));
 };
 
-const getTrailer = async (id) => {
+const getTrailer = async (type, id) => {
   if (!id) return null;
 
-  const response = await axiosRequest.get(`/movie/${id}/videos`);
+  const response = await axiosRequest.get(`/${type}/${id}/videos`);
 
   return response.data.results.find(
     (video) => video.type.toLowerCase() === 'trailer' && video.official

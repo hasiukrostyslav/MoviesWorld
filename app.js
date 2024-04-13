@@ -30,7 +30,7 @@ app.use(getGenresMiddleware);
 app.use('/', homeRoute);
 app.use('/movies', moviesRoute);
 app.use('/cartoons', cartoonsRoute);
-app.use('/tv-shows', showsRoute);
+app.use('/tv', showsRoute);
 app.use('/collections', collectionsRoute);
 app.use('/actors', actorsRoute);
 app.use('/view', viewRoute);

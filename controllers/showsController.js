@@ -1,7 +1,12 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { showSearchParams } = require('../utils/constants');
-const { getShowsData, getListOfItems, getCast } = require('../utils/helpers');
+const {
+  getShowsData,
+  getListOfItems,
+  getCast,
+  getTrailer,
+} = require('../utils/helpers');
 
 const getShowListsByCategory = async (req, res, next) => {
   const request = showSearchParams.map((category) =>
@@ -50,12 +55,13 @@ const getShow = async (req, res, next) => {
   const { data } = response;
 
   const cast = await getCast('tv', data.id);
+  const video = await getTrailer('tv', id);
 
   const show = {
     id: data.id,
     title: data.name,
-    status: data.status,
     releaseDate: data.first_air_date,
+    status: data.status,
     overview: data.overview,
     backdropPath: data.backdrop_path,
     posterPath: data.poster_path,
@@ -75,6 +81,7 @@ const getShow = async (req, res, next) => {
         rating: season.vote_average,
       })),
     cast,
+    videoKey: video?.key || null,
   };
 
   res.status(StatusCodes.OK).json({

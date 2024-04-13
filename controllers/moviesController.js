@@ -56,23 +56,23 @@ const getMovie = async (req, res, next) => {
 
   const collection = await getCollectionData(data.belongs_to_collection);
   const cast = await getCast('movie', data.id);
-  const video = await getTrailer(id);
+  const video = await getTrailer('movie', id);
 
   const movie = {
     id: data.id,
     title: data.title,
-    status: data.status,
     releaseDate: data.release_date,
+    status: data.status,
     overview: data.overview,
     backdropPath: data.backdrop_path,
     posterPath: data.poster_path,
     genres: data.genres.map((genre) => genre.name),
     rating: +data.vote_average.toFixed(1),
+    languages: data.spoken_languages.map((language) => language.english_name),
+    countries: data.production_countries.map((country) => country.name),
     runtime: data.runtime,
     budget: data.budget,
     revenue: data.revenue,
-    languages: data.spoken_languages.map((language) => language.english_name),
-    countries: data.production_countries.map((country) => country.name),
     collection: collection?.filter((item) => item.year && item.id !== data.id),
     cast,
     videoKey: video?.key || null,
