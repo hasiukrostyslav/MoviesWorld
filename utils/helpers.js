@@ -137,12 +137,13 @@ const getCollectionData = async function (isCollection) {
   }));
 };
 
-const getCast = async (type, id) => {
+const getCast = async (type, id, season) => {
   if (!id) return null;
 
-  const response = await axiosRequest.get(`/${type}/${id}/credits`);
+  const seasonId = season ? `/season/${season}` : '';
 
-  return response.data.cast
+  const response = await axiosRequest.get(`/${type}/${id}${seasonId}/credits`);
+  const cast = response.data.cast
     .filter((el) => el.profile_path && el.character)
     .map((actor) => ({
       id: actor.id,
@@ -150,12 +151,34 @@ const getCast = async (type, id) => {
       character: actor.character,
       imgPath: actor.profile_path,
     }));
+
+  return cast;
 };
 
-const getTrailer = async (type, id) => {
+const getSeasons = (data, seasonId) => {
+  const seasons = data.seasons
+    .filter((item) => item.season_number !== 0)
+    .filter((s) => (!seasonId ? s : s.id !== seasonId));
+
+  return seasons.map((season) => ({
+    id: data.id,
+    seasonId: season.id,
+    seasonNumber: season.season_number,
+    type: 'tv',
+    season: true,
+    title: season.name,
+    posterPath: season.poster_path,
+    year: new Date(season.air_date).getFullYear(),
+    rating: season.vote_average,
+  }));
+};
+
+const getTrailer = async (type, id, season) => {
   if (!id) return null;
 
-  const response = await axiosRequest.get(`/${type}/${id}/videos`);
+  const seasonId = season ? `/season/${season}` : '';
+
+  const response = await axiosRequest.get(`/${type}/${id}${seasonId}/videos`);
 
   return response.data.results.find(
     (video) => video.type.toLowerCase() === 'trailer' && video.official
@@ -188,4 +211,5 @@ module.exports = {
   getTrendingListOfItem,
   getAge,
   formatBiography,
+  getSeasons,
 };

@@ -6,6 +6,7 @@ const {
   getListOfItems,
   getCast,
   getTrailer,
+  getSeasons,
 } = require('../utils/helpers');
 
 const getShowListsByCategory = async (req, res, next) => {
@@ -51,11 +52,11 @@ const getShow = async (req, res, next) => {
   const { id } = req.params;
 
   const response = await axiosRequest.get(`/tv/${id}`);
-
   const { data } = response;
 
   const cast = await getCast('tv', data.id);
   const video = await getTrailer('tv', id);
+  const seasons = getSeasons(data);
 
   const show = {
     id: data.id,
@@ -71,6 +72,7 @@ const getShow = async (req, res, next) => {
     countries: data.production_countries.map((country) => country.name),
     numberOfSeasons: data.number_of_seasons,
     numberOfEpisodes: data.number_of_episodes,
+<<<<<<< Updated upstream
     seasons: data.seasons
       .filter((item) => item.season_number !== 0)
       .map((season) => ({
@@ -80,6 +82,9 @@ const getShow = async (req, res, next) => {
         releaseDate: new Date(season.air_date).getFullYear(),
         rating: season.vote_average,
       })),
+=======
+    seasons,
+>>>>>>> Stashed changes
     cast,
     videoKey: video?.key || null,
   };
@@ -93,16 +98,31 @@ const getShow = async (req, res, next) => {
 const getSeason = async (req, res, next) => {
   const { id, seasonId } = req.params;
 
-  const response = await axiosRequest.get(`/tv/${id}/season/${seasonId}`);
-  const { data } = response;
+  const showResponse = await axiosRequest.get(`/tv/${id}`);
+  const video = await getTrailer('tv', id, seasonId);
+  const seasonResponse = await axiosRequest.get(`/tv/${id}/season/${seasonId}`);
+
+  const { data: showData } = showResponse;
+  const { data: seasonData } = seasonResponse;
+
+  const seasons = getSeasons(showData, seasonData.id);
+  const cast = await getCast('tv', showData.id, seasonId);
 
   const season = {
-    id: data.id,
-    title: data.name,
-    releaseDate: data.air_date,
-    posterPath: data.poster_path,
-    rating: +data.vote_average.toFixed(1),
-    episodes: data.episodes.map((episode) => ({
+    showId: showData.id,
+    seasonId: seasonData.id,
+    seasonTitle: seasonData.name,
+    title: showData.name,
+    releaseDate: seasonData.air_date,
+    posterPath: seasonData.poster_path,
+    backdropPath: showData.backdrop_path,
+    genres: showData.genres.map((genre) => genre.name),
+    rating: +seasonData.vote_average.toFixed(1),
+    seasonNumber: seasonData.season_number,
+    numberOfEpisodes: seasonData.episodes.length,
+    overview: seasonData.overview,
+    videoKey: video?.key || null,
+    episodes: seasonData.episodes.map((episode) => ({
       id: episode.id,
       showId: episode.show_id,
       number: episode.episode_number,
@@ -110,6 +130,8 @@ const getSeason = async (req, res, next) => {
       posterPath: episode.still_path,
       rating: +episode.vote_average.toFixed(1),
     })),
+    seasons,
+    cast,
   };
 
   res.status(StatusCodes.OK).json({
@@ -139,6 +161,7 @@ const getEpisode = async (req, res, next) => {
     cast: data.guest_stars.map((actor) => ({
       id: actor.id,
       name: actor.name,
+      character: actor.character,
       imgPath: actor.profile_path,
     })),
   };

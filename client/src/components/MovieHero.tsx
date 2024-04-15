@@ -1,5 +1,9 @@
 import { imgSize, imgURL } from '../utils/constants';
+<<<<<<< Updated upstream
 import type { Movie } from '../utils/types';
+=======
+import type { Movie, Show, ShowSeason } from '../utils/types';
+>>>>>>> Stashed changes
 import BackdropPoster from './BackdropPoster';
 import Button from './Button';
 import Icon from './Icon';
@@ -7,7 +11,11 @@ import Poster from './Poster';
 import Video from './Video';
 
 interface MovieHeroProps {
+<<<<<<< Updated upstream
   movie: Movie;
+=======
+  movie: Movie | Show | ShowSeason;
+>>>>>>> Stashed changes
   isOpenFrame: boolean;
   openVideoFrame(): void;
 }
@@ -49,6 +57,10 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
                 {new Date(releaseDate).getFullYear() || ''}
               </span>
             </h2>
+
+            {'seasonTitle' in movie && (
+              <h4 className="mb-4 text-xl">{movie.seasonTitle}</h4>
+            )}
 
             {rating > 0 && (
               <p className="flex items-center gap-1 text-sm">

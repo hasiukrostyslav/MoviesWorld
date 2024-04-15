@@ -8,7 +8,7 @@ export function useStaticPagination(
   const itemsPerPage = 10;
   const currentPage = Number(searchParams.get('page') || 1);
   const totalPages = Math.ceil(items.length / itemsPerPage);
-  return { currentPage, totalPages, itemsPerPage };
+  const remainder = items.length % itemsPerPage;
+
+  return { currentPage, totalPages, itemsPerPage, remainder };
 }
-
-

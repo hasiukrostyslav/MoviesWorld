@@ -1,8 +1,17 @@
+<<<<<<< Updated upstream
 import type { Movie } from '../utils/types';
 import InfoItem from './InfoItem';
 
 interface InfoSidebarProps {
   movie: Movie;
+=======
+import { createMoviesInfoList } from '../utils/helper';
+import type { Movie, Show, ShowSeason } from '../utils/types';
+import InfoItem from './InfoItem';
+
+interface InfoSidebarProps {
+  movie: Movie | Show | ShowSeason;
+>>>>>>> Stashed changes
 }
 
 function InfoSidebar({ movie }: InfoSidebarProps) {

@@ -16,7 +16,7 @@ function CartoonsPage() {
       {categories?.map((list, i, arr) => {
         const { category, type, data } = list;
         const pathKey = category.replaceAll(' ', '-').toLowerCase();
-        console.log('compo', type, pathKey);
+
         return (
           <FilmListShort
             path={`category/${type}/${pathKey}`}

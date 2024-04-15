@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export function usePagination(currentPage: number, totalPages: number) {
   const navigate = useNavigate();
   const [schema, setSchema] = useState<(number | null)[] | []>([]);
-  const [curPage, setCurPage] = useState<number>(currentPage);
+  const [curPage, setCurPage] = useState<number>(1);
 
   const schemaParams = useMemo(
     () => ({
@@ -16,6 +16,10 @@ export function usePagination(currentPage: number, totalPages: number) {
     }),
     [totalPages],
   );
+
+  useEffect(() => {
+    setCurPage(currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     if (totalPages <= schemaParams.buttons) {

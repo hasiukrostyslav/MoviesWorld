@@ -55,7 +55,15 @@ const getActor = async (req, res, next) => {
   const age = getAge(actorData.birthday, actorData.deathday);
   const biography = formatBiography(actorData.biography);
   const tvData = tvResponse.data.cast.map((movie) => getShowsData(movie));
-  const credits = [...moviesData, ...tvData].sort((a, b) => b.year - a.year);
+  const credits = [...moviesData, ...tvData]
+    .filter((item) => item.year)
+    .sort((a, b) => b.year - a.year)
+    .reduce((movies, el) => {
+      if (!movies.length) movies.push(el);
+      if (!movies.find((mv) => mv.id === el.id)) movies.push(el);
+
+      return movies;
+    }, []);
 
   const actor = {
     id: actorData.id,
