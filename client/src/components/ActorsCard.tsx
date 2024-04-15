@@ -29,12 +29,14 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
       />
       <Link
         to={`/view/actor/${actor.id}`}
-        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
+        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4  hover:dark:text-slate-400"
       >
         {formatNameLength(actor.name, 16)}
       </Link>
       {cast && (
-        <span className="ml-1 text-xs">{formatNameLength(character, 22)}</span>
+        <span className="ml-1 mt-1 text-xs">
+          {formatNameLength(character, 22)}
+        </span>
       )}
     </li>
   );

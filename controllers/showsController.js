@@ -113,6 +113,7 @@ const getSeason = async (req, res, next) => {
     episodes: seasonData.episodes.map((episode) => ({
       id: episode.id,
       showId: episode.show_id,
+      seasonNumber: seasonData.season_number,
       number: episode.episode_number,
       title: episode.name,
       posterPath: episode.still_path,

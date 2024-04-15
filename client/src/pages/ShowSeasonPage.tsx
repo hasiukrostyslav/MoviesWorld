@@ -42,8 +42,10 @@ function ShowSeasonPage() {
           <InfoSidebar movie={season} />
         </section>
 
-        <EpisodeListShort />
-        {season.seasons && (
+        <EpisodeListShort episodes={season.episodes} />
+
+        {season.seasons.filter((s) => s.seasonNumber !== season.seasonNumber)
+          .length > 0 && (
           <FilmListLong
             heading="Other Seasons"
             movies={season.seasons}

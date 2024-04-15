@@ -193,6 +193,7 @@ export interface ShowSeasonResponse {
 export interface EpisodeBaseData {
   id: number;
   showId: number;
+  seasonNumber: number;
   number: number;
   title: string;
   posterPath: string;

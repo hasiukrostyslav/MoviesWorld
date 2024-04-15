@@ -144,14 +144,13 @@ const getCast = async (type, id, season) => {
 
   const response = await axiosRequest.get(`/${type}/${id}${seasonId}/credits`);
   const cast = response.data.cast
-    .filter((el) => el.profile_path && el.character)
+    .filter((el) => el.profile_path && el.known_for_department === 'Acting')
     .map((actor) => ({
       id: actor.id,
       name: actor.name,
       character: actor.character,
       imgPath: actor.profile_path,
     }));
-
   return cast;
 };
 

@@ -34,7 +34,7 @@ function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
         </div>
         <Link
           to={`/view/${item.type}/${item.id}${'season' in item ? `/season/${item.seasonNumber}` : ''}`}
-          className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
+          className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4 hover:dark:text-slate-400"
         >
           {item.title.length < 18
             ? item.title

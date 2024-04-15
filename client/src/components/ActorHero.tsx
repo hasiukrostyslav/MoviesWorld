@@ -37,7 +37,7 @@ function ActorHero({ actor }: ActorHeroProps) {
                   return null;
 
                 return (
-                  <li>
+                  <li key={item.at(0)}>
                     {`${title[0].toUpperCase()}${title.slice(1)} `}
                     <span className="text-sm italic text-slate-500 dark:text-slate-400">
                       {item.at(-1)}

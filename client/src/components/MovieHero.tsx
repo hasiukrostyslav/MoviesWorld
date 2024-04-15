@@ -8,7 +8,6 @@ import Video from './Video';
 
 interface MovieHeroProps {
   movie: Movie | Show | ShowSeason;
-
   isOpenFrame: boolean;
   openVideoFrame(): void;
 }
