@@ -137,12 +137,15 @@ const getCollectionData = async function (isCollection) {
   }));
 };
 
-const getCast = async (type, id, season) => {
+const getCast = async (type, id, season, episode) => {
   if (!id) return null;
 
   const seasonId = season ? `/season/${season}` : '';
+  const episodeId = episode ? `/episode/${episode}` : '';
 
-  const response = await axiosRequest.get(`/${type}/${id}${seasonId}/credits`);
+  const response = await axiosRequest.get(
+    `/${type}/${id}${seasonId}${episodeId}/credits`
+  );
   const cast = response.data.cast
     .filter((el) => el.profile_path && el.known_for_department === 'Acting')
     .map((actor) => ({
@@ -172,15 +175,30 @@ const getSeasons = (data, seasonId) => {
   }));
 };
 
-const getTrailer = async (type, id, season) => {
+const getEpisodes = (data, seasonNum) =>
+  data.map((episode) => ({
+    id: episode.id,
+    showId: episode.show_id,
+    seasonNumber: seasonNum,
+    number: episode.episode_number,
+    title: episode.name,
+    posterPath: episode.still_path,
+    rating: +episode.vote_average.toFixed(1),
+  }));
+
+const getTrailer = async (type, id, season, episode) => {
   if (!id) return null;
 
   const seasonId = season ? `/season/${season}` : '';
+  const episodeId = episode ? `/episode/${episode}` : '';
 
-  const response = await axiosRequest.get(`/${type}/${id}${seasonId}/videos`);
+  const response = await axiosRequest.get(
+    `/${type}/${id}${seasonId}${episodeId}/videos`
+  );
 
   return response.data.results.find(
-    (video) => video.type.toLowerCase() === 'trailer' && video.official
+    (video) =>
+      video.type.toLowerCase() === ('trailer' || 'clip') && video.official
   );
 };
 
@@ -211,4 +229,5 @@ module.exports = {
   getAge,
   formatBiography,
   getSeasons,
+  getEpisodes,
 };

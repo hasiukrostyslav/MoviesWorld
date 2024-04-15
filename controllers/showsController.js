@@ -7,6 +7,7 @@ const {
   getCast,
   getTrailer,
   getSeasons,
+  getEpisodes,
 } = require('../utils/helpers');
 
 const getShowListsByCategory = async (req, res, next) => {
@@ -93,8 +94,9 @@ const getSeason = async (req, res, next) => {
   const { data: showData } = showResponse;
   const { data: seasonData } = seasonResponse;
 
-  const seasons = getSeasons(showData, seasonData.id);
   const cast = await getCast('tv', showData.id, seasonId);
+  const seasons = getSeasons(showData, seasonData.id);
+  const episodes = getEpisodes(seasonData.episodes, seasonData.season_number);
 
   const season = {
     showId: showData.id,
@@ -110,15 +112,7 @@ const getSeason = async (req, res, next) => {
     numberOfEpisodes: seasonData.episodes.length,
     overview: seasonData.overview,
     videoKey: video?.key || null,
-    episodes: seasonData.episodes.map((episode) => ({
-      id: episode.id,
-      showId: episode.show_id,
-      seasonNumber: seasonData.season_number,
-      number: episode.episode_number,
-      title: episode.name,
-      posterPath: episode.still_path,
-      rating: +episode.vote_average.toFixed(1),
-    })),
+    episodes,
     seasons,
     cast,
   };
@@ -137,6 +131,12 @@ const getEpisode = async (req, res, next) => {
   );
   const { data } = response;
 
+  const cast = await getCast('tv', id, seasonId, episodeId);
+  const video = await getTrailer('tv', id, seasonId);
+
+  const seasonResponse = await axiosRequest.get(`/tv/${id}/season/${seasonId}`);
+  const episodes = getEpisodes(seasonResponse.data.episodes, seasonId);
+
   const episode = {
     id: data.id,
     title: data.name,
@@ -147,12 +147,9 @@ const getEpisode = async (req, res, next) => {
     episodeNumber: data.episode_number,
     seasonNumber: data.season_number,
     runtime: data.runtime,
-    cast: data.guest_stars.map((actor) => ({
-      id: actor.id,
-      name: actor.name,
-      character: actor.character,
-      imgPath: actor.profile_path,
-    })),
+    videoKey: video?.key || null,
+    cast,
+    episodes,
   };
 
   res.status(StatusCodes.OK).json({
