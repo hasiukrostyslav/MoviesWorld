@@ -28,6 +28,7 @@ export interface ShowBaseData {
 
 export interface SeasonBaseData extends ShowBaseData {
   seasonId: number;
+  seasonNumber: number;
   season: true;
 }
 
@@ -180,8 +181,41 @@ export interface Show {
   numberOfSeasons: number;
   numberOfEpisodes: number;
   cast: ActorBaseData[];
-  seasons: ShowBaseData[];
+  seasons: SeasonBaseData[];
   videoKey: string | null;
+}
+
+export interface ShowSeasonResponse {
+  status: 'success';
+  data: ShowSeason;
+}
+
+export interface EpisodeBaseData {
+  id: number;
+  showId: number;
+  number: number;
+  title: string;
+  posterPath: string;
+  rating: number;
+}
+
+export interface ShowSeason {
+  showId: number;
+  seasonId: number;
+  seasonTitle: string;
+  seasonNumber: number;
+  numberOfEpisodes: number;
+  title: string;
+  releaseDate: string;
+  posterPath: string;
+  backdropPath: string;
+  genres: string[];
+  rating: number;
+  overview: string;
+  videoKey: string;
+  episodes: EpisodeBaseData[];
+  seasons: SeasonBaseData[];
+  cast: ActorBaseData[];
 }
 
 export interface ActorResponse {
@@ -201,5 +235,8 @@ export interface Actor {
   credits: (MovieBaseData | ShowBaseData)[];
 }
 
-export type MoviesListTypes = MovieBaseData[] | ShowBaseData[];
+export type MoviesListTypes =
+  | MovieBaseData[]
+  | ShowBaseData[]
+  | SeasonBaseData[];
 export type MoviesTypes = MovieBaseData | ShowBaseData | SeasonBaseData;

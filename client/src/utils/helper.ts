@@ -1,4 +1,4 @@
-import type { Movie, Show } from '../utils/types';
+import type { Movie, Show, ShowSeason } from '../utils/types';
 
 type ArrayData = ReturnType<typeof createMoviesInfoList>;
 type Data = ArrayData[0];
@@ -20,10 +20,11 @@ const splitStringsWords = function (string: string) {
   return newString[0].toUpperCase() + newString.slice(1);
 };
 
-export const createMoviesInfoList = function (item: Movie | Show) {
+export const createMoviesInfoList = function (item: Movie | Show | ShowSeason) {
   // prettier-ignore
   const exception = [
-    'id', 'title', 'overview', 'backdropPath', 'posterPath', 'cast', 'videoKey', 'collection', 'seasons'
+    'id', 'title', 'overview', 'backdropPath', 'posterPath', 'cast', 'videoKey', 'collection', 'seasons', 'episodes', 'seasonTitle', 'showId', 'seasonId'
+
   ];
 
   const keys = Object.keys(item) as Array<keyof typeof item>;

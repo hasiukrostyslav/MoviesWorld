@@ -13,7 +13,10 @@ function FilmListLong({ movies, heading, className }: FilmListLongProps) {
       <h2 className="text-3xl font-semibold">{heading}</h2>
       <ul className="mb-8 mt-6 grid grid-cols-5 justify-items-center gap-y-16 px-4">
         {movies.map((movie) => (
-          <MoviesCard item={movie} key={movie.id} />
+          <MoviesCard
+            item={movie}
+            key={'seasonId' in movie ? movie.seasonId : movie.id}
+          />
         ))}
       </ul>
     </div>

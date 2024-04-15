@@ -10,6 +10,13 @@ function ActorHero({ actor }: ActorHeroProps) {
   const { name, birthday, deathday, biography, age, birthplace, imgPath } =
     actor;
 
+  const info = [
+    [...Object.keys({ age }), age],
+    [...Object.keys({ birthday }), birthday],
+    [...Object.keys({ birthplace }), birthplace],
+    [...Object.keys({ deathday }), deathday],
+  ];
+
   return (
     <div className="my-14">
       <div className="flex h-full gap-10">
@@ -24,32 +31,20 @@ function ActorHero({ actor }: ActorHeroProps) {
             </h2>
 
             <ul className="flex gap-4">
-              <li>
-                Age{' '}
-                <span className="text-sm italic text-slate-500 dark:text-slate-400">
-                  {age}
-                </span>
-              </li>
-              <li>
-                Birthday{' '}
-                <span className="text-sm italic text-slate-500 dark:text-slate-400">
-                  {birthday}
-                </span>
-              </li>
-              <li>
-                Birthplace{' '}
-                <span className="text-sm italic text-slate-500 dark:text-slate-400">
-                  {birthplace}
-                </span>
-              </li>
-              {deathday && (
-                <li>
-                  Deathday{' '}
-                  <span className="text-sm italic text-slate-500 dark:text-slate-400">
-                    {deathday}
-                  </span>
-                </li>
-              )}
+              {info.map((item) => {
+                const title = item.at(0);
+                if (!item.at(-1) || !title || typeof title === 'number')
+                  return null;
+
+                return (
+                  <li>
+                    {`${title[0].toUpperCase()}${title.slice(1)} `}
+                    <span className="text-sm italic text-slate-500 dark:text-slate-400">
+                      {item.at(-1)}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
 
             <p className="my-4 text-sm">{biography}</p>

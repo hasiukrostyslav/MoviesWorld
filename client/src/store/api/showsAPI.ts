@@ -3,11 +3,17 @@ import type {
   MoviesPageResponse,
   ShowCategoryResponse,
   ShowResponse,
+  ShowSeasonResponse,
 } from '../../utils/types';
 
 interface ShowsByCategory {
   key: string | undefined;
   page: number;
+}
+
+interface Season {
+  id: string | undefined;
+  seasonId: string | undefined;
 }
 
 const showsApi = createApi({
@@ -53,6 +59,16 @@ const showsApi = createApi({
           };
         },
       }),
+
+      getShowSeason: builder.query<ShowSeasonResponse, Season>({
+        query: ({ id, seasonId }) => {
+          return {
+            url: `/api/view/tv/${id}/season/${seasonId}`,
+            method: 'GET',
+            params: { id, seasonId },
+          };
+        },
+      }),
     };
   },
 });
@@ -62,5 +78,6 @@ export const {
   useGetTrendingShowsQuery,
   useGetShowsByCategoryQuery,
   useGetShowByIdQuery,
+  useGetShowSeasonQuery,
 } = showsApi;
 export { showsApi };
