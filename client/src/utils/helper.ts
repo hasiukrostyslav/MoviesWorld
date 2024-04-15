@@ -24,7 +24,6 @@ export const createMoviesInfoList = function (item: Movie | Show | ShowSeason) {
   // prettier-ignore
   const exception = [
     'id', 'title', 'overview', 'backdropPath', 'posterPath', 'cast', 'videoKey', 'collection', 'seasons', 'episodes', 'seasonTitle', 'showId', 'seasonId'
-
   ];
 
   const keys = Object.keys(item) as Array<keyof typeof item>;
