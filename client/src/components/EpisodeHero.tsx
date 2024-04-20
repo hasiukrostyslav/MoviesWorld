@@ -2,15 +2,22 @@ import type { ShowEpisode } from '../utils/types';
 import BackdropPoster from './BackdropPoster';
 import Button from './Button';
 import Icon from './Icon';
+import ShowNavigation from './ShowNavigation';
 import Video from './Video';
 
 interface MovieHeroProps {
   episode: ShowEpisode;
   isOpenFrame: boolean;
+  numOfEpisodes: number;
   openVideoFrame(): void;
 }
 
-function EpisodeHero({ episode, isOpenFrame, openVideoFrame }: MovieHeroProps) {
+function EpisodeHero({
+  episode,
+  isOpenFrame,
+  openVideoFrame,
+  numOfEpisodes,
+}: MovieHeroProps) {
   const {
     posterPath,
     showTitle,
@@ -19,6 +26,7 @@ function EpisodeHero({ episode, isOpenFrame, openVideoFrame }: MovieHeroProps) {
     overview,
     videoKey,
     episodeNumber,
+    numberOfSeasons,
     seasonNumber,
   } = episode;
 
@@ -27,7 +35,7 @@ function EpisodeHero({ episode, isOpenFrame, openVideoFrame }: MovieHeroProps) {
       {posterPath && <BackdropPoster src={posterPath} title={title} />}
       {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 
-      <div className="flex h-full items-center gap-10">
+      <div className="relative flex h-full items-center gap-10">
         <div className="flex flex-col">
           <div className="flex flex-col">
             <h2 className="mb-6 flex items-end gap-2 text-5xl font-bold">
@@ -58,6 +66,11 @@ function EpisodeHero({ episode, isOpenFrame, openVideoFrame }: MovieHeroProps) {
               Favorite <Icon name="favorite" />
             </Button>
           </div>
+
+          <ShowNavigation
+            numOfSeasons={numberOfSeasons}
+            numOfEpisodes={numOfEpisodes}
+          />
         </div>
       </div>
     </div>

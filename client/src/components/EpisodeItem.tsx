@@ -14,7 +14,7 @@ function EpisodeItem({ episode }: EpisodeItemProps) {
 
   return (
     <>
-      <li className="flex h-48">
+      <li className="flex h-44">
         <div className="relative w-max">
           <img
             className="h-full w-96 rounded-md"
@@ -23,7 +23,7 @@ function EpisodeItem({ episode }: EpisodeItemProps) {
           />
         </div>
         <div
-          className={`ml-3 flex w-full flex-col rounded-md p-3 ${isCurrentEpisode ? '' : 'bg-slate-200 dark:bg-slate-900'}`}
+          className={`ml-3 flex w-full flex-col rounded-md p-2 ${isCurrentEpisode ? '' : 'bg-slate-200 dark:bg-slate-900'}`}
         >
           <p className="flex items-center gap-2 text-xl font-semibold">
             <span className=" text-red-500">
@@ -42,7 +42,7 @@ function EpisodeItem({ episode }: EpisodeItemProps) {
               </span>
             )}
           </p>
-          <span className="my-2 text-sm italic text-slate-500 dark:text-slate-400">
+          <span className="mb-1 text-sm italic text-slate-500 dark:text-slate-400">
             {formatDate(episode.releaseDate)}
           </span>
           <p className="text-sm text-slate-600 dark:text-slate-300">

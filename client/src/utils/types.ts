@@ -212,6 +212,7 @@ export interface ShowSeason {
   seasonTitle: string;
   seasonNumber: number;
   numberOfEpisodes: number;
+  numberOfSeasons: number;
   title: string;
   releaseDate: string;
   posterPath: string;
@@ -240,6 +241,7 @@ export interface ShowEpisode {
   overview: string;
   episodeNumber: number;
   seasonNumber: number;
+  numberOfSeasons: number;
   runtime: number;
   videoKey: string;
   episodes: EpisodeData[];
