@@ -10,11 +10,20 @@ function ActorHero({ actor }: ActorHeroProps) {
   const { name, birthday, deathday, biography, age, birthplace, imgPath } =
     actor;
 
+  const dateFormatter = new Intl.DateTimeFormat('us-EN', {
+    day: 'numeric',
+    year: 'numeric',
+    month: 'long',
+  });
+
   const info = [
     [...Object.keys({ age }), age],
-    [...Object.keys({ birthday }), birthday],
+    [...Object.keys({ birthday }), dateFormatter.format(new Date(birthday))],
     [...Object.keys({ birthplace }), birthplace],
-    [...Object.keys({ deathday }), deathday],
+    [
+      ...Object.keys({ deathday }),
+      deathday && dateFormatter.format(new Date(deathday)),
+    ],
   ];
 
   return (
