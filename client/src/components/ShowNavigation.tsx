@@ -17,7 +17,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
   } = useShowNavigation(numOfSeasons, numOfEpisodes);
 
   return (
-    <div className="absolute bottom-8">
+    <div className={`absolute ${!numOfEpisodes ? 'bottom-2' : 'bottom-6'}`}>
       <div className="mb-4 flex items-center gap-4">
         <h4 className="w-20 text-slate-400">Seasons:</h4>
         <ul className="flex gap-2">
@@ -32,9 +32,10 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
         </ul>
       </div>
 
-      <div className="flex items-center gap-4 ">
-        <h4 className="w-20 text-slate-400">Episodes:</h4>
-        {numOfEpisodes && (
+      {numOfEpisodes && (
+        <div className="flex items-center gap-4 ">
+          <h4 className="w-20 text-slate-400">Episodes:</h4>
+
           <ul className="flex gap-2">
             {episodes.map((episode) => (
               <PaginationButton
@@ -45,8 +46,8 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
               />
             ))}
           </ul>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

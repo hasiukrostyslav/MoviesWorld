@@ -23,7 +23,7 @@ function PaginationButton({
     active:
       'bg-slate-150 hover:bg-slate-300 dark:border-slate-500 dark:bg-slate-500 dark:hover:border-slate-400 dark:hover:bg-slate-400 border-slate-400',
     disabled:
-      'border-slate-300 dark:border-slate-700 text-slate-300 dark:text-slate-700',
+      'border-slate-300 dark:border-slate-700 text-slate-300 dark:text-slate-700 cursor-not-allowed',
     regular:
       'dark:border-slate-700 dark:bg-slate-700 hover:bg-slate-200 border-slate-400 hover:dark:border-slate-600 hover:dark:bg-slate-600',
     outline:

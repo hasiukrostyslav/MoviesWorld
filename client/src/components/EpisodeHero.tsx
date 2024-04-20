@@ -56,7 +56,7 @@ function EpisodeHero({
             <p className="mb-6 ml-1 text-sm leading-8">{overview}</p>
           </div>
 
-          <div className="mt-10 flex gap-8">
+          <div className="mt-3 flex gap-8">
             {videoKey && (
               <Button onClick={openVideoFrame} color="primary" size="large">
                 Watch Trailer <Icon name="play" />

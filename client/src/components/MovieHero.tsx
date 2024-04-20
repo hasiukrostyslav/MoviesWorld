@@ -4,6 +4,7 @@ import BackdropPoster from './BackdropPoster';
 import Button from './Button';
 import Icon from './Icon';
 import Poster from './Poster';
+import ShowNavigation from './ShowNavigation';
 import Video from './Video';
 
 interface MovieHeroProps {
@@ -29,7 +30,7 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
       {backdropPath && <BackdropPoster src={backdropPath} title={title} />}
       {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 
-      <div className="flex h-full items-center gap-10">
+      <div className="relative flex h-full items-center gap-10">
         <div className="basis-1/4">
           <Poster
             src={
@@ -40,6 +41,10 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
             title={title}
           />
         </div>
+
+        {'numberOfSeasons' in movie && (
+          <ShowNavigation numOfSeasons={movie.numberOfSeasons} />
+        )}
 
         <div className="flex basis-2/3 flex-col">
           <div className="flex flex-col">
@@ -67,10 +72,10 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
               </span>
             )}
 
-            <p className="mb-6 ml-1 text-sm leading-8">{overview}</p>
+            <p className="mb-4 ml-1 text-sm leading-8">{overview}</p>
           </div>
 
-          <div className="mt-10 flex gap-8">
+          <div className="mt-2 flex gap-8">
             {videoKey && (
               <Button onClick={openVideoFrame} color="primary" size="large">
                 Watch Trailer <Icon name="play" />
