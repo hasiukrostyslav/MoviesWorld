@@ -35,6 +35,7 @@ function ShowEpisodePage() {
           )}
 
         <EpisodeHero
+          numOfEpisodes={episode.episodes.length}
           episode={episode}
           isOpenFrame={isOpenFrame}
           openVideoFrame={openVideoFrame}
