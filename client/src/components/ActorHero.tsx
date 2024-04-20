@@ -1,4 +1,5 @@
 import { imgSize, imgURL } from '../utils/constants';
+import { formatDate } from '../utils/helper';
 import type { Actor } from '../utils/types';
 import Poster from './Poster';
 
@@ -10,20 +11,11 @@ function ActorHero({ actor }: ActorHeroProps) {
   const { name, birthday, deathday, biography, age, birthplace, imgPath } =
     actor;
 
-  const dateFormatter = new Intl.DateTimeFormat('us-EN', {
-    day: 'numeric',
-    year: 'numeric',
-    month: 'long',
-  });
-
   const info = [
     [...Object.keys({ age }), age],
-    [...Object.keys({ birthday }), dateFormatter.format(new Date(birthday))],
+    [...Object.keys({ birthday }), formatDate(birthday)],
     [...Object.keys({ birthplace }), birthplace],
-    [
-      ...Object.keys({ deathday }),
-      deathday && dateFormatter.format(new Date(deathday)),
-    ],
+    [...Object.keys({ deathday }), formatDate(deathday)],
   ];
 
   return (

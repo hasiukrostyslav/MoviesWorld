@@ -1,9 +1,9 @@
 import { createMoviesInfoList } from '../utils/helper';
-import type { Movie, Show, ShowSeason } from '../utils/types';
+import type { Movie, Show, ShowEpisode, ShowSeason } from '../utils/types';
 import InfoItem from './InfoItem';
 
 interface InfoSidebarProps {
-  movie: Movie | Show | ShowSeason;
+  movie: Movie | Show | ShowSeason | ShowEpisode;
 }
 
 function InfoSidebar({ movie }: InfoSidebarProps) {
