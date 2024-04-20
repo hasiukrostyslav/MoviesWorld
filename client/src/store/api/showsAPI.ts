@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type {
   MoviesPageResponse,
   ShowCategoryResponse,
+  ShowEpisodeResponse,
   ShowResponse,
   ShowSeasonResponse,
 } from '../../utils/types';
@@ -14,6 +15,10 @@ interface ShowsByCategory {
 interface Season {
   id: string | undefined;
   seasonId: string | undefined;
+}
+
+interface Episode extends Season {
+  episodeId: string | undefined;
 }
 
 const showsApi = createApi({
@@ -69,6 +74,16 @@ const showsApi = createApi({
           };
         },
       }),
+
+      getShowEpisode: builder.query<ShowEpisodeResponse, Episode>({
+        query: ({ id, seasonId, episodeId }) => {
+          return {
+            url: `/api/view/tv/${id}/season/${seasonId}/episode/${episodeId}`,
+            method: 'GET',
+            params: { id, seasonId, episodeId },
+          };
+        },
+      }),
     };
   },
 });
@@ -79,5 +94,6 @@ export const {
   useGetShowsByCategoryQuery,
   useGetShowByIdQuery,
   useGetShowSeasonQuery,
+  useGetShowEpisodeQuery,
 } = showsApi;
 export { showsApi };

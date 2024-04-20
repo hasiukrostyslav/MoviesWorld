@@ -200,6 +200,12 @@ export interface EpisodeBaseData {
   rating: number;
 }
 
+export interface EpisodeData extends EpisodeBaseData {
+  releaseDate: string;
+  overview: string;
+  runtime: number;
+}
+
 export interface ShowSeason {
   showId: number;
   seasonId: number;
@@ -216,6 +222,27 @@ export interface ShowSeason {
   videoKey: string;
   episodes: EpisodeBaseData[];
   seasons: SeasonBaseData[];
+  cast: ActorBaseData[];
+}
+
+export interface ShowEpisodeResponse {
+  status: 'success';
+  data: ShowEpisode;
+}
+
+export interface ShowEpisode {
+  id: number;
+  showTitle: string;
+  title: string;
+  releaseDate: string;
+  posterPath: string;
+  rating: number;
+  overview: string;
+  episodeNumber: number;
+  seasonNumber: number;
+  runtime: number;
+  videoKey: string;
+  episodes: EpisodeData[];
   cast: ActorBaseData[];
 }
 
