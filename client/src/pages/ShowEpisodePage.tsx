@@ -26,8 +26,6 @@ function ShowEpisodePage() {
   if (data) {
     const episode = data.data;
 
-    console.log(episode);
-
     return (
       <section className="mb-20">
         {isOpenFrame &&
