@@ -131,7 +131,7 @@ const getCollectionData = async function (isCollection) {
     id: movie.id,
     posterPath: movie.poster_path,
     title: movie.title,
-    year: movie.release_date,
+    year: new Date(movie.release_date).getFullYear(),
     rating: +movie.vote_average.toFixed(1),
     type: 'movie',
   }));
@@ -179,9 +179,12 @@ const getEpisodes = (data, seasonNum) =>
   data.map((episode) => ({
     id: episode.id,
     showId: episode.show_id,
-    seasonNumber: seasonNum,
+    seasonNumber: +seasonNum,
     number: episode.episode_number,
     title: episode.name,
+    releaseDate: episode.air_date,
+    overview: episode.overview,
+    runtime: episode.runtime,
     posterPath: episode.still_path,
     rating: +episode.vote_average.toFixed(1),
   }));

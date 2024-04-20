@@ -126,27 +126,30 @@ const getSeason = async (req, res, next) => {
 const getEpisode = async (req, res, next) => {
   const { id, seasonId, episodeId } = req.params;
 
-  const response = await axiosRequest.get(
+  const showResponse = await axiosRequest.get(`/tv/${id}`);
+  const episodeResponse = await axiosRequest.get(
     `/tv/${id}/season/${seasonId}/episode/${episodeId}`
   );
-  const { data } = response;
+  const { data: showData } = showResponse;
+  const { data: episodeData } = episodeResponse;
 
   const cast = await getCast('tv', id, seasonId, episodeId);
-  const video = await getTrailer('tv', id, seasonId);
+  const video = await getTrailer('tv', id, seasonId, episodeId);
 
   const seasonResponse = await axiosRequest.get(`/tv/${id}/season/${seasonId}`);
   const episodes = getEpisodes(seasonResponse.data.episodes, seasonId);
 
   const episode = {
-    id: data.id,
-    title: data.name,
-    releaseDate: data.air_date,
-    posterPath: data.still_path,
-    rating: +data.vote_average.toFixed(1),
-    overview: data.overview,
-    episodeNumber: data.episode_number,
-    seasonNumber: data.season_number,
-    runtime: data.runtime,
+    id: episodeData.id,
+    showTitle: showData.name,
+    title: episodeData.name,
+    releaseDate: episodeData.air_date,
+    posterPath: episodeData.still_path,
+    rating: +episodeData.vote_average.toFixed(1),
+    overview: episodeData.overview,
+    episodeNumber: episodeData.episode_number,
+    seasonNumber: episodeData.season_number,
+    runtime: episodeData.runtime,
     videoKey: video?.key || null,
     cast,
     episodes,
