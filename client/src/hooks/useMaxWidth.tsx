@@ -39,8 +39,6 @@ function useMaxWidth(
     setContainerWidth(parseFloat(divWidth) - parseFloat(headingWidth) + 'px');
   }, [divWidth, headingWidth]);
 
-  console.log(divWidth);
-
   return { maxWidth, containerWidth };
 }
 

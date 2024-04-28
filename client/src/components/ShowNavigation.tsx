@@ -9,8 +9,8 @@ interface ShowNavigationProps {
 }
 
 function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
-  const [translateS, setTranslateS] = useState(0);
-  const [translateE, setTranslateE] = useState(0);
+  const [pageS, setPageS] = useState(0);
+  const [pageE, setPageE] = useState(0);
   const divRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const { maxWidth, containerWidth } = useMaxWidth(divRef, headingRef);
@@ -23,18 +23,16 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
     currentSeason,
     maxPages,
   } = useShowNavigation(numOfSeasons, numOfEpisodes);
+  const btnWidth = 40;
+  const maxBtn = (maxWidth && Math.trunc(parseFloat(maxWidth) / btnWidth)) || 0;
 
-  const prevSeasonPage = () => {
-    setTranslateS((t) => t + 100);
-  };
-  const nextSeasonPage = () => setTranslateS((t) => t - 100);
+  const prevSeasonPage = () => setPageS((p) => p - 1);
+  const nextSeasonPage = () => setPageS((p) => p + 1);
 
-  const prevEpisodePage = () => {
-    setTranslateE((t) => t + 100);
-  };
-  const nextEpisodePage = () => {
-    setTranslateE((t) => t - 100);
-  };
+  const prevEpisodePage = () => setPageE((p) => p - 1);
+  const nextEpisodePage = () => setPageE((p) => p + 1);
+
+  console.log(pageS);
 
   return (
     <div ref={divRef} className="relative mb-10 w-full">
@@ -44,7 +42,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
         </h4>
 
         <div
-          className={`flex max-w-[${containerWidth}] items-center overflow-hidden`}
+          className={`flex max-w-[${containerWidth}] relative items-center overflow-hidden`}
         >
           {numOfSeasons >= maxPages && (
             <PaginationButton
@@ -52,21 +50,21 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
               dark
               className="shrink-0"
               onClick={prevSeasonPage}
-              disabled={translateS === 0}
+              disabled={pageS === 0}
             />
           )}
 
           <ul
-            className={`${numOfSeasons >= maxPages && 'mx-2'}  flex  max-w-[${maxWidth}] gap-2 overflow-hidden`}
+            className={`${numOfSeasons >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}] gap-2 overflow-hidden`}
           >
-            {seasons.map((season) => (
+            {seasons.map((season, i) => (
               <PaginationButton
                 key={season}
                 page={season}
                 onClick={() => selectSeason(season)}
                 outline
                 disabled={season === currentSeason}
-                className={`shrink-0 translate-x-[${translateS}%] ${
+                className={`shrink-0 ${i >= pageS && i < maxBtn + pageS ? '' : 'hidden'}  ${
                   season === currentSeason
                     ? 'border-slate-700 text-slate-700'
                     : ''
@@ -81,6 +79,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
               dark
               className="shrink-0"
               onClick={nextSeasonPage}
+              disabled={pageS + maxBtn >= numOfSeasons}
             />
           )}
         </div>
@@ -98,23 +97,23 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
                 prev
                 dark
                 className="shrink-0"
-                disabled={translateE === 0}
+                disabled={pageE === 0}
                 onClick={prevEpisodePage}
               />
             )}
 
             <ul
-              className={`${numOfEpisodes >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}]  gap-2 overflow-hidden`}
+              className={`${numOfEpisodes >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}] gap-2 overflow-hidden`}
             >
-              {episodes.map((episode) => (
+              {episodes.map((episode, i) => (
                 <PaginationButton
                   key={episode}
                   page={episode}
                   onClick={() => selectEpisode(episode)}
                   outline
                   disabled={episode === currentEpisode}
-                  className={`shrink-0 translate-x-[${translateE}%] ${
-                    episode === currentSeason
+                  className={`shrink-0 ${i >= pageE && i < maxBtn + pageE ? '' : 'hidden'} ${
+                    episode === currentEpisode
                       ? 'border-slate-700 text-slate-700'
                       : ''
                   }`}
@@ -128,6 +127,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
                 dark
                 className="shrink-0"
                 onClick={nextEpisodePage}
+                disabled={pageE + maxBtn >= numOfEpisodes}
               />
             )}
           </div>
