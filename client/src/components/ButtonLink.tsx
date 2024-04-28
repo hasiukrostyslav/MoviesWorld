@@ -1,4 +1,5 @@
-import { Link, useMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useMatchTheme } from '../hooks/useMatchTheme';
 
 interface ButtonLinkProps {
   children: React.ReactNode;
@@ -33,9 +34,8 @@ function ButtonLink({
   size,
   className,
 }: ButtonLinkProps) {
-  const matchHome = useMatch('/');
-  const matchCollection = useMatch('collections');
-  const match = matchHome || matchCollection;
+  const match = useMatchTheme();
+
   return (
     <Link
       className={`flex items-center gap-2 rounded-lg font-semibold outline-0 transition-all duration-200 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${match && color === 'outline' ? buttonColors.outlineWhite : ''} ${className}`}

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-function useShowNavigation(
+export function useShowNavigation(
   numOfSeasons: number,
   numOfEpisodes?: number | null,
 ) {
@@ -32,5 +32,3 @@ function useShowNavigation(
     maxPages,
   };
 }
-
-export default useShowNavigation;

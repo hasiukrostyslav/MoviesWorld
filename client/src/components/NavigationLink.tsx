@@ -1,4 +1,5 @@
-import { NavLink, useMatch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useMatchTheme } from '../hooks/useMatchTheme';
 
 interface NavigationLinkProps {
   path: string;
@@ -10,9 +11,7 @@ const baseStyles =
   'duration-500 rounded-md outline-0 transition-all ring-blue-500 outline-0 focus-visible:ring-4 px-2 py-1 z-10';
 
 function NavigationLink({ path, children, className }: NavigationLinkProps) {
-  const matchHome = useMatch('/');
-  const matchCollection = useMatch('collections');
-  const match = matchHome || matchCollection;
+  const match = useMatchTheme();
 
   return (
     <NavLink

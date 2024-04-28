@@ -1,10 +1,8 @@
-import { useMatch } from 'react-router-dom';
+import { useMatchTheme } from '../hooks/useMatchTheme';
 import Icon from './Icon';
 
 function SearchForm() {
-  const matchHome = useMatch('/');
-  const matchCollection = useMatch('collections');
-  const match = matchHome || matchCollection;
+  const match = useMatchTheme();
 
   return (
     <form className="relative">

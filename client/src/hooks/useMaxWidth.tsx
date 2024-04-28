@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function useMaxWidth(
+export function useMaxWidth(
   divRef: React.RefObject<HTMLDivElement>,
   headingRef: React.RefObject<HTMLHeadingElement>,
 ) {
@@ -41,5 +41,3 @@ function useMaxWidth(
 
   return { maxWidth, containerWidth };
 }
-
-export default useMaxWidth;

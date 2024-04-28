@@ -1,5 +1,5 @@
-import { useMatch } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, toggleTheme } from '../store';
+import { useMatchTheme } from '../hooks/useMatchTheme';
 import Icon from './Icon';
 
 interface ThemeButtonProps {
@@ -9,9 +9,7 @@ interface ThemeButtonProps {
 const absoluteStyles = 'absolute right-1 top-1';
 
 function ThemeButton({ absolute }: ThemeButtonProps) {
-  const matchHome = useMatch('/');
-  const matchCollection = useMatch('collections');
-  const match = matchHome || matchCollection;
+  const match = useMatchTheme();
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.theme.theme);
 

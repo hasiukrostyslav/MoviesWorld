@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import useShowNavigation from '../hooks/useShowNavigation';
+import { useMaxWidth } from '../hooks/useMaxWidth';
+import { useShowNavigation } from '../hooks/useShowNavigation';
 import PaginationButton from './PaginationButton';
-import useMaxWidth from '../hooks/useMaxWidth';
 
 interface ShowNavigationProps {
   numOfSeasons: number;
@@ -31,8 +31,6 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
 
   const prevEpisodePage = () => setPageE((p) => p - 1);
   const nextEpisodePage = () => setPageE((p) => p + 1);
-
-  console.log(pageS);
 
   return (
     <div ref={divRef} className="relative mb-10 w-full">

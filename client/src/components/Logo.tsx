@@ -1,4 +1,5 @@
-import { Link, useMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useMatchTheme } from '../hooks/useMatchTheme';
 
 interface LogoProps {
   size: 'base' | 'lg';
@@ -6,9 +7,7 @@ interface LogoProps {
 }
 
 function Logo({ size, className }: LogoProps) {
-  const matchHome = useMatch('/');
-  const matchCollection = useMatch('collections');
-  const match = matchHome || matchCollection;
+  const match = useMatchTheme();
 
   return (
     <Link
