@@ -1,6 +1,6 @@
 interface ButtonProps {
   children: React.ReactNode;
-  color: 'primary' | 'secondary' | 'outline' | 'transparent';
+  color: 'primary' | 'secondary' | 'outline' | 'transparent' | 'outlineWhite';
   className?: string;
   size: 'small' | 'medium' | 'large';
   onClick?: () => void;
@@ -13,6 +13,8 @@ const buttonColors = {
   secondary: '',
   outline:
     'dark:border-slate-300 border-blue-600 dark:hover:border-slate-100  hover:border-blue-400 text-blue-600 dark:text-slate-300 dark:hover:text-slate-100 hover:text-blue-400 ring-blue-500 dark:focus:border-blue-500 focus:border-blue-500 border-2',
+  outlineWhite:
+    'border-slate-300 hover:border-slate-100 text-slate-300 hover:text-slate-100 focus:border-blue-500',
   transparent:
     'border-0 text-blue-500 font-semibold hover:bg-blue-100 dark:hover:bg-slate-800',
 };

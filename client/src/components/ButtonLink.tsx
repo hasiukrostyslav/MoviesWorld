@@ -3,7 +3,7 @@ import { Link, useMatch } from 'react-router-dom';
 interface ButtonLinkProps {
   children: React.ReactNode;
   path: string;
-  color: 'primary' | 'secondary' | 'outline' | 'transparent';
+  color: 'primary' | 'secondary' | 'outline' | 'transparent' | 'outlineWhite';
   size: 'small' | 'medium' | 'large';
   className?: string;
 }
@@ -15,7 +15,7 @@ const buttonColors = {
   outline:
     'ring-blue-500 border-2 dark:border-slate-300 border-blue-600 dark:hover:border-slate-100 hover:border-blue-400 text-blue-600 dark:text-slate-300 dark:hover:text-slate-100 hover:text-blue-400 dark:focus:border-blue-500 focus:border-blue-500',
   outlineWhite:
-    'border-slate-300 hover:border-slate-100 text-slate-300 hover:text-slate-100 focus:border-blue-500 ',
+    'border-slate-300 hover:border-slate-100 text-slate-300 hover:text-slate-100 focus:border-blue-500',
   transparent:
     'border-0 text-blue-500 font-semibold hover:bg-blue-100 dark:hover:bg-slate-800',
 };

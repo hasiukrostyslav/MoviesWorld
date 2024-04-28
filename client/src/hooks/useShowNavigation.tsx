@@ -1,8 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-function useShowNavigation(numOfSeasons: number, numOfEpisodes?: number) {
+function useShowNavigation(
+  numOfSeasons: number,
+  numOfEpisodes?: number | null,
+) {
   const params = useParams();
   const navigate = useNavigate();
+
+  const maxPages = 27;
 
   const { id, seasonId, episodeId } = params;
   const seasons = Array.from({ length: numOfSeasons }, (_, i) => i + 1);
@@ -24,6 +29,7 @@ function useShowNavigation(numOfSeasons: number, numOfEpisodes?: number) {
     selectEpisode,
     currentSeason,
     currentEpisode,
+    maxPages,
   };
 }
 

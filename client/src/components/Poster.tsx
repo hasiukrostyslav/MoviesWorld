@@ -5,7 +5,7 @@ interface PosterProps {
 
 function Poster({ src, title }: PosterProps) {
   return (
-    <img src={src} alt={`${title} poster`} className="h-img rounded-lg"></img>
+    <img src={src} alt={`${title} poster`} className="h-96 rounded-lg"></img>
   );
 }
 

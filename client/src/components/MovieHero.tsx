@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import { imgSize, imgURL } from '../utils/constants';
 import type { Movie, Show, ShowSeason } from '../utils/types';
 import BackdropPoster from './BackdropPoster';
@@ -14,6 +15,11 @@ interface MovieHeroProps {
 }
 
 function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
+  const location = useLocation();
+  const pathname = !location.pathname.includes('season')
+    ? location.pathname
+    : location.pathname.split('/season').at(0);
+
   const {
     backdropPath,
     posterPath,
@@ -26,12 +32,12 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
   } = movie;
 
   return (
-    <div className="h-hero">
+    <div className="flex h-hero flex-col">
       {backdropPath && <BackdropPoster src={backdropPath} title={title} />}
       {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 
-      <div className="relative flex h-full items-center gap-10">
-        <div className="basis-1/4">
+      <div className="relative flex grow items-center gap-10">
+        <div className="mb-10 basis-1/4">
           <Poster
             src={
               posterPath
@@ -42,35 +48,36 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
           />
         </div>
 
-        {'numberOfSeasons' in movie && (
-          <ShowNavigation numOfSeasons={movie.numberOfSeasons} />
-        )}
-
-        <div className="flex basis-2/3 flex-col">
+        <div className="mb-10 flex basis-2/3 flex-col text-slate-100">
           <div className="flex flex-col">
-            <h2 className="mb-4 flex items-end gap-2 text-3xl font-bold">
+            <Link
+              to={pathname || ''}
+              className="mb-4 flex items-end gap-2 text-3xl font-bold"
+            >
               {title}
               <span className="text-xl font-normal text-slate-400">
                 {new Date(releaseDate).getFullYear() || ''}
               </span>
-            </h2>
+            </Link>
 
-            {'seasonTitle' in movie && (
-              <h4 className="mb-4 text-xl">{movie.seasonTitle}</h4>
-            )}
+            <div className="mb-3 flex items-center gap-3">
+              {'seasonTitle' in movie && (
+                <h4 className="text-lg italic">{movie.seasonTitle}</h4>
+              )}
 
-            {rating > 0 && (
-              <p className="flex items-center gap-1 text-sm">
-                <Icon name="star" />
-                <span className="italic text-slate-400">{rating}</span>
-              </p>
-            )}
+              {rating > 0 && (
+                <p className="flex items-center gap-1 text-sm">
+                  <Icon name="star" />
+                  <span className="italic text-slate-400">{rating}</span>
+                </p>
+              )}
 
-            {genres.length > 0 && (
-              <span className="mb-5 mt-3 text-sm italic text-slate-400">
-                {genres.join('  /  ')}
-              </span>
-            )}
+              {genres.length > 0 && (
+                <span className="text-sm italic text-slate-400">
+                  {genres.join('  /  ')}
+                </span>
+              )}
+            </div>
 
             <p className="mb-4 ml-1 text-sm leading-8">{overview}</p>
           </div>
@@ -81,12 +88,21 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
                 Watch Trailer <Icon name="play" />
               </Button>
             )}
-            <Button size="large" color="outline">
+            <Button size="large" color="outlineWhite">
               Favorite <Icon name="favorite" />
             </Button>
           </div>
         </div>
       </div>
+
+      {'numberOfSeasons' in movie && (
+        <ShowNavigation
+          numOfSeasons={movie.numberOfSeasons}
+          numOfEpisodes={
+            location.pathname.includes('season') ? movie.numberOfEpisodes : null
+          }
+        />
+      )}
     </div>
   );
 }
