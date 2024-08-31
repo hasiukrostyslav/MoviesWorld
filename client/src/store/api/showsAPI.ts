@@ -21,15 +21,17 @@ interface Episode extends Season {
   episodeId: string | undefined;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 const showsApi = createApi({
   reducerPath: 'shows',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SERVER_URL }),
   endpoints: (builder) => {
     return {
       getShowsLists: builder.query<MoviesPageResponse, void>({
         query: () => {
           return {
-            url: '/api/tv',
+            url: '/tv',
             method: 'GET',
           };
         },
@@ -38,7 +40,7 @@ const showsApi = createApi({
       getTrendingShows: builder.query<ShowCategoryResponse, number>({
         query: (page) => {
           return {
-            url: '/api/trending/tv',
+            url: '/trending/tv',
             method: 'GET',
             params: { page },
           };
@@ -48,7 +50,7 @@ const showsApi = createApi({
       getShowsByCategory: builder.query<ShowCategoryResponse, ShowsByCategory>({
         query: ({ key, page }) => {
           return {
-            url: `/api/tv/category/${key}`,
+            url: `/tv/category/${key}`,
             method: 'GET',
             params: { page },
           };
@@ -58,7 +60,7 @@ const showsApi = createApi({
       getShowById: builder.query<ShowResponse, string | undefined>({
         query: (id) => {
           return {
-            url: `/api/view/tv/${id}`,
+            url: `/view/tv/${id}`,
             method: 'GET',
             params: { id },
           };
@@ -68,7 +70,7 @@ const showsApi = createApi({
       getShowSeason: builder.query<ShowSeasonResponse, Season>({
         query: ({ id, seasonId }) => {
           return {
-            url: `/api/view/tv/${id}/season/${seasonId}`,
+            url: `/view/tv/${id}/season/${seasonId}`,
             method: 'GET',
             params: { id, seasonId },
           };
@@ -78,7 +80,7 @@ const showsApi = createApi({
       getShowEpisode: builder.query<ShowEpisodeResponse, Episode>({
         query: ({ id, seasonId, episodeId }) => {
           return {
-            url: `/api/view/tv/${id}/season/${seasonId}/episode/${episodeId}`,
+            url: `/view/tv/${id}/season/${seasonId}/episode/${episodeId}`,
             method: 'GET',
             params: { id, seasonId, episodeId },
           };

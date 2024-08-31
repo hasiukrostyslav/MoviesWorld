@@ -3,15 +3,17 @@ import type { ActorResponse, ActorsPageResponse } from '../../utils/types';
 
 type PageParam = number;
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 const actorsApi = createApi({
   reducerPath: 'actors',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SERVER_URL }),
   endpoints: (builder) => {
     return {
       getActorsList: builder.query<ActorsPageResponse, PageParam>({
         query: (page) => {
           return {
-            url: 'api/actors',
+            url: '/actors',
             method: 'GET',
             params: {
               page,
@@ -23,7 +25,7 @@ const actorsApi = createApi({
       getActor: builder.query<ActorResponse, string | undefined>({
         query: (id) => {
           return {
-            url: `api/view/actor/${id}`,
+            url: `/view/actor/${id}`,
             method: 'GET',
             params: { id },
           };

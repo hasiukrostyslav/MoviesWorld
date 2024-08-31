@@ -10,15 +10,17 @@ interface MoviesByCategory {
   page: number;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 const moviesApi = createApi({
   reducerPath: 'movies',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SERVER_URL }),
   endpoints: (builder) => {
     return {
       getMoviesLists: builder.query<MoviesPageResponse, void>({
         query: () => {
           return {
-            url: '/api/movies',
+            url: '/movies',
             method: 'GET',
           };
         },
@@ -27,7 +29,7 @@ const moviesApi = createApi({
       getTrendingMovies: builder.query<MovieCategoryResponse, number>({
         query: (page) => {
           return {
-            url: '/api/trending/movies',
+            url: '/trending/movies',
             method: 'GET',
             params: { page },
           };
@@ -40,7 +42,7 @@ const moviesApi = createApi({
       >({
         query: ({ key, page }) => {
           return {
-            url: `/api/movies/category/${key}`,
+            url: `/movies/category/${key}`,
             method: 'GET',
             params: { page },
           };
@@ -50,7 +52,7 @@ const moviesApi = createApi({
       getMovieById: builder.query<MovieResponse, string | undefined>({
         query: (id) => {
           return {
-            url: `/api/view/movie/${id}`,
+            url: `/view/movie/${id}`,
             method: 'GET',
             params: { id },
           };

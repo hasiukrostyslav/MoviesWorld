@@ -2,6 +2,8 @@ require('dotenv').config();
 require('express-async-errors');
 
 const express = require('express');
+const cors = require('cors');
+
 const morgan = require('morgan');
 
 const homeRoute = require('./routes/homeRoute');
@@ -19,6 +21,8 @@ const notFoundMiddleware = require('./middleware/notFoundMiddleware');
 const errorHandlerMiddleware = require('./middleware/errorHandlerMiddleware');
 
 const app = express();
+
+app.use(cors());
 
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {

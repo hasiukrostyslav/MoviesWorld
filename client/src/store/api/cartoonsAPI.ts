@@ -10,15 +10,17 @@ interface CartoonsByCategory {
   page: number;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 const cartoonsApi = createApi({
   reducerPath: 'cartoons',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SERVER_URL }),
   endpoints: (builder) => {
     return {
       getCartoonsLists: builder.query<CartoonsPageResponse, void>({
         query: () => {
           return {
-            url: '/api/cartoons',
+            url: '/cartoons',
             method: 'GET',
           };
         },
@@ -30,7 +32,7 @@ const cartoonsApi = createApi({
       >({
         query: ({ key, type, page }) => {
           return {
-            url: `/api/cartoons/category/${type}/${key}`,
+            url: `/cartoons/category/${type}/${key}`,
             method: 'GET',
             params: { page },
           };
