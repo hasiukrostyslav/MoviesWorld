@@ -17,7 +17,7 @@ function HomeHeroItem({ movie, currentMovie, index }: HeroItemProps) {
     >
       <BackdropPoster src={movie.backdropPath} title={movie.title} />
 
-      <div className="z-20 flex items-center justify-between">
+      <div className="z-20 flex w-full items-center justify-between">
         <div className="flex basis-1/2 flex-col">
           <h1 className="mb-4 text-5xl font-bold">{movie.title}</h1>
           <span className="mb-5 ml-2 text-xs">
