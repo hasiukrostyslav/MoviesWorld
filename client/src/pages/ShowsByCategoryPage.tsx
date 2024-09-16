@@ -4,6 +4,7 @@ import FilmListLong from '../components/FilmListLong';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
+import { convertParamToString } from '../utils/helper';
 
 function ShowsByCategoryPage() {
   const params = useParams();
@@ -24,7 +25,10 @@ function ShowsByCategoryPage() {
 
     return (
       <section className="flex flex-col py-20">
-        <FilmListLong movies={movies} heading="Trending Movies" />
+        <FilmListLong
+          movies={movies}
+          heading={`${convertParamToString(key)} Shows`}
+        />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </section>
     );

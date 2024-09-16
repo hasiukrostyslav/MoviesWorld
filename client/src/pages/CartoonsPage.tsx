@@ -22,7 +22,7 @@ function CartoonsPage() {
             path={`category/${type}/${pathKey}`}
             key={`${type}-${category}`}
             movies={data}
-            heading={`${category}`}
+            heading={`${category} ${type === 'tv' ? 'Shows' : 'Movies'}`}
             className={i === arr.length - 1 ? 'pb-20' : ''}
           />
         );

@@ -4,6 +4,7 @@ import FilmListLong from '../components/FilmListLong';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
+import { convertParamToString } from '../utils/helper';
 
 function CartoonsByCategoryPage() {
   const params = useParams();
@@ -25,7 +26,12 @@ function CartoonsByCategoryPage() {
 
     return (
       <section className="flex flex-col py-20">
-        <FilmListLong movies={movies} heading="Trending Movies" />
+        <FilmListLong
+          movies={movies}
+          heading={`${convertParamToString(key)} Cartoon ${
+            type === 'movie' ? 'Movies' : 'Serials'
+          }`}
+        />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </section>
     );

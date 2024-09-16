@@ -75,3 +75,12 @@ export const formatDate = function (str: string | null | undefined) {
 
   return dateFormatter.format(date);
 };
+
+export const convertParamToString = (str: string | undefined) => {
+  if (!str) return '';
+
+  return str
+    .split('-')
+    .map((word) => word.at(0)?.toUpperCase() + word.slice(1))
+    .join(' ');
+};
