@@ -1,7 +1,8 @@
-import { imgSize, imgURL } from '../utils/constants';
 import { formatDate } from '../utils/helper';
 import type { Actor } from '../utils/types';
 import Poster from './Poster';
+
+const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface ActorHeroProps {
   actor: Actor;
@@ -22,7 +23,7 @@ function ActorHero({ actor }: ActorHeroProps) {
     <div className="my-14">
       <div className="flex h-full gap-10">
         <div className="basis-1/4">
-          <Poster src={`${imgURL}${imgSize.large}${imgPath}`} title={name} />
+          <Poster src={`${IMG_URL_LARGE}${imgPath}`} title={name} />
         </div>
 
         <div className="flex basis-2/3 flex-col">

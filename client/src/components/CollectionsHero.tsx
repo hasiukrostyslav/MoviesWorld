@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useSlider } from '../hooks/useSlider';
-import { imgSize, imgURL } from '../utils/constants';
 import type { CollectionPoster } from '../utils/types';
 import SliderButton from './SliderButton';
 import BackdropPoster from './BackdropPoster';
+
+const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
+const IMG_URL_MEDIUM = import.meta.env.VITE_IMG_URL_MEDIUM;
 
 interface CollectionsHeroProps {
   posters: CollectionPoster[];
@@ -49,7 +51,7 @@ function CollectionsHero({ posters }: CollectionsHeroProps) {
               className="rounded-md font-semibold outline-0 ring-blue-500 focus-visible:ring-4"
             >
               <img
-                src={`${imgURL}${index === currentMovie ? imgSize.medium : imgSize.small}${movie.img.posterImg}`}
+                src={`${index === currentMovie ? IMG_URL_MEDIUM : IMG_URL_SMALL}${movie.img.posterImg}`}
                 alt="Collection poster"
                 className={`rounded-md ${index === currentMovie ? 'w-56' : 'w-36'}`}
               />

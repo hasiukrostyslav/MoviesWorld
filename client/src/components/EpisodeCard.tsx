@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { imgSize, imgURL } from '../utils/constants';
 import type { EpisodeBaseData } from '../utils/types';
+
+const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface EpisodeCardProps {
   episode: EpisodeBaseData;
@@ -13,7 +14,7 @@ function EpisodeCard({ episode }: EpisodeCardProps) {
     <li className="flex flex-col">
       <img
         className="rounded-md"
-        src={`${imgURL}${imgSize.large}${posterPath}`}
+        src={`${IMG_URL_LARGE}${posterPath}`}
         alt="Episode Image"
       />
       <span className="font-lights my-1 ml-1 text-sm">

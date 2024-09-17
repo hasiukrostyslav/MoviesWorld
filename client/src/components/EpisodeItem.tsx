@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { imgSize, imgURL } from '../utils/constants';
 import { formatDate } from '../utils/helper';
 import { EpisodeData } from '../utils/types';
 import NavigationLink from './NavigationLink';
+
+const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface EpisodeItemProps {
   episode: EpisodeData;
@@ -18,7 +19,7 @@ function EpisodeItem({ episode }: EpisodeItemProps) {
         <div className="relative w-max">
           <img
             className="h-full w-96 rounded-md"
-            src={`${imgURL}${imgSize.large}${episode.posterPath}`}
+            src={`${IMG_URL_LARGE}${episode.posterPath}`}
             alt="Episode Image"
           />
         </div>

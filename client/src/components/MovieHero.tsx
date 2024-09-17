@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import { imgSize, imgURL } from '../utils/constants';
 import type { Movie, Show, ShowSeason } from '../utils/types';
 import BackdropPoster from './BackdropPoster';
 import Button from './Button';
@@ -7,6 +6,8 @@ import Icon from './Icon';
 import Poster from './Poster';
 import ShowNavigation from './ShowNavigation';
 import Video from './Video';
+
+const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface MovieHeroProps {
   movie: Movie | Show | ShowSeason;
@@ -40,9 +41,7 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
         <div className="mb-10 basis-1/4">
           <Poster
             src={
-              posterPath
-                ? `${imgURL}${imgSize.large}${posterPath}`
-                : '/imgMovieAlt.jpg'
+              posterPath ? `${IMG_URL_LARGE}${posterPath}` : '/imgMovieAlt.jpg'
             }
             title={title}
           />

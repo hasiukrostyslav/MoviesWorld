@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { imgSize, imgURL } from '../utils/constants';
 import type { MoviesTypes } from '../utils/types';
 import Icon from './Icon';
+
+const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
 
 interface MoviesCardProps {
   item: MoviesTypes;
@@ -21,7 +22,7 @@ function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
             className="mb-3 w-full rounded-md"
             src={
               item.posterPath
-                ? `${imgURL}${imgSize.small}${item.posterPath}`
+                ? `${IMG_URL_SMALL}${item.posterPath}`
                 : `/imgMovieAlt.jpg`
             }
             alt={`${item.title} poster`}

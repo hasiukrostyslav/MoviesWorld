@@ -1,7 +1,8 @@
 import type { CollectionData } from '../utils/types';
-import { imgSize, imgURL } from '../utils/constants';
 import MoviesCard from './MoviesCard';
 import ButtonLink from './ButtonLink';
+
+const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface CollectionListProps {
   collection: CollectionData;
@@ -33,7 +34,7 @@ function CollectionList({ collection, index, length }: CollectionListProps) {
       </div>
       <div className="relative mt-4 flex flex-col overflow-hidden rounded-md px-2 pb-8 pt-52">
         <img
-          src={`${imgURL}${imgSize.large}${backdropImg}`}
+          src={`${IMG_URL_LARGE}${backdropImg}`}
           alt={`${title} collection poster`}
           className="absolute left-0 top-0 z-0 h-full w-full brightness-75"
         />

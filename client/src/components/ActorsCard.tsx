@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { imgSize, imgURL } from '../utils/constants';
 import type { ActorBaseData } from '../utils/types';
+
+const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
 
 interface ActorsCardProps {
   actor: ActorBaseData;
@@ -22,7 +23,7 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
         className="mb-3 w-full rounded-md"
         src={
           actor.imgPath
-            ? `${imgURL}${imgSize.small}${actor.imgPath}`
+            ? `${IMG_URL_SMALL}${actor.imgPath}`
             : `/imgActorAlt.jpg`
         }
         alt={`${actor.name} photo`}
