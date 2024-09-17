@@ -7,9 +7,10 @@ const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface EpisodeItemProps {
   episode: EpisodeData;
+  backupPoster: string;
 }
 
-function EpisodeItem({ episode }: EpisodeItemProps) {
+function EpisodeItem({ episode, backupPoster }: EpisodeItemProps) {
   const params = useParams();
   const isCurrentEpisode = Number(params.episodeId) === episode.number;
 
@@ -19,7 +20,7 @@ function EpisodeItem({ episode }: EpisodeItemProps) {
         <div className="relative w-max">
           <img
             className="h-full w-96 rounded-md"
-            src={`${IMG_URL_LARGE}${episode.posterPath}`}
+            src={`${IMG_URL_LARGE}${episode.posterPath || backupPoster}`}
             alt="Episode Image"
           />
         </div>

@@ -221,6 +221,7 @@ export interface ShowSeason {
   rating: number;
   overview: string;
   videoKey: string;
+  backupPoster: string;
   episodes: EpisodeBaseData[];
   seasons: SeasonBaseData[];
   cast: ActorBaseData[];
@@ -244,6 +245,7 @@ export interface ShowEpisode {
   numberOfSeasons: number;
   runtime: number;
   videoKey: string;
+  backupPoster: string;
   episodes: EpisodeData[];
   cast: ActorBaseData[];
 }

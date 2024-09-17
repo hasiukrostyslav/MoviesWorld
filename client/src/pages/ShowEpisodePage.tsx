@@ -46,7 +46,10 @@ function ShowEpisodePage() {
           <InfoSidebar movie={episode} />
         </section>
 
-        <EpisodeListLong episodes={episode.episodes} />
+        <EpisodeListLong
+          episodes={episode.episodes}
+          backupPoster={episode.backupPoster}
+        />
       </section>
     );
   }

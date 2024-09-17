@@ -34,11 +34,14 @@ function EpisodeHero({
     episodeNumber,
     numberOfSeasons,
     seasonNumber,
+    backupPoster,
   } = episode;
 
   return (
     <div className="flex h-hero flex-col">
-      {posterPath && <BackdropPoster src={posterPath} title={title} />}
+      {(posterPath || backupPoster) && (
+        <BackdropPoster src={posterPath || backupPoster} title={title} />
+      )}
       {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 
       <div className="relative flex h-full items-center gap-10 text-slate-100">

@@ -5,9 +5,10 @@ const IMG_URL_LARGE = import.meta.env.VITE_IMG_URL_LARGE;
 
 interface EpisodeCardProps {
   episode: EpisodeBaseData;
+  backupPoster: string;
 }
 
-function EpisodeCard({ episode }: EpisodeCardProps) {
+function EpisodeCard({ episode, backupPoster }: EpisodeCardProps) {
   const { seasonNumber, title, posterPath, number: episodeNum } = episode;
 
   return (
@@ -18,10 +19,10 @@ function EpisodeCard({ episode }: EpisodeCardProps) {
       >
         <img
           className="rounded-md transition-all duration-500 hover:opacity-70"
-          src={`${IMG_URL_LARGE}${posterPath}`}
+          src={`${IMG_URL_LARGE}${posterPath || backupPoster}`}
           alt="Episode Image"
         />
-        <span className="font-light my-1 ml-1 text-sm">
+        <span className="my-1 ml-1 text-sm font-light">
           {seasonNumber}x{episodeNum < 10 ? `0${episodeNum}` : episodeNum}
         </span>
         {title}
