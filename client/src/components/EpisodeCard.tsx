@@ -21,7 +21,7 @@ function EpisodeCard({ episode }: EpisodeCardProps) {
       </span>
       <Link
         to={`episode/${episodeNum}`}
-        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4 hover:dark:text-slate-400"
+        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4 hover:dark:text-slate-400"
       >
         {title}
       </Link>

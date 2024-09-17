@@ -33,7 +33,7 @@ function EpisodeItem({ episode }: EpisodeItemProps) {
 
             <NavigationLink
               className={
-                !isCurrentEpisode ? 'text-slate-500 hover:text-slate-400' : ''
+                !isCurrentEpisode ? 'text-slate-500 hover:text-slate-600' : ''
               }
               path={`/view/tv/${episode.showId}/season/${episode.seasonNumber}/episode/${episode.number}`}
             >
