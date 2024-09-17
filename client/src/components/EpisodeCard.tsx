@@ -11,19 +11,19 @@ function EpisodeCard({ episode }: EpisodeCardProps) {
   const { seasonNumber, title, posterPath, number: episodeNum } = episode;
 
   return (
-    <li className="flex flex-col">
-      <img
-        className="rounded-md"
-        src={`${IMG_URL_LARGE}${posterPath}`}
-        alt="Episode Image"
-      />
-      <span className="font-lights my-1 ml-1 text-sm">
-        {seasonNumber}x{episodeNum < 10 ? `0${episodeNum}` : episodeNum}
-      </span>
+    <li className="">
       <Link
         to={`episode/${episodeNum}`}
-        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4 hover:dark:text-slate-400"
+        className="flex flex-col rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4 hover:dark:text-slate-400"
       >
+        <img
+          className="rounded-md transition-all duration-500 hover:opacity-70"
+          src={`${IMG_URL_LARGE}${posterPath}`}
+          alt="Episode Image"
+        />
+        <span className="font-light my-1 ml-1 text-sm">
+          {seasonNumber}x{episodeNum < 10 ? `0${episodeNum}` : episodeNum}
+        </span>
         {title}
       </Link>
     </li>

@@ -19,19 +19,19 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
 
   return (
     <li className={`relative flex w-44 flex-col ${className}`}>
-      <img
-        className="mb-3 w-full rounded-md"
-        src={
-          actor.imgPath
-            ? `${IMG_URL_SMALL}${actor.imgPath}`
-            : `/imgActorAlt.jpg`
-        }
-        alt={`${actor.name} photo`}
-      />
       <Link
         to={`/view/actor/${actor.id}`}
-        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4  hover:dark:text-slate-400"
+        className="rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4"
       >
+        <img
+          className="mb-3 w-full rounded-md transition-all duration-500 hover:opacity-70"
+          src={
+            actor.imgPath
+              ? `${IMG_URL_SMALL}${actor.imgPath}`
+              : `/imgActorAlt.jpg`
+          }
+          alt={`${actor.name} photo`}
+        />
         {formatNameLength(actor.name, 16)}
       </Link>
       {cast && (

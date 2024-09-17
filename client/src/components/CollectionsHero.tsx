@@ -53,7 +53,7 @@ function CollectionsHero({ posters }: CollectionsHeroProps) {
               <img
                 src={`${index === currentMovie ? IMG_URL_MEDIUM : IMG_URL_SMALL}${movie.img.posterImg}`}
                 alt="Collection poster"
-                className={`rounded-md ${index === currentMovie ? 'w-56' : 'w-36'}`}
+                className={`rounded-md transition-all duration-500 hover:opacity-80  ${index === currentMovie ? 'w-56' : 'w-36'}`}
               />
             </Link>
           </li>
