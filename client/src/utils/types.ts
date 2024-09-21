@@ -272,3 +272,22 @@ export type MoviesListTypes =
   | ShowBaseData[]
   | SeasonBaseData[];
 export type MoviesTypes = MovieBaseData | ShowBaseData | SeasonBaseData;
+
+export interface SearchResponse {
+  status: 'success';
+  results: number;
+  data: {
+    movies: {
+      results: number;
+      data: MovieBaseData[];
+    };
+    tv: {
+      results: number;
+      data: ShowBaseData[];
+    };
+    actors: {
+      results: number;
+      data: ActorBaseData[];
+    };
+  };
+}

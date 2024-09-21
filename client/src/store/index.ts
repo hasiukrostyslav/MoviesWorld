@@ -2,12 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeReducer } from './slice/themeSlice';
-import { homeApi } from './api/homeAPI';
+import { homeApi } from './api/homeApi';
 import { moviesApi } from './api/moviesAPI';
 import { cartoonsApi } from './api/cartoonsAPI';
 import { showsApi } from './api/showsAPI';
 import { collectionsApi } from './api/collectionsAPI';
 import { actorsApi } from './api/actorsAPI';
+import { searchApi } from './api/searchAPI';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [showsApi.reducerPath]: showsApi.reducer,
     [collectionsApi.reducerPath]: collectionsApi.reducer,
     [actorsApi.reducerPath]: actorsApi.reducer,
+    [searchApi.reducerPath]: searchApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
@@ -26,7 +28,8 @@ export const store = configureStore({
       .concat(cartoonsApi.middleware)
       .concat(showsApi.middleware)
       .concat(collectionsApi.middleware)
-      .concat(actorsApi.middleware);
+      .concat(actorsApi.middleware)
+      .concat(searchApi.middleware);
   },
 });
 
@@ -39,9 +42,10 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector = useSelector.withTypes<RootState>();
 
 export * from './slice/themeSlice';
-export * from './api/homeAPI';
+export * from './api/homeApi';
 export * from './api/moviesAPI';
 export * from './api/cartoonsAPI';
 export * from './api/showsAPI';
 export * from './api/collectionsAPI';
 export * from './api/actorsAPI';
+export * from './api/searchAPI';
