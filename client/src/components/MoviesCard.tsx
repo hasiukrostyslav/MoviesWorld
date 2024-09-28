@@ -14,12 +14,12 @@ interface MoviesCardProps {
 function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
   return (
     <li
-      className={`relative min-w-44 ${frame ? 'text-slate-100' : ''} ${hidden || ''}`}
+      className={`relative box-content min-w-44 ${frame ? 'text-slate-100' : ''} ${hidden || ''}`}
     >
-      <div className={`rounded-md ${className}`}>
+      <div className={`w-full ${className}`}>
         <Link
           to={`/view/${item.type}/${item.id}${'season' in item ? `/season/${item.seasonNumber}` : ''}`}
-          className="rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4"
+          className="outline-round flex w-full flex-col p-2 font-semibold hover:text-slate-400"
         >
           <div className="relative">
             <img
@@ -39,13 +39,15 @@ function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
               </span>
             )}
           </div>
-          {item.title.length < 18
-            ? item.title
-            : item.title.slice(0, 18).padEnd(21, '...')}
+          <span>
+            {item.title.length < 18
+              ? item.title
+              : item.title.slice(0, 18).padEnd(21, '...')}
+          </span>
         </Link>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-sm font-light">{item.year}</span>
-          <button className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4">
+          <button className="outline-round p-1 font-semibold">
             <Icon name="favorite" />
           </button>
         </div>

@@ -201,3 +201,16 @@
       -1.8em -1.8em 0 0em #030712;
   }
 }
+
+@layer components {
+  .outline-round {
+    border-radius: 0.5rem;
+    outline-width: 0px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-duration: 500ms;
+    @apply ring-blue-500;
+    @apply focus-visible:ring-4;
+  }
+}

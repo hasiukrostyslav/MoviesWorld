@@ -51,7 +51,7 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
           <div className="flex flex-col">
             <Link
               to={pathname || ''}
-              className="mb-4 flex items-end gap-2 text-3xl font-bold"
+              className="outline-round mb-4 flex w-fit items-end gap-2 p-1 text-3xl font-bold"
             >
               {title}
               <span className="text-xl font-normal text-slate-400">

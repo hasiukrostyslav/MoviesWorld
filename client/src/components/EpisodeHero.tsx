@@ -53,7 +53,10 @@ function EpisodeHero({
                 {`${seasonNumber}x${episodeNumber < 10 ? '0' + episodeNumber : episodeNumber}`}
               </span>
             </h2>
-            <Link to={pathname || ''} className="mb-6 text-2xl font-bold">
+            <Link
+              to={pathname || ''}
+              className="outline-round mb-6 w-fit p-1 text-2xl font-bold"
+            >
               {showTitle}
             </Link>
 
