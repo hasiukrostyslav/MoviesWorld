@@ -1,10 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export function usePagination(currentPage: number, totalPages: number) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [schema, setSchema] = useState<(number | null)[] | []>([]);
   const [curPage, setCurPage] = useState<number>(1);
+
+  const params = searchParams
+    .toString()
+    .split('&')
+    .filter((param) => !param.includes('page'))
+    .join('&');
 
   const schemaParams = useMemo(
     () => ({
@@ -68,17 +75,17 @@ export function usePagination(currentPage: number, totalPages: number) {
 
   const prevPage = () => {
     setCurPage((c) => c - 1);
-    navigate(`?page=${curPage - 1}`);
+    navigate(`?${params ? params + '&' : ''}page=${curPage - 1}`);
   };
 
   const nextPage = () => {
     setCurPage((c) => c + 1);
-    navigate(`?page=${curPage + 1}`);
+    navigate(`?${params ? params + '&' : ''}page=${curPage + 1}`);
   };
 
   const selectPage = (page: number) => {
     setCurPage(() => page);
-    navigate(`?page=${page}`);
+    navigate(`?${params ? params + '&' : ''}page=${page}`);
   };
 
   return { schema, curPage, setCurPage, prevPage, nextPage, selectPage };

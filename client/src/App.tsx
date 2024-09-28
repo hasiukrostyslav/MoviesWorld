@@ -24,6 +24,7 @@ import ActorPage from './pages/ActorPage';
 import ShowPage from './pages/ShowPage';
 import ShowSeasonPage from './pages/ShowSeasonPage';
 import ShowEpisodePage from './pages/ShowEpisodePage';
+import SearchPage from './pages/SearchPage';
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      { path: 'search', element: <SearchPage /> },
       { path: 'user', element: <UserPage /> },
     ],
   },

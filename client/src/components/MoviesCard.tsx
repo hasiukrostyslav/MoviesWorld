@@ -32,7 +32,9 @@ function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
               alt={`${item.title} poster`}
             />
             {item.rating > 0 && (
-              <span className="absolute top-0 bg-red-600 px-4 text-slate-100">
+              <span
+                className={`absolute top-0 rounded-br-md px-4 text-slate-100 ${item.rating >= 8 ? 'bg-green-500' : item.rating < 8 && item.rating >= 7 ? 'bg-yellow-500' : 'bg-red-600'}`}
+              >
                 {item.rating.toFixed(1)}
               </span>
             )}

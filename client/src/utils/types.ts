@@ -276,18 +276,31 @@ export type MoviesTypes = MovieBaseData | ShowBaseData | SeasonBaseData;
 export interface SearchResponse {
   status: 'success';
   results: number;
-  data: {
-    movies: {
-      results: number;
-      data: MovieBaseData[];
-    };
-    tv: {
-      results: number;
-      data: ShowBaseData[];
-    };
-    actors: {
-      results: number;
-      data: ActorBaseData[];
-    };
-  };
+  page: number;
+  totalPages: number;
+  data: (MovieBaseData | ShowBaseData | ActorBaseData)[];
+}
+
+export interface SearchMoviesResponse {
+  status: 'success';
+  results: number;
+  page: number;
+  totalPages: number;
+  data: MovieBaseData[];
+}
+
+export interface SearchShowsResponse {
+  status: 'success';
+  results: number;
+  page: number;
+  totalPages: number;
+  data: ShowBaseData[];
+}
+
+export interface SearchActorsResponse {
+  status: 'success';
+  results: number;
+  page: number;
+  totalPages: number;
+  data: ActorBaseData[];
 }

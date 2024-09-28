@@ -18,7 +18,7 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
     name.length < 18 ? name : name.slice(0, num).padEnd(num + 2, '...');
 
   return (
-    <li className={`relative flex w-44 flex-col ${className}`}>
+    <li className={`relative flex flex-col ${className || 'w-44'}`}>
       <Link
         to={`/view/actor/${actor.id}`}
         className="rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4"
