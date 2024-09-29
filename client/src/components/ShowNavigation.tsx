@@ -39,9 +39,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
           Seasons:
         </h4>
 
-        <div
-          className={`flex max-w-[${containerWidth}] relative items-center overflow-hidden`}
-        >
+        <div className={`flex max-w-[${containerWidth}] relative items-center`}>
           {numOfSeasons >= maxPages && (
             <PaginationButton
               prev
@@ -53,7 +51,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
           )}
 
           <ul
-            className={`${numOfSeasons >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}] gap-2 overflow-hidden`}
+            className={`${numOfSeasons >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}] gap-2`}
           >
             {seasons.map((season, i) => (
               <PaginationButton
@@ -87,9 +85,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
         <div className="flex items-center">
           <h4 className="min-w-20 text-slate-400">Episodes:</h4>
 
-          <div
-            className={`flex max-w-[${containerWidth}] items-center overflow-hidden`}
-          >
+          <div className={`flex max-w-[${containerWidth}] items-center`}>
             {numOfEpisodes >= maxPages && (
               <PaginationButton
                 prev
@@ -101,7 +97,7 @@ function ShowNavigation({ numOfSeasons, numOfEpisodes }: ShowNavigationProps) {
             )}
 
             <ul
-              className={`${numOfEpisodes >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}] gap-2 overflow-hidden`}
+              className={`${numOfEpisodes >= maxPages && 'mx-2'} relative flex max-w-[${maxWidth}] gap-2`}
             >
               {episodes.map((episode, i) => (
                 <PaginationButton
