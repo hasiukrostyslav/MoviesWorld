@@ -3,8 +3,9 @@ import { SearchResponse } from '../../utils/types';
 
 interface Params {
   query: string | null;
-  page: number | string;
+  searchId: number | string | null;
   type: string | null;
+  remain: string | null;
 }
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -15,11 +16,11 @@ const searchApi = createApi({
   endpoints: (builder) => {
     return {
       getSearchedItems: builder.query<SearchResponse, Params>({
-        query: ({ query, page, type }) => {
+        query: ({ query, searchId, type, remain }) => {
           return {
             url: '/search',
             method: 'GET',
-            params: { query, page, type },
+            params: { query, searchId, type, remain },
           };
         },
       }),

@@ -20,7 +20,6 @@ export function useSearchTabs() {
     if (type === 'movies') setLeftPosition('before:left-1/4');
     if (type === 'shows') setLeftPosition('before:left-2/4');
     if (type === 'actors') setLeftPosition('before:left-3/4');
-    console.log(type);
   }, [type]);
 
   return { params, type, leftPosition };
