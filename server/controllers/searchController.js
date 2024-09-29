@@ -8,7 +8,7 @@ const {
 } = require('../utils/convertData');
 
 const getSearchedItems = async (req, res, next) => {
-  const { query, page, type } = req.query;
+  const { query, type, page } = req.query;
 
   let requestType;
   if (!type) requestType = 'multi';
@@ -28,7 +28,11 @@ const getSearchedItems = async (req, res, next) => {
     );
 
   const data = response.data.results.map((item) => {
-    if (item.media_type === 'movie' || requestType === 'movie')
+    if (
+      item.media_type === 'movie' ||
+      item.media_type === 'collection' ||
+      requestType === 'movie'
+    )
       return convertMovieData(item);
     if (item.media_type === 'tv' || requestType === 'tv')
       return convertShowData(item);
