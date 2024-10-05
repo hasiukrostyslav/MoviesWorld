@@ -275,10 +275,14 @@ export type MoviesTypes = MovieBaseData | ShowBaseData | SeasonBaseData;
 
 export interface SearchResponse {
   status: 'success';
-  results: number;
-  page: number;
-  totalPages: number;
-  data: (MovieBaseData | ShowBaseData | ActorBaseData)[];
+  data: {
+    page: number;
+    totalPages: number;
+    totalResults: number;
+    results: number;
+    resultPerPage: number;
+    data: (MovieBaseData | ShowBaseData | ActorBaseData)[];
+  };
 }
 
 export interface SearchMoviesResponse {
