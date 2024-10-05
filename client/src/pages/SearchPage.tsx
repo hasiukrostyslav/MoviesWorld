@@ -1,18 +1,18 @@
-import { useSearchParams } from 'react-router-dom';
-import Spinner from '../components/Spinner';
+import { useNavigate } from 'react-router-dom';
+import { useSearchTabs } from '../hooks/useSearchTabs';
 import { useGetSearchedItemsQuery } from '../store';
+import Spinner from '../components/Spinner';
 import ErrorPage from './ErrorPage';
-import Pagination from '../components/Pagination';
 import SearchedList from '../components/SearchedList';
 import Tabs from '../components/Tabs';
+import Button from '../components/Button';
 
 function SearchPage() {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('query');
-  const searchId = searchParams.get('searchId') || '';
-  const remain = searchParams.get('remain') || '';
-  // const page = searchParams.get('page') || searchId || 1;
-  const type = searchParams.get('type') || '';
+  const navigate = useNavigate();
+  const {
+    params: { query, type, searchId, remain },
+    searchString,
+  } = useSearchTabs();
 
   const { data, isFetching, isError } = useGetSearchedItemsQuery({
     query,
@@ -25,7 +25,15 @@ function SearchPage() {
   if (isError) return <ErrorPage code={500} message="Internal Server Error" />;
 
   if (data) {
-    const { data: searchedData, page: currentPage, totalPages } = data.data;
+    const {
+      data: searchedData,
+      page,
+      totalPages,
+      results,
+      resultPerPage,
+    } = data.data;
+
+    console.log(data);
 
     return (
       <section className="flex flex-col pt-20">
@@ -37,7 +45,21 @@ function SearchPage() {
         </h2>
         <Tabs />
         <SearchedList searchedItems={searchedData} />
-        {/* <Pagination currentPage={currentPage} totalPages={totalPages} /> */}
+        {(page < totalPages || results > resultPerPage) && (
+          <Button
+            size="large"
+            color="primary"
+            className="my-16 self-center"
+            onClick={() => {
+              console.log(results - resultPerPage);
+              navigate(
+                `?${searchString}&searchId=${results > resultPerPage ? page : page + 1}${results > resultPerPage ? `&remain=${results - resultPerPage}` : ''}`,
+              );
+            }}
+          >
+            Get more results
+          </Button>
+        )}
       </section>
     );
   }

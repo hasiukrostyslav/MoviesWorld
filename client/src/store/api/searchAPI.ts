@@ -23,6 +23,25 @@ const searchApi = createApi({
             params: { query, searchId, type, remain },
           };
         },
+        serializeQueryArgs: ({ endpointName }) => {
+          return endpointName;
+        },
+        merge: (currentCache, newItems, otherArgs) => {
+          const { searchId } = otherArgs.arg;
+
+          if (!searchId) return newItems;
+
+          currentCache.data.page = newItems.data.page;
+          currentCache.data.results = newItems.data.results;
+          currentCache.data.resultPerPage = newItems.data.resultPerPage;
+          currentCache.data.data = [
+            ...currentCache.data.data,
+            ...newItems.data.data,
+          ];
+        },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg;
+        },
       }),
     };
   },
