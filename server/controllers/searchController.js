@@ -1,7 +1,11 @@
 const { StatusCodes } = require('http-status-codes');
 const { NotFoundError } = require('../errors');
 const axiosRequest = require('../utils/axiosInstance');
-const { convertData } = require('../utils/convertData');
+const {
+  convertData,
+  getUniqueItems,
+  filterRedundantData,
+} = require('../utils/convertData');
 
 const getSearchedItems = async (req, res, next) => {
   const { query, type, searchId, remain } = req.query;
@@ -25,14 +29,12 @@ const getSearchedItems = async (req, res, next) => {
 
   const responseData = response.data;
 
-  let data = convertData(responseData.results, requestType)
-    .filter((el) => el.imgPath || el.posterPath)
-    .filter((el) => {
-      if (el.type)
-        return el.title.toLowerCase().includes(query.trim().toLowerCase());
-      return el.name.toLowerCase().includes(query.trim().toLowerCase());
-    })
-    .slice(remain ? -remain : 0);
+  const convertedData = filterRedundantData(
+    convertData(responseData.results, requestType),
+    query
+  );
+
+  let data = getUniqueItems(convertedData).slice(remain ? -remain : 0);
 
   const initialParams = {
     page: responseData.page,
@@ -41,7 +43,6 @@ const getSearchedItems = async (req, res, next) => {
     resultPerPage: responseData.results.length,
     results: data.length,
     data,
-    redundantData: [],
   };
 
   for (
@@ -56,20 +57,19 @@ const getSearchedItems = async (req, res, next) => {
       params: { query, type, page: i },
     });
 
-    const newData = convertData(newResponse.data.results, requestType)
-      .filter((el) => el.imgPath || el.posterPath)
-      .filter((el) => {
-        if (el.type)
-          return el.title.toLowerCase().includes(query.trim().toLowerCase());
-        return el.name.toLowerCase().includes(query.trim().toLowerCase());
-      })
-      .slice(remain ? -remain : 0);
+    const extraData = filterRedundantData(
+      convertData(newResponse.data.results, requestType),
+      query
+    );
 
-    data = [...data, ...newData];
+    data = getUniqueItems([
+      ...data,
+      ...getUniqueItems(extraData).slice(remain ? -remain : 0),
+    ]);
+
     initialParams.results = data.length;
     if (data.length > initialParams.resultPerPage) {
       initialParams.data = data.slice(0, 20);
-      initialParams.redundantData = data.slice(20);
     } else {
       initialParams.data = data;
     }
