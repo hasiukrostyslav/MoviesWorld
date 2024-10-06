@@ -8,7 +8,7 @@ interface SearchedListProps {
 
 function SearchedList({ searchedItems }: SearchedListProps) {
   return (
-    <ul className="mb-8 mt-6 grid grid-cols-5 justify-items-center gap-y-16 px-4">
+    <ul className="mb-32 mt-6 grid grid-cols-5 justify-items-center gap-y-16 px-4">
       {searchedItems.map((item) => {
         if ('type' in item) return <MoviesCard item={item} key={item.id} />;
         if ('character' in item)

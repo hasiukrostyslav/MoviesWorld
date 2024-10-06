@@ -36,7 +36,7 @@ function SearchPage() {
     console.log(data);
 
     return (
-      <section className="flex flex-col pt-20">
+      <section className="flex flex-col py-20">
         <h2 className="text-2xl font-semibold">
           Search results:{' '}
           <span className="text-xl font-medium text-slate-700 dark:text-slate-400">
@@ -49,7 +49,7 @@ function SearchPage() {
           <Button
             size="large"
             color="primary"
-            className="my-16 self-center"
+            className="self-center"
             onClick={() => {
               console.log(results - resultPerPage);
               navigate(
