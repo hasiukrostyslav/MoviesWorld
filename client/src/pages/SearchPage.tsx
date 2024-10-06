@@ -45,21 +45,6 @@ function SearchPage() {
         </h2>
         <Tabs />
         <SearchedList searchedItems={searchedData} />
-        {(page < totalPages || results > resultPerPage) && (
-          <Button
-            size="large"
-            color="primary"
-            className="self-center"
-            onClick={() => {
-              console.log(results - resultPerPage);
-              navigate(
-                `?${searchString}&searchId=${results > resultPerPage ? page : page + 1}${results > resultPerPage ? `&remain=${results - resultPerPage}` : ''}`,
-              );
-            }}
-          >
-            Get more results
-          </Button>
-        )}
       </section>
     );
   }
