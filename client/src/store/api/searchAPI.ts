@@ -1,4 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 import { SearchResponse } from '../../utils/types';
 
 interface Params {
@@ -8,11 +13,21 @@ interface Params {
   remain: string | null;
 }
 
+interface CustomizedFetchBaseQueryError {
+  status: number;
+  data: {
+    status: string;
+    message: string;
+  };
+}
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const searchApi = createApi({
   reducerPath: 'search',
-  baseQuery: fetchBaseQuery({ baseUrl: SERVER_URL }),
+  baseQuery: <
+    BaseQueryFn<string | FetchArgs, unknown, CustomizedFetchBaseQueryError>
+  >fetchBaseQuery({ baseUrl: SERVER_URL }),
   endpoints: (builder) => {
     return {
       getSearchedItems: builder.query<SearchResponse, Params>({
