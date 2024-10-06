@@ -16,7 +16,7 @@ function HomeHeroItem({ movie, currentMovie, index }: HeroItemProps) {
     <li
       className={`flex min-w-full text-slate-100 ${index === currentMovie ? '' : 'hidden'}`}
     >
-      <BackdropPoster src={movie.backdropPath} title={movie.title} />
+      <BackdropPoster src={movie.backdropImg} title={movie.title} />
 
       <div className="z-20 flex w-full items-center justify-between">
         <div className="flex basis-1/2 flex-col">
@@ -40,7 +40,7 @@ function HomeHeroItem({ movie, currentMovie, index }: HeroItemProps) {
         </div>
         <div className="basis-1/4">
           <Poster
-            src={`${IMG_URL_MEDIUM}${movie.posterPath}`}
+            src={`${IMG_URL_MEDIUM}${movie.posterImg}`}
             title={movie.title}
           />
         </div>

@@ -25,8 +25,8 @@ function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
             <img
               className="mb-3 w-full rounded-md transition-all duration-500 hover:opacity-70"
               src={
-                item.posterPath
-                  ? `${IMG_URL_SMALL}${item.posterPath}`
+                item.posterImg
+                  ? `${IMG_URL_SMALL}${item.posterImg}`
                   : `/imgMovieAlt.jpg`
               }
               alt={`${item.title} poster`}

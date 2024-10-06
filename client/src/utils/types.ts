@@ -3,8 +3,8 @@ export interface HeroBaseData {
   type: 'movie' | 'tv';
   title: string;
   overview: string;
-  backdropPath: string;
-  posterPath: string;
+  backdropImg: string;
+  posterImg: string;
   genres: string[];
 }
 
@@ -12,7 +12,7 @@ export interface MovieBaseData {
   id: number;
   type?: 'movie';
   title: string;
-  posterPath: string;
+  posterImg: string;
   year: number;
   rating: number;
 }
@@ -21,7 +21,7 @@ export interface ShowBaseData {
   id: number;
   type?: 'tv';
   title: string;
-  posterPath: string;
+  posterImg: string;
   year: number;
   rating: number;
 }
@@ -35,7 +35,7 @@ export interface SeasonBaseData extends ShowBaseData {
 export interface ActorBaseData {
   id: number;
   name: string;
-  imgPath: string;
+  posterImg: string;
   character: string | null;
 }
 
@@ -142,8 +142,8 @@ export interface Movie {
   id: number;
   title: string;
   overview: string;
-  posterPath: string;
-  backdropPath: string;
+  posterImg: string;
+  backdropImg: string;
   status: string;
   releaseDate: string;
   runtime: number;
@@ -167,8 +167,8 @@ export interface Show {
   id: number;
   title: string;
   overview: string;
-  posterPath: string;
-  backdropPath: string;
+  posterImg: string;
+  backdropImg: string;
   status: string;
   releaseDate: string;
   runtime: number;
@@ -196,7 +196,7 @@ export interface EpisodeBaseData {
   seasonNumber: number;
   number: number;
   title: string;
-  posterPath: string;
+  posterImg: string;
   rating: number;
 }
 
@@ -215,8 +215,8 @@ export interface ShowSeason {
   numberOfSeasons: number;
   title: string;
   releaseDate: string;
-  posterPath: string;
-  backdropPath: string;
+  posterImg: string;
+  backdropImg: string;
   genres: string[];
   rating: number;
   overview: string;
@@ -237,7 +237,7 @@ export interface ShowEpisode {
   showTitle: string;
   title: string;
   releaseDate: string;
-  posterPath: string;
+  posterImg: string;
   rating: number;
   overview: string;
   episodeNumber: number;
@@ -262,7 +262,7 @@ export interface Actor {
   age: number;
   deathday: string | null;
   birthplace: string;
-  imgPath: string;
+  posterImg: string;
   biography: string;
   credits: (MovieBaseData | ShowBaseData)[];
 }

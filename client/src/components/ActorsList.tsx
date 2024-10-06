@@ -9,6 +9,7 @@ interface ItemsListProps {
 }
 
 function ActorsList({ actors, heading, className }: ItemsListProps) {
+  console.log(actors);
   return (
     <div className={`${className} flex flex-col pt-20`}>
       <h2 className="text-3xl font-semibold">{heading}</h2>

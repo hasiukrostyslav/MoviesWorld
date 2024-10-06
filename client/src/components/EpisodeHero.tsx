@@ -25,7 +25,7 @@ function EpisodeHero({
     : location.pathname.split('/season').at(0);
 
   const {
-    posterPath,
+    posterImg,
     showTitle,
     title,
     rating,
@@ -39,8 +39,8 @@ function EpisodeHero({
 
   return (
     <div className="flex h-hero flex-col">
-      {(posterPath || backupPoster) && (
-        <BackdropPoster src={posterPath || backupPoster} title={title} />
+      {(posterImg || backupPoster) && (
+        <BackdropPoster src={posterImg || backupPoster} title={title} />
       )}
       {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 

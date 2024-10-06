@@ -20,7 +20,7 @@ function EpisodeItem({ episode, backupPoster }: EpisodeItemProps) {
         <div className="relative w-max">
           <img
             className="h-full w-96 rounded-md"
-            src={`${IMG_URL_LARGE}${episode.posterPath || backupPoster}`}
+            src={`${IMG_URL_LARGE}${episode.posterImg || backupPoster}`}
             alt="Episode Image"
           />
         </div>

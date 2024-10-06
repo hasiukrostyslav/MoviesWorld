@@ -62,7 +62,6 @@ function SearchedList() {
             color="primary"
             className="self-center"
             onClick={() => {
-              console.log(results - resultPerPage);
               navigate(
                 `?${searchString}&searchId=${results > resultPerPage ? page : page + 1}${results > resultPerPage ? `&remain=${results - resultPerPage}` : ''}`,
               );

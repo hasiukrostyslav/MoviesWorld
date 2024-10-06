@@ -22,8 +22,8 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
     : location.pathname.split('/season').at(0);
 
   const {
-    backdropPath,
-    posterPath,
+    backdropImg,
+    posterImg,
     title,
     releaseDate,
     rating,
@@ -34,14 +34,14 @@ function MovieHero({ movie, isOpenFrame, openVideoFrame }: MovieHeroProps) {
 
   return (
     <div className="flex h-hero flex-col">
-      {backdropPath && <BackdropPoster src={backdropPath} title={title} />}
+      {backdropImg && <BackdropPoster src={backdropImg} title={title} />}
       {isOpenFrame && videoKey && <Video videoKey={videoKey} />}
 
       <div className="relative flex grow items-center gap-10">
         <div className="mb-10 basis-1/4">
           <Poster
             src={
-              posterPath ? `${IMG_URL_LARGE}${posterPath}` : '/imgMovieAlt.jpg'
+              posterImg ? `${IMG_URL_LARGE}${posterImg}` : '/imgMovieAlt.jpg'
             }
             title={title}
           />

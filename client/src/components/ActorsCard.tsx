@@ -14,6 +14,8 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
     ? actor.character.replace('(uncredited)', '')
     : '';
 
+  console.log(actor);
+
   const formatNameLength = (name: string, num: number) =>
     name.length < 18 ? name : name.slice(0, num).padEnd(num + 2, '...');
 
@@ -26,8 +28,8 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
         <img
           className="mb-3 w-full rounded-md transition-all duration-500 hover:opacity-70"
           src={
-            actor.imgPath
-              ? `${IMG_URL_SMALL}${actor.imgPath}`
+            actor.posterImg
+              ? `${IMG_URL_SMALL}${actor.posterImg}`
               : `/imgActorAlt.jpg`
           }
           alt={`${actor.name} photo`}

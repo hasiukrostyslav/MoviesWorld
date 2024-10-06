@@ -20,7 +20,7 @@ function HomePage() {
   const categories = data?.data;
 
   const IsHeroData = (data: HomeGeneralTypes): data is HeroBaseData[] => {
-    if (data.every((el) => Object.hasOwn(el, 'backdropPath'))) return true;
+    if (data.every((el) => Object.hasOwn(el, 'backdropImg'))) return true;
     else return false;
   };
 

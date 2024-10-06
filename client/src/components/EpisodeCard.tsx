@@ -9,7 +9,7 @@ interface EpisodeCardProps {
 }
 
 function EpisodeCard({ episode, backupPoster }: EpisodeCardProps) {
-  const { seasonNumber, title, posterPath, number: episodeNum } = episode;
+  const { seasonNumber, title, posterImg, number: episodeNum } = episode;
 
   return (
     <li className="">
@@ -19,7 +19,7 @@ function EpisodeCard({ episode, backupPoster }: EpisodeCardProps) {
       >
         <img
           className="rounded-md transition-all duration-500 hover:opacity-70"
-          src={`${IMG_URL_LARGE}${posterPath || backupPoster}`}
+          src={`${IMG_URL_LARGE}${posterImg || backupPoster}`}
           alt="Episode Image"
         />
         <span className="my-1 ml-1 text-sm font-light">
