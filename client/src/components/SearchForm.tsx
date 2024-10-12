@@ -8,6 +8,7 @@ import { useMatchTheme } from '../hooks/useMatchTheme';
 import Icon from './Icon';
 import MiniSpinner from './MiniSpinner';
 import SearchedItem from './SearchedItem';
+import Button from './Button';
 
 type Input = {
   query: string;
@@ -33,7 +34,9 @@ function SearchForm() {
   }, [location, resetQuery]);
 
   const { data, isError, isFetching } = result;
+  const dataLength = data?.data.data.length;
   const items = data?.data.data.slice(0, 12);
+  console.log(result);
 
   const leftPosition =
     items && items?.length > 6 && !isError && !isFetching
@@ -42,8 +45,7 @@ function SearchForm() {
 
   const onSubmit: SubmitHandler<Input> = (data) => {
     navigate(`search?query=${data.query}`);
-    reset();
-    setIsFocus(false);
+    resetQuery();
   };
 
   return (
@@ -115,6 +117,19 @@ function SearchForm() {
             </div>
           )}
           {isFetching && <MiniSpinner />}
+          {dataLength && dataLength > 12 && !isFetching && !isError && (
+            <Button
+              onClick={() => {
+                navigate(`search?query=${result.originalArgs?.query}`);
+                resetQuery();
+              }}
+              className="col-start-2 mt-2 justify-self-end"
+              color="primary"
+              size="small"
+            >
+              Get all results
+            </Button>
+          )}
         </div>
       )}
     </>
