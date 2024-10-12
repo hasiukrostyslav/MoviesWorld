@@ -14,8 +14,6 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
     ? actor.character.replace('(uncredited)', '')
     : '';
 
-  console.log(actor);
-
   const formatNameLength = (name: string, num: number) =>
     name.length < 18 ? name : name.slice(0, num).padEnd(num + 2, '...');
 

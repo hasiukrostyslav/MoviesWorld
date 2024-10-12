@@ -12,7 +12,7 @@ function Logo({ size, className }: LogoProps) {
   return (
     <Link
       to="/"
-      className={`outline-round p-1 font-logo ${size === 'base' ? 'text-3xl' : 'text-5xl'} ${className} ${match ? 'text-slate-200' : 'text-slate-500 dark:text-slate-200'}`}
+      className={`outline-round p-1 font-logo ${size === 'base' ? 'z-20 text-3xl' : 'text-5xl'} ${className} ${match ? 'text-slate-200' : 'text-slate-500 dark:text-slate-200'}`}
     >
       <span className="text-blue-600">M</span>
       oviesWorld

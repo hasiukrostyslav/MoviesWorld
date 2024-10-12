@@ -14,12 +14,15 @@ function SearchedList() {
     searchString,
   } = useSearchTabs();
 
-  const { data, isFetching, isError, error } = useGetSearchedItemsQuery({
-    query,
-    searchId,
-    type,
-    remain,
-  });
+  const { data, isFetching, isError, error } = useGetSearchedItemsQuery(
+    {
+      query,
+      searchId,
+      type,
+      remain,
+    },
+    { skip: !query },
+  );
 
   if (isFetching && !data) return <Spinner />;
 

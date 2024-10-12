@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import type { MoviesTypes } from '../utils/types';
 import Icon from './Icon';
+import { useDispatch } from 'react-redux';
+import { util } from '../store';
 
 const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
 
@@ -12,8 +14,11 @@ interface MoviesCardProps {
 }
 
 function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
+  const dispatch = useDispatch();
+
   return (
     <li
+      onClick={() => dispatch(util.resetApiState())}
       className={`relative box-content min-w-44 ${frame ? 'text-slate-100' : ''} ${hidden || ''}`}
     >
       <div className={`w-full ${className}`}>
