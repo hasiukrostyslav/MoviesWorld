@@ -9,6 +9,7 @@ import { showsApi } from './api/showsAPI';
 import { collectionsApi } from './api/collectionsAPI';
 import { actorsApi } from './api/actorsAPI';
 import { searchApi } from './api/searchAPI';
+import { shortSearchApi } from './api/shortSearchAPI';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [collectionsApi.reducerPath]: collectionsApi.reducer,
     [actorsApi.reducerPath]: actorsApi.reducer,
     [searchApi.reducerPath]: searchApi.reducer,
+    [shortSearchApi.reducerPath]: shortSearchApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
@@ -29,7 +31,8 @@ export const store = configureStore({
       .concat(showsApi.middleware)
       .concat(collectionsApi.middleware)
       .concat(actorsApi.middleware)
-      .concat(searchApi.middleware);
+      .concat(searchApi.middleware)
+      .concat(shortSearchApi.middleware);
   },
 });
 
@@ -49,3 +52,4 @@ export * from './api/showsAPI';
 export * from './api/collectionsAPI';
 export * from './api/actorsAPI';
 export * from './api/searchAPI';
+export * from './api/shortSearchAPI';

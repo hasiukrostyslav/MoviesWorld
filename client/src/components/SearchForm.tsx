@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useLazyGetSearchedItemsQuery, util } from '../store';
+import { shortSearchApi, useLazyGetFastSearchQuery } from '../store';
 import { useMatchTheme } from '../hooks/useMatchTheme';
 import Icon from './Icon';
 import MiniSpinner from './MiniSpinner';
@@ -16,18 +16,27 @@ type Input = {
 
 function SearchForm() {
   const [isFocus, setIsFocus] = useState(false);
+  const [queryStr, setQueryStr] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const match = useMatchTheme();
-  const { register, handleSubmit, reset, setFocus } = useForm<Input>();
-  const [trigger, result] = useLazyGetSearchedItemsQuery();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setFocus,
+    trigger: triggerForm,
+  } = useForm<Input>();
+  const [trigger, result] = useLazyGetFastSearchQuery();
   const dispatch = useDispatch();
 
   const resetQuery = useCallback(() => {
     setIsFocus(false);
     reset();
-    dispatch(util.resetApiState());
-  }, [dispatch, reset]);
+    setQueryStr('');
+    if (!location.pathname.includes('search'))
+      dispatch(shortSearchApi.util.resetApiState());
+  }, [dispatch, reset, location]);
 
   useEffect(() => {
     resetQuery();
@@ -36,7 +45,6 @@ function SearchForm() {
   const { data, isError, isFetching } = result;
   const dataLength = data?.data.data.length;
   const items = data?.data.data.slice(0, 12);
-  console.log(result);
 
   const leftPosition =
     items && items?.length > 6 && !isError && !isFetching
@@ -46,6 +54,8 @@ function SearchForm() {
   const onSubmit: SubmitHandler<Input> = (data) => {
     navigate(`search?query=${data.query}`);
     resetQuery();
+    triggerForm('query', { shouldFocus: false });
+    (document.activeElement as HTMLElement).blur();
   };
 
   return (
@@ -64,14 +74,11 @@ function SearchForm() {
             required: true,
             minLength: 3,
             onChange(e) {
-              if (e.target.value.length >= 3)
+              setQueryStr(e.target.value);
+              if (e.target.value.length > 2)
                 trigger({
                   query: e.target.value,
-                  searchId: undefined,
-                  type: undefined,
-                  remain: undefined,
                 });
-              else dispatch(util.resetApiState());
             },
           })}
         />
@@ -83,7 +90,7 @@ function SearchForm() {
           onClick={() => {
             setFocus('query');
             reset();
-            dispatch(util.resetApiState());
+            dispatch(shortSearchApi.util.resetApiState());
           }}
           type="button"
           className={`outline-round absolute right-1 top-1 p-2 ${match ? 'text-slate-200' : 'text-slate-400 dark:text-slate-200'}`}
@@ -99,39 +106,42 @@ function SearchForm() {
             document.body,
           )}
       </form>
-      {isFocus && result.status !== 'uninitialized' && (
-        <div
-          className={`absolute ${leftPosition} top-11 z-30 ${!isError && !isFetching ? 'grid auto-rows-max gap-x-10 gap-y-4' : 'flex min-h-40 min-w-96  items-center justify-center p-2 text-lg dark:text-slate-400'} rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
-        >
-          {items &&
-            !isFetching &&
-            !isError &&
-            items.map((el) => <SearchedItem key={el.id} item={el} />)}
+      {isFocus &&
+        result.status !== 'uninitialized' &&
+        result.originalArgs?.query &&
+        queryStr.length > 2 && (
+          <div
+            className={`absolute ${leftPosition} top-14 z-30 ${!isError && !isFetching ? 'grid auto-rows-max gap-x-10 gap-y-4' : 'flex min-h-40 min-w-96  items-center justify-center p-2 text-lg dark:text-slate-400'} rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
+          >
+            {items &&
+              !isFetching &&
+              !isError &&
+              items.map((el) => <SearchedItem key={el.id} item={el} />)}
 
-          {isError && (
-            <div className="flex w-96 flex-col items-center gap-1">
-              <p>No data was found</p>
-              <span className="text-base text-slate-500">
-                Please try again!
-              </span>
-            </div>
-          )}
-          {isFetching && <MiniSpinner />}
-          {dataLength && dataLength > 12 && !isFetching && !isError && (
-            <Button
-              onClick={() => {
-                navigate(`search?query=${result.originalArgs?.query}`);
-                resetQuery();
-              }}
-              className="col-start-2 mt-2 justify-self-end"
-              color="primary"
-              size="small"
-            >
-              Get all results
-            </Button>
-          )}
-        </div>
-      )}
+            {isError && (
+              <div className="flex w-96 flex-col items-center gap-1">
+                <p>No data was found</p>
+                <span className="text-base text-slate-500">
+                  Please try again!
+                </span>
+              </div>
+            )}
+            {isFetching && <MiniSpinner />}
+            {dataLength && dataLength > 12 && !isFetching && !isError && (
+              <Button
+                onClick={() => {
+                  navigate(`search?query=${result.originalArgs?.query}`);
+                  resetQuery();
+                }}
+                className="col-start-2 mt-2 justify-self-end"
+                color="primary"
+                size="small"
+              >
+                Get all results
+              </Button>
+            )}
+          </div>
+        )}
     </>
   );
 }

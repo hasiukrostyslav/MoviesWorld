@@ -25,7 +25,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const searchApi = createApi({
   reducerPath: 'search',
-
+  refetchOnMountOrArgChange: true,
   baseQuery: <
     BaseQueryFn<string | FetchArgs, unknown, CustomizedFetchBaseQueryError>
   >fetchBaseQuery({ baseUrl: SERVER_URL }),
@@ -63,6 +63,5 @@ const searchApi = createApi({
   },
 });
 
-export const { useGetSearchedItemsQuery, useLazyGetSearchedItemsQuery, util } =
-  searchApi;
+export const { useGetSearchedItemsQuery } = searchApi;
 export { searchApi };
