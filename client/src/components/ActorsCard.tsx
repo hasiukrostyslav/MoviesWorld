@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { ActorBaseData } from '../utils/types';
+import { formatTextLength } from '../utils/helper';
 
 const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
 
@@ -13,9 +14,6 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
   const character = actor.character
     ? actor.character.replace('(uncredited)', '')
     : '';
-
-  const formatNameLength = (name: string, num: number) =>
-    name.length < 18 ? name : name.slice(0, num).padEnd(num + 2, '...');
 
   return (
     <li className={`relative flex flex-col ${className || 'w-44'}`}>
@@ -32,10 +30,10 @@ function ActorsCard({ actor, cast, className }: ActorsCardProps) {
           }
           alt={`${actor.name} photo`}
         />
-        {formatNameLength(actor.name, 16)}
+        {formatTextLength(actor.name, 18, 16)}
         {cast && (
           <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            {formatNameLength(character, 22)}
+            {formatTextLength(character, 18, 22)}
           </span>
         )}
       </Link>

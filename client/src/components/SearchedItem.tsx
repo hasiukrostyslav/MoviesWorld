@@ -4,6 +4,7 @@ import type {
   MovieBaseData,
   ShowBaseData,
 } from '../utils/types';
+import { formatTextLength } from '../utils/helper';
 
 const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
 
@@ -24,7 +25,8 @@ function SearchedItem({ item }: Item) {
       />
       <div className="flex w-full flex-col items-start justify-center">
         <p>
-          {'type' in item && item.title} {'name' in item && item.name}{' '}
+          {'type' in item && formatTextLength(item.title, 80, 83)}{' '}
+          {'name' in item && item.name}{' '}
           {'type' in item && (
             <span className="text-xs font-light text-slate-500">
               {item.year && item.year}

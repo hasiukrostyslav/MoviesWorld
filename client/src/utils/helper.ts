@@ -84,3 +84,10 @@ export const convertParamToString = (str: string | undefined) => {
     .map((word) => word.at(0)?.toUpperCase() + word.slice(1))
     .join(' ');
 };
+
+export const formatTextLength = (
+  text: string,
+  maxLength: number,
+  pad: number,
+) =>
+  text.length < maxLength ? text : text.slice(0, pad).padEnd(pad + 2, '...');

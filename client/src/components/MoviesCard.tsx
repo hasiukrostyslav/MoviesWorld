@@ -3,6 +3,7 @@ import type { MoviesTypes } from '../utils/types';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { util } from '../store';
+import { formatTextLength } from '../utils/helper';
 
 const IMG_URL_SMALL = import.meta.env.VITE_IMG_URL_SMALL;
 
@@ -44,11 +45,7 @@ function MoviesCard({ item, frame, className, hidden }: MoviesCardProps) {
               </span>
             )}
           </div>
-          <span>
-            {item.title.length < 18
-              ? item.title
-              : item.title.slice(0, 18).padEnd(21, '...')}
-          </span>
+          <span>{formatTextLength(item.title, 17, 20)}</span>
         </Link>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-sm font-light">{item.year}</span>
