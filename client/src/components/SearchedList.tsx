@@ -63,6 +63,7 @@ function SearchedList() {
           <Button
             size="large"
             color="primary"
+            disabled={isFetching}
             className="self-center"
             onClick={() => {
               navigate(
