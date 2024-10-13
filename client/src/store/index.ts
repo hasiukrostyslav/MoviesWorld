@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeReducer } from './slice/themeSlice';
-import { homeApi } from './api/homeApi';
+import { homeApi } from './api/homeAPI';
 import { moviesApi } from './api/moviesAPI';
 import { cartoonsApi } from './api/cartoonsAPI';
 import { showsApi } from './api/showsAPI';
@@ -45,7 +45,7 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector = useSelector.withTypes<RootState>();
 
 export * from './slice/themeSlice';
-export * from './api/homeApi';
+export * from './api/homeAPI';
 export * from './api/moviesAPI';
 export * from './api/cartoonsAPI';
 export * from './api/showsAPI';
