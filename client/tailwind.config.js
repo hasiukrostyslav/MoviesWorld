@@ -19,6 +19,9 @@ export default {
         hero: 'calc(100vh - 6.25rem)',
         img: '25rem',
       },
+      width: {
+        86: '360px',
+      },
       aspectRatio: {
         img: '4 / 3',
       },

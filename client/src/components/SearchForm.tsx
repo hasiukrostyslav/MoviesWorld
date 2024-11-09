@@ -9,6 +9,7 @@ import Icon from './Icon';
 import MiniSpinner from './MiniSpinner';
 import SearchedItem from './SearchedItem';
 import Button from './Button';
+import { useScroll } from '../hooks/useScroll';
 
 type Input = {
   query: string;
@@ -29,6 +30,7 @@ function SearchForm() {
   } = useForm<Input>();
   const [trigger, result] = useLazyGetFastSearchQuery();
   const dispatch = useDispatch();
+  const { isScroll, scrollToTop } = useScroll();
 
   const resetQuery = useCallback(() => {
     setIsFocus(false);
@@ -56,6 +58,7 @@ function SearchForm() {
     resetQuery();
     triggerForm('query', { shouldFocus: false });
     (document.activeElement as HTMLElement).blur();
+    if (isScroll) scrollToTop();
   };
 
   return (
@@ -111,12 +114,14 @@ function SearchForm() {
         result.originalArgs?.query &&
         queryStr.length > 2 && (
           <div
-            className={`absolute ${leftPosition} top-14 z-30 ${!isError && !isFetching ? 'grid auto-rows-fr gap-x-10 gap-y-4' : 'flex min-h-40 min-w-96  items-center justify-center p-2 text-lg dark:text-slate-400'} rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
+            className={`absolute ${leftPosition} top-14 z-30 ${!isError && !isFetching ? 'grid auto-rows-fr gap-x-10 gap-y-4' : 'flex min-h-40 min-w-96 items-center justify-center text-lg dark:text-slate-400'} rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
           >
             {items &&
               !isFetching &&
               !isError &&
-              items.map((el) => <SearchedItem key={el.id} item={el} />)}
+              items.map((el) => (
+                <SearchedItem length={items.length} key={el.id} item={el} />
+              ))}
 
             {isError && (
               <div className="flex w-96 flex-col items-center gap-1">
@@ -132,6 +137,7 @@ function SearchForm() {
                 onClick={() => {
                   navigate(`search?query=${result.originalArgs?.query}`);
                   resetQuery();
+                  if (isScroll) scrollToTop();
                 }}
                 className="col-start-2 mt-2 justify-self-end"
                 color="primary"
